@@ -1,7 +1,7 @@
 import { collection, getDocs, getDoc } from "firebase/firestore/lite";
 import { firestoreDB } from "..";
 
-class Collection {
+export class Collection {
     
     constructor(collectionName){
         this.collectionName = collectionName;
