@@ -7,6 +7,7 @@ import { BatchDetails } from "./BatchDetails";
 const BatchDisplay = () => {
 	const { id } = useParams();
 
+  const [isLoading, setIsLoading] = useState(true);
 	const [batchStudents, setBatchStudents] = useState([]);
 
 	useEffect(() => {
@@ -34,6 +35,7 @@ const BatchDisplay = () => {
 
 			// save to the state and redux
 			setBatchStudents((d) => data);
+      setIsLoading(false);
 		};
 		fetchBatchDetails();
 	}, []);
@@ -47,16 +49,14 @@ const BatchDisplay = () => {
 				<div className="container team__container">
           {/* 
             // Improvise this for Skeleton Loader
-            <ProfileDetails
-              isLoading
-              key={batch.id}
-              fname={batch.fname}
-              company={batch.company}
-              insta={batch.insta}
-              gmail={batch.gmail ?? ""}
-              linkedin={batch.linkedin}
-              image={batch.image}
-            /> */}
+            isLoading && 
+            [1,2,3,4].map( num => 
+              <ProfileDetails
+                isLoading
+                
+              />
+              )
+             */}
           {
             !Object.is(batchStudents, []) && batchStudents.map(student => {
               return <ProfileDetails

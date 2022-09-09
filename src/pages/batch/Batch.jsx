@@ -6,6 +6,7 @@ import { BatchOverallData } from '../../Data/batch.data';
 
 const Batch = () => {
 
+  const [isLoading, setIsLoading] = useState(true);
   const [allBatchDetails, setAllBatchDetails] = useState(undefined);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const Batch = () => {
         return new BatchOverallData(id, title, startingYear, endingYear);
       } );
       setAllBatchDetails( saveDataToState );
+      setIsLoading(false);
 
     }
 
@@ -34,7 +36,7 @@ const Batch = () => {
   return (
     <div className="batch__card">
       {
-        Object.is(allBatchDetails, {}) && 
+        isLoading && 
         [1,2,3,4,5].map(num => <BatchColumn key={num} isLoading />)
       }
       {
