@@ -7,7 +7,7 @@ import { BatchDetails } from "./BatchDetails";
 const BatchDisplay = () => {
 	const { id } = useParams();
 
-	const [batchStudents, setBatchStudents] = useState({});
+	const [batchStudents, setBatchStudents] = useState([]);
 
 	useEffect(() => {
 		const fetchBatchDetails = async () => {
@@ -45,16 +45,32 @@ const BatchDisplay = () => {
 			<div className="section team">
 				<h2>Meet Your Senior / Junior / BatchMates</h2>
 				<div className="container team__container">
-					<ProfileDetails
-						data={batchStudents}
-						key={batch.id}
-						fname={batch.fname}
-						company={batch.company}
-						insta={batch.insta}
-						gmail={batch.gmail ?? ""}
-						linkedin={batch.linkedin}
-						image={batch.image}
-					/>
+          {/* 
+            // Improvise this for Skeleton Loader
+            <ProfileDetails
+              isLoading
+              key={batch.id}
+              fname={batch.fname}
+              company={batch.company}
+              insta={batch.insta}
+              gmail={batch.gmail ?? ""}
+              linkedin={batch.linkedin}
+              image={batch.image}
+            /> */}
+          {
+            !Object.is(batchStudents, []) && batchStudents.map(student => {
+              return <ProfileDetails
+                key={student.id}
+                fname={student.Name}
+                company={student.Company}
+                insta={student.Insta}
+                gmail={student.Email}
+                linkedin={batch.linkedin}
+                image={batch.image}
+              />
+            })   
+          }
+          
 				</div>
 			</div>
 		</div>

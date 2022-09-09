@@ -4,9 +4,9 @@
       #eee 0%, #eee 40%,
       #ddd 50%, #ddd 55%,
       #eee 65%, #eee 100%
-    );
-    background-size: 400%;
-    animation: skeleton 1.5s infinite;
+    ) !important;
+    background-size: 400% !important;
+    animation: skeleton 1.5s infinite !important;
   }
 
   @keyframes skeleton{

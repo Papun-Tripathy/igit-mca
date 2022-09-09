@@ -27,8 +27,6 @@ export class FireStoreCollection {
 
     getCollectionData = async (customCollection) => {
         const snap = await getDocs(customCollection ?? this.collectionRef)
-        console.log("Data")
-        // snap.docs.forEach( doc => console.log(doc.data()))
         return snap.docs;
     }
 
