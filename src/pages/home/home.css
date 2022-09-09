@@ -1,0 +1,69 @@
+.main__header{
+    position: relative;
+    top: 3rem;
+    height: 100vh;
+    margin-bottom: 10rem;
+}
+
+.main__header-container{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    gap: 3rem;
+    height: 100%;
+}
+
+.main__header-left{
+    margin-top: -3rem;
+}
+
+.main__header-left h4{
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+    font-weight: 400;
+}
+.main__header-left p{
+    margin: 1rem 0 3.5rem;
+    font-size: 1.1rem;
+}
+
+.main__header-right{
+    font-size: 14px;
+    color: #000;
+    margin-left: 20px;
+}
+
+.categories {
+    height: auto;
+
+}
+
+.categories__container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+}
+
+.categories__left {
+    margin-right: 0rem;
+}
+
+/* ==============POPULAR COURSES============== */
+.courses {
+    margin-top: 10rem;
+}
+
+.courses__container {
+    grid-template-columns: 1fr 1fr;
+
+}
+
+
+@media screen and (max-width:600px) {
+    .main__header-container{
+        grid-template-columns: 0% 100%;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+}

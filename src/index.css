@@ -1,13 +1,105 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+    --primary-hue: 210;
+    --gray-hue: 240;
+    /* --color-primary: #6c63ff; */
+    --color-primary: #6c63ff;
+    --color-primary-variant: hsl(var(--primary-hue), 100%, 65%);
+    --color-secondary: #ffb116;
+    --color-gray-100: hsl(var(--gray-hue), 47%, 94%);
+    --color-gray-200: hsl(var(--gray-hue), 26%, 75%);
+    --color-gray-300: hsl(var(--gray-hue), 24%, 64%);
+    --color-gray-400: hsl(var(--gray-hue), 16%, 41%);
+    --color-gray-500: hsl(var(--gray-hue), 44%, 25%);
+    --color-gray-600: hsl(var(--gray-hue), 48%, 15%);
+    --color-bg: #1f2641;
+    --color-bg1: #2e3267;
+    --color-bg2: #424890;
+    --container-width-lg: 80%;
+    --container-width-md: 90%;
+    --transition: all 500ms ease;
 }
+
+body {
+    font-family: 'Montserrat',sans-serif;
+    color: var(--color-gray-200);
+    line-height: 1.7;
+    overflow-x: hidden;
+    background: var(--color-bg);
+    background-image: url('./images//bg-texture.png');
+}
+.window-scroll {
+    background: var(--color-primary);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+.container{
+    width: var(--container-width-lg);
+    max-width: 1920px;
+    margin-inline: auto;
+}
+h1,h2,h3,h4,h5{
+    line-height: 1.2;
+    color: var(--color-gray-100);
+}
+
+h1{
+    font-size: 3rem;
+    
+}
+h2{
+    font-size: 2rem;
+
+}
+a{
+    color: var(--color-gray-100);
+}
+img{
+    display: block;
+    object-fit: cover;
+    width: 100%;
+}
+
+.btn {
+    color: var(--color-gray-100);
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0.9rem 2rem;
+    background: var(--color-primary);
+    border-radius: 1.5rem;
+    transition: var(--transition);
+}
+
+.btn:hover{
+    background-color: var(--color-secondary);
+    color: var(--color-gray-600);
+}
+
+.btn.lg{
+    padding: 1.2rem 3rem;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+
+}
+
+.btn.sm{
+    padding: 0.4rem 1.2rem;
+    font-size: 0.9rem;
+
+}
+
+.btn.sm:hover{
+    background: var(--color-gray-100);
+    
+}
+

@@ -1,0 +1,106 @@
+
+/* BEGIN CARD DESIGN */
+.batch__card{
+   display: flex;
+   flex-wrap: wrap;
+   margin: 0 0 8rem 2rem;
+   padding: 1rem;
+}
+.hero {
+    position: relative;
+    width: 200px;
+    min-width: 300px;
+    height: 200px;
+    border-radius: 30px;
+    overflow:hidden;
+    top: 6rem;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    transition: var(--transition);
+  }
+  .hero:hover{
+    box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+  
+  .hero-description-bk {
+    background-image: linear-gradient(0deg , #bb7413, #fc466b);
+    border-radius: 30px;
+    position: absolute;
+    top: 65%;
+    left: -5px;
+    height: 80%;
+    width: 110%;
+    transform: skew(19deg, -9deg);
+  }
+  .skeleton{
+    background-image: linear-gradient(
+      90deg,
+      #eee 0%, #eee 40%,
+      #ddd 50%, #ddd 55%,
+      #eee 65%, #eee 100%
+    );
+    background-size: 400%;
+    animation: skeleton 1.5s infinite;
+  }
+
+  @keyframes skeleton{
+    from{
+      background-position: 100%;
+    }
+    to{
+      background-position: 0%;
+    }
+  }
+ 
+  
+  .hero-logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 20px;
+    background-color: #fff;
+    position: absolute;
+    bottom: 20%;
+    left: 30px;
+    overflow:hidden;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.7);
+  }
+  
+  .description{
+    position: absolute;
+    color: #fff;
+    font-weight: 500;
+    left: 224px;
+    bottom: 25%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+  }
+
+  
+  .hero-btn {
+    position: absolute;
+    right: 30px;
+    top: 80%;
+    padding: 0 0.5rem 0 0.5rem;
+    color: var(--color-gray-100);
+    background: var(--color-primary);
+    border-radius: 1.5rem;
+    transition: var(--transition);
+
+
+  }
+  .hero-btn:hover{
+    background-color: var(--color-secondary);
+    color: var(--color-gray-600);
+  }
+  
+
+  
+  .hero-date {
+    position: absolute;
+    color: #fff;
+    left: 30px;
+    bottom: 5%;
+  }
+  /* END CARD DESIGN */
+  

@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore";
+import {getStorage} from "firebase/storage"
 import { ENV } from "../utils/env";
 
 const firebaseConfig = {
@@ -16,3 +17,8 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 export const firestoreDB = getFirestore(firebaseApp);
 
+export const StorageBucket = getStorage(firebaseApp);
+
+export const cloudFirestoreCollections = {
+  USER_DETAILS: "userDetails",
+}
