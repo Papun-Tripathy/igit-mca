@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BatchDisplay from './pages/BatchDetails/BatchDisplay';
 import ProtectedRoute from './pages/ProtectedRoute';
+import LoginSignUp from './pages/LoginSignUp/LoginSignUp';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route index element={<Home/>}/>
         <Route path='/about'element={<About/>}/>
         <Route path='/contact'element={<Contact/>}/>
+        <Route path='/register'element={<LoginSignUp/>}/>
         <Route path='*'element={<NotFound/>}/>
       </Routes>
       <Footer/>
