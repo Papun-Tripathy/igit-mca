@@ -1,18 +1,26 @@
 import React from 'react'
 import AchievementSection from '../../components/AchievementSection'
-import '../../components/achievement.css'
-import DisplayAbout from '../../components/DisplayAbout'
+import DisplayAbout from '../../components/DisplayAbout';
+import './about.css';
+import { teamMember } from './teamMember'
+
 const About = () => {
   return (
-    <div>
+    <>
       <AchievementSection />
-      <section class="team">
+      <section className="team">
         <h2>Meet Our Team</h2>
-        <div class="container team__container">
+        <div className="container team__container">{
+          teamMember.map(({name,role,gmail,insta,linkedin,image},index)=>{
+            return(
+              <DisplayAbout key={index} name={name} role={role} gmail={gmail} insta={insta} linkedin={linkedin} image={image} />
+            )
+          })
+        }
           <DisplayAbout/>
         </div>
       </section>
-    </div>
+    </>
   )
 }
 

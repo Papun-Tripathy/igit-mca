@@ -15,6 +15,7 @@ import ProtectedRoute from './pages/ProtectedRoute';
 import LoginSignUp from './pages/LoginSignUp/LoginSignUp';
 import { useEffect } from 'react';
 import { checkAuthState } from './Firebase';
+import RoadMap from './pages/course/courseDetails/RoadMap';
 
 const App = () => {
   useEffect(() => {
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/batch'element={<Batch/>}/>
           <Route path='/batch/:id'element={<BatchDisplay/>}/>
           <Route path='/course'element={<Course/>}/>
+          <Route path='/course/:id'element={<RoadMap/>}/>
           <Route path='/notes'element={<Notes/>}/>
           <Route path='/gallary'element={<Gallary/>}/>
         </Route>
