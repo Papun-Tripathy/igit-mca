@@ -13,8 +13,18 @@ import Footer from './components/Footer';
 import BatchDisplay from './pages/BatchDetails/BatchDisplay';
 import ProtectedRoute from './pages/ProtectedRoute';
 import LoginSignUp from './pages/LoginSignUp/LoginSignUp';
+import { useEffect } from 'react';
+import { checkAuthState } from './Firebase';
 
 const App = () => {
+  useEffect(() => {
+    const unSub = checkAuthState();
+
+    return () => {
+      unSub();
+    }
+  }, [])
+  
   return (
   
       <BrowserRouter>

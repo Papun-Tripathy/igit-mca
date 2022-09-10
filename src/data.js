@@ -32,7 +32,7 @@ export const links = [
         path: '/contact'
     },
     {
-        name: "Register",
+        name: "Login",
         path: '/register'
     }
 ]

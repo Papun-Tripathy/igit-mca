@@ -17,6 +17,7 @@ const Batch = () => {
 
       // fetch the details collection 
       const data = await batchCollectionRef.getDetails();
+      console.log(data)
 
       // save to the state and redux
       const saveDataToState = data.map( ({id, startingYear, endingYear, title}) => {
