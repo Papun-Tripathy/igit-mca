@@ -32,6 +32,10 @@ nav{
 .nav__links a{
     transition: var(--transition);
 }
+.nav__links li p{
+    color: var(--color-gray-100);
+    cursor: pointer;
+}
 .nav__links a:hover{
    color: var(--color-secondary);
 }

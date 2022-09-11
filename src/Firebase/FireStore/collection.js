@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, setDoc } from "firebase/firestore";
 import { firestoreDB } from "..";
 
 export class FireStoreCollection {
@@ -24,26 +24,57 @@ export class FireStoreCollection {
     customCollectionRef = (newRef) =>{
         return collection(firestoreDB, `${this.collectionName}/${newRef}`)
     }
+    customCollectionName = (newRef) =>{
+        return `/${newRef}`;
+    }
 
     getCollectionData = async (customCollection) => {
-        const snap = await getDocs(customCollection ?? this.collectionRef)
-        return snap.docs;
+        try {
+            const snap = await getDocs(customCollection ?? this.collectionRef);
+            return snap.docs;
+        } catch (err) {
+            return Error(err.message);
+        }
     }
 
     getSubscription = async () => {
         return onSnapshot(this.collectionRef)
     }
 
-    getSingleDoc = async (id, customCollectionRef) => {
+    getSingleDoc = async (id, customCollectionName) => {
         try {
-            const docRef = doc(firestoreDB, customCollectionRef ?? this.collectionName, id);
-            const docData = await getDoc(docRef)
+            const docRef = doc(firestoreDB, customCollectionName ?? this.collectionName, id);
+            const docData = await getDoc(docRef);
             return docData.exists() ?
-                docData.data() : Error("Invalid Id in the Collection");
-    
+            docData.data() : Error("Invalid Id in the Collection");
+            
         } catch (err) {
             return Error("Error in data fetching")
         }
     }
+
+    addDocumentWithoutId = async ({customCollectionRef, data}) =>{
+        try {
+            const docData = await addDoc(customCollectionRef ?? this.collectionRef, data);
+            console.log(data);
+            return docData;
+        } catch (err) {
+            console.warn(err)
+        }
+    }
+
+    addDocumentWithId = async ({ customCollectionPath, specificId, data}) =>{
+        try {
+            const docRef = doc(firestoreDB, customCollectionPath, specificId );
+            const docData = await setDoc(docRef, data);
+        } catch (err) {
+            console.warn(err)
+        }
+    }
     
 }
+
+export const cloudFirestoreCollections = {
+    USER_DETAILS: "User",
+    BATCH: "Batch",
+  }

@@ -16,6 +16,7 @@ import LoginSignUp from './pages/LoginSignUp/LoginSignUp';
 import { useEffect } from 'react';
 import { checkAuthState } from './Firebase';
 import RoadMap from './pages/course/courseDetails/RoadMap';
+import Registration from './pages/Registration/Registration';
 
 const App = () => {
   useEffect(() => {
@@ -38,6 +39,7 @@ const App = () => {
           <Route path='/course/:id'element={<RoadMap/>}/>
           <Route path='/notes'element={<Notes/>}/>
           <Route path='/gallary'element={<Gallary/>}/>
+          <Route path='/fill-details'element={<Registration/>}/>
         </Route>
         <Route index element={<Home/>}/>
         <Route path='/about'element={<About/>}/>

@@ -5,34 +5,42 @@ import {SiOpenaigym} from 'react-icons/si'
 export const links = [
     {
         name: "Home",
+        privateLink: false,
         path: '/'
     },
     {
         name: "Batch",
+        privateLink: true,
         path: '/batch'
     },
     {
         name: "Course",
+        privateLink: true,
         path: '/course'
     },
     {
         name: "Notes",
+        privateLink: true,
         path: '/notes'
     },
     {
         name: "Gallary",
+        privateLink: false,
         path: '/gallary'
     },
     {
         name: "About",
+        privateLink: false,
         path: '/about'
     },
     {
         name: "Contact",
+        privateLink: false,
         path: '/contact'
     },
     {
         name: "Login",
+        privateLink: false,
         path: '/register'
     }
 ]

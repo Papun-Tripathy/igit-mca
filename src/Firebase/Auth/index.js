@@ -22,7 +22,7 @@ export const signupUserWithEmail = async (email, pass) => {
         return response.user;
 
     } catch (err) {
-        return err.message
+        return Error(err.message)
     }
     
 }
@@ -37,7 +37,7 @@ export const signinUserWithEmail = async (email, pass) => {
         return response.user;
     
     } catch (err) {
-        return err.message
+        return Error(err.message)
     }
 
 }
@@ -48,7 +48,7 @@ export const signInwithGooglePopup = async () =>{
 
         return result.user;
     } catch(err){
-        return err.message
+        return Error(err.message)
     }    
 }
 
@@ -56,6 +56,6 @@ export const logout = async () =>{
     try {
         await signOut(firebaseAuth); 
     } catch (err) {
-        return err.message;
+        return Error(err.message);
     }
 }
