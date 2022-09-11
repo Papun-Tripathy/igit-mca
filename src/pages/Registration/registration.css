@@ -1,14 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
 
-* {
-    font-size: 18px;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
-body {
+.row {
     font-family: 'PT Sans', sans-serif;
     font-size: 16px;
     line-height: 1.428571429;
