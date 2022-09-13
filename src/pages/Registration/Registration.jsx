@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./registration.css";
 import { useState } from "react";
-import dummyProfile from "../../images/logo.png";
+import dummyProfile from "../../images/dummy-man.png";
 import {
 	cloudFirestoreCollections,
 	FireStoreCollection,
@@ -12,6 +12,7 @@ const Registration = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
+	const [rollNumber, setRollNumber] = useState("");
 	const [image, setImage] = useState(File.prototype);
 	const [imageMeta, setImageMeta] = useState({
 		contentType: "image/*",
@@ -22,6 +23,7 @@ const Registration = () => {
 		fileSize: "",
 		fileName: "",
 	});
+	const [uploadedImageLink, setUploadedImageLink] = useState("");
 	const [batchList, setBatchList] = useState([]);
 	const [batch, setBatch] = useState(0);
 	const [linkedIn, setLinkedIn] = useState("");
@@ -44,6 +46,7 @@ const Registration = () => {
 		if (
 			name.trim() === "" ||
 			email.trim() === "" ||
+			rollNumber.trim() === "" ||
 			phoneNumber.trim() === "" ||
 			batch === 0
 		) {
@@ -55,26 +58,89 @@ const Registration = () => {
 		return false;
 	};
 
+	const structureUserDataForFirebase = () => {
+		return {
+			name,
+			email,
+			contact: phoneNumber,
+			batch,
+			linkedIn,
+			insta,
+			company: companyName,
+			profilePic: uploadedImageLink,
+		};
+	};
+
+	const resetFormData = () =>{
+		setName("");
+		setEmail("");
+		setPhoneNumber("");
+		setRollNumber("");
+		setUploadedImageLink("");
+		setLinkedIn("");
+		setInsta("");
+		setCompanyName("IGIT");
+		setImage(File.prototype);
+		setImageMeta({
+			contentType: "image/*",
+		});
+		setShowingImage(null);
+		setAdditionImageDetails({
+			fileType: "",
+			fileSize: "",
+			fileName: "",
+		});
+		setBatch(0);
+	}
+
 	const uploadTheData = async () => {
-		if (validateAllData()) return;
-		const userRegister = new FireStoreCollection("User");
+		try {
+			if (validateAllData()) return;
+			await storeData();
+			const userRegister = new FireStoreCollection("User");
+			const userDataToUpload = structureUserDataForFirebase();
+			await userRegister.addDocumentWithId({
+				data: userDataToUpload,
+				specificId: rollNumber,
+			});
+			const user = await userRegister.getSingleDoc(rollNumber); 
+			console.log(user);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const storeData = async () => {
-		const studentPhotoLink = new FirebaseBucketStorage("studentsPhoto");
-		const imageServerUrl = await studentPhotoLink.storeObjectAndGetUrl(
-			additionImageDetails.fileName,
-			image,
-			imageMeta
-		);
-		console.log(imageServerUrl);
+		try {
+			const studentPhotoLink = new FirebaseBucketStorage("studentsPhoto");
+			const imageServerUrl = await studentPhotoLink.storeObjectAndGetUrl(
+				additionImageDetails.fileName,
+				image,
+				imageMeta
+			);
+			console.log(imageServerUrl)
+			setUploadedImageLink(imageServerUrl);
+		} catch (err) {
+			throw Error("Error in Image Upload");
+		}
 	};
-
+	const getUTCtime = () => {
+		let date = new Date();
+		let now_utc = Date.UTC(
+			date.getUTCFullYear(),
+			date.getUTCMonth(),
+			date.getUTCDate(),
+			date.getUTCHours(),
+			date.getUTCMinutes(),
+			date.getUTCSeconds(),
+			date.getUTCMilliseconds(),
+		);
+		return now_utc;
+	};
 	const handleImageChange = (e) => {
-		console.log(e);
 		if (e.target.files[0]) {
 			let fileSize = e.target.files[0].size;
-			let fileName = e.target.files[0].name;
+			let fileName = `${e.target.files[0].name}-${getUTCtime()}`;
 			let fileType = e.target.files[0].type;
 			console.log(fileSize);
 			if (fileSize / 1024 >= 1024 * 5) {
@@ -99,7 +165,7 @@ const Registration = () => {
 			<div className="row">
 				<section className="section">
 					<header>
-						<h3>Welcome Senior to IGIT MCA Registration Form</h3>
+						<h3>Welcome to IGIT MCA Registration Form</h3>
 						<h4>Please fill your information bellow</h4>
 					</header>
 					<main>
@@ -140,8 +206,21 @@ const Registration = () => {
 											/>
 										</div>
 									</div>
+									<div className="form-item box-item">
+										<div className="form-item">
+											<input
+												id="rollNumber"
+												type="text"
+												name="rollNumber"
+												value={rollNumber}
+												onChange={(e) => setRollNumber(e.target.value)}
+												placeholder="Roll number"
+												data-once
+											/>
+										</div>
+									</div>
 								</div>
-								<div className="form-item box-item profile-upload">
+								<div className="form-item profile-upload">
 									<label htmlFor="imageupload">
 										<div className="wrapper">
 											<div className="image">
@@ -224,7 +303,7 @@ const Registration = () => {
 							</div>
 
 							<div className="form-item">
-								<span id="submit" onClick={storeData} className="submit">
+								<span id="submit" onClick={uploadTheData} className="submit">
 									Submit
 								</span>
 							</div>

@@ -20,17 +20,4 @@ export const firestoreDB = getFirestore(firebaseApp);
 
 export const StorageBucket = getStorage(firebaseApp);
 
-export const firebaseAuth = getAuth(firebaseApp);
-
-
-export const checkAuthState = () =>{
-  const unSubscribe = onAuthStateChanged(firebaseAuth,(user) =>{
-    console.log("changes in user....")
-    console.log(user)
-    // if user is loggin in then there will be something in the object otherwise null
-    if(user){
-    } else {
-    }
-  })
-  return unSubscribe;
-}
+export const firebaseAuth = getAuth(firebaseApp); 

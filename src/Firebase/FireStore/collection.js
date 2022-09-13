@@ -17,7 +17,7 @@ export class FireStoreCollection {
             
         } catch (err) {
             console.warn(err)
-            return Error("Error in getDetails for the collection");
+            throw Error("Error in getDetails for the collection");
         }
     }
 
@@ -33,7 +33,7 @@ export class FireStoreCollection {
             const snap = await getDocs(customCollection ?? this.collectionRef);
             return snap.docs;
         } catch (err) {
-            return Error(err.message);
+            throw Error(err.message);
         }
     }
 
@@ -49,7 +49,8 @@ export class FireStoreCollection {
             docData.data() : Error("Invalid Id in the Collection");
             
         } catch (err) {
-            return Error("Error in data fetching")
+            console.log(err)
+            // throw Error("Error in data fetching")
         }
     }
 
@@ -59,16 +60,22 @@ export class FireStoreCollection {
             console.log(data);
             return docData;
         } catch (err) {
-            console.warn(err)
+            throw Error("Error!! Try Again")
         }
     }
 
     addDocumentWithId = async ({ customCollectionPath, specificId, data}) =>{
         try {
-            const docRef = doc(firestoreDB, customCollectionPath, specificId );
-            const docData = await setDoc(docRef, data);
+            const docRef = doc(firestoreDB, customCollectionPath ?? this.collectionName, specificId );
+            await setDoc(docRef, data);
+            
+            // const docData = await this.getSingleDoc(specificId, customCollectionPath);
+            console.log("Data with Id addition")
+            // console.log(docData);
+            // return docData;
         } catch (err) {
-            console.warn(err)
+            console.error(err)
+            throw Error("Error in Document Upload!!");
         }
     }
     

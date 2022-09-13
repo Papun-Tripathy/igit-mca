@@ -14,19 +14,47 @@ import BatchDisplay from './pages/BatchDetails/BatchDisplay';
 import ProtectedRoute from './pages/ProtectedRoute';
 import LoginSignUp from './pages/LoginSignUp/LoginSignUp';
 import { useEffect } from 'react';
-import { checkAuthState } from './Firebase';
+import { checkAuthState, firebaseAuth } from './Firebase';
 import RoadMap from './pages/course/courseDetails/RoadMap';
 import Registration from './pages/Registration/Registration';
+import { onAuthStateChanged } from 'firebase/auth';
+import { resetAtLogout, setAtLogin } from './State/Google/slice.Google';
+import { useDispatch } from 'react-redux';
+import { userLoggedIn } from './State/Auth/slice.Auth';
+
+
 
 const App = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
     const unSub = checkAuthState();
 
+    // getting Data from the firestore user collection  
+    const fetchDataFromTheUser = async () =>{
+      
+    }
+    
     return () => {
       unSub();
     }
   }, [])
   
+  const checkAuthState = () =>{
+    const unSubscribe = onAuthStateChanged(firebaseAuth, (user) =>{
+      console.log("changes in user....")
+      console.log(user)
+      // if user is loggin in then there will be something in the object otherwise null
+      if(user){
+        const {accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid} = user;
+  			dispatch(setAtLogin({accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid}));
+        
+      } else {
+        dispatch(resetAtLogout());
+      }
+    })
+    return unSubscribe;
+  }
+
   return (
   
       <BrowserRouter>

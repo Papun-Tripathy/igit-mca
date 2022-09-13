@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,12 +10,15 @@ import {
 } from "../../Firebase/Auth";
 import GoogleC from "../../images/google-color-icon.png";
 import { userLoggedIn } from "../../State/Auth/slice.Auth";
+import { setAtLogin } from "../../State/Google/slice.Google";
 import { validMail } from "../../utils/validator";
 import "./loginsignup.css";
 
 const LoginSignUp = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
@@ -42,15 +46,20 @@ const LoginSignUp = () => {
 
 	const signInSubmit = async (e) => {
 		e.preventDefault();
+		
+		setIsLoading(true);
+		
 		setSignInData((s) => ({
 			email: s.email.trim(),
 			password: s.password.trim(),
 		}));
 
 		if (Object.is(signInData, defaultSignInData)) return;
+
 		if (!validMail(signInData.email)) {
 			return;
 		}
+		
 		try {
 			const user = await signinUserWithEmail(
 				signInData.email,
@@ -58,12 +67,16 @@ const LoginSignUp = () => {
 			);
 			console.log(user);
 			dispatch(userLoggedIn());
+			setIsLoading(false);
 			return navigate("/");
-		} catch (err) {}
+		} catch (err) {
+			setIsLoading(false);
+		}
 	};
-
+	
 	const signupSubmit = async (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 		setSignUpData((s) => ({
 			email: s.email.trim(),
 			password: s.password.trim(),
@@ -83,16 +96,26 @@ const LoginSignUp = () => {
 			);
 			console.log(user);
 			dispatch(userLoggedIn());
+			dispatch(setAtLogin(user));
+			setIsLoading(false);
 			return navigate("/");
-		} catch (err) {}
+		} catch (err) {
+			setIsLoading(true);
+		}
 	};
-
+	
 	const loginWithGoogle = async (firstTime) => {
+		setIsLoading(true);
 		try {
-			await signInwithGooglePopup();
+			const user = await signInwithGooglePopup();
 			dispatch(userLoggedIn());
-			navigate(firstTime ?"/" : "/fill-details");
-		} catch (err) {}
+			const {accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid} = user;
+			dispatch(setAtLogin({accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid}));
+			setIsLoading(false);
+			return navigate(firstTime ?"/" : "/fill-details");
+		} catch (err) {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -141,7 +164,10 @@ const LoginSignUp = () => {
 									setSignInData((s) => ({ ...s, password: e.target.value }))
 								}
 							/>
-							<input type="submit" value="Login" />
+							{
+								isLoading ? <CircularProgress size={30} /> :
+									<input type="submit" value="Login" />
+							}
 							<p className="forget">Forget Password ?</p>
 						</form>
 					</div>
@@ -178,7 +204,10 @@ const LoginSignUp = () => {
 									}))
 								}
 							/>
-							<input type="submit" value="Register" />
+							{
+								isLoading ? <CircularProgress size={30} /> :
+									<input type="submit" value="Register" />
+							}
 							<p className="forget">Forget Password ?</p>
 						</form>
 					</div>

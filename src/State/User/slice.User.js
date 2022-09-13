@@ -9,6 +9,7 @@ const initialState = {
     linkedIn: "",
     insta: "",
     company: "",
+    registered: false,
 }
 
 const userSlice = createSlice({
@@ -24,6 +25,7 @@ const userSlice = createSlice({
                 email, 
                 branch, 
                 phoneNumber, 
+                registered: true,
                 insta: insta ?? "", 
                 company: company ?? "",
                 linkedIn: linkedIn ?? "", 

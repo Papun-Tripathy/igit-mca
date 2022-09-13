@@ -13,6 +13,7 @@
     background-color: #3D4067;
     position: relative;
     overflow: hidden;
+    margin-top: 2rem;
 }
 header {
     padding: 48px;
@@ -89,15 +90,18 @@ small {
     grid-gap: 20px;
 }
 
+.profile-upload{
+    height: 100%;
+}
 
 .profile-upload .wrapper {
-
-
-
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    height: 100%;
+    width: 95%;
 
 }
 .image{

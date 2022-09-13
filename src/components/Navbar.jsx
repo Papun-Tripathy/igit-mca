@@ -7,10 +7,11 @@ import { GoThreeBars } from "react-icons/go";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoggedOut } from "../State/Auth/slice.Auth";
+import { logout } from "../Firebase/Auth";
 
 const Navbar = () => {
 	const [isNavShowing, setIsNavShowing] = useState(false);
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
@@ -29,34 +30,41 @@ const Navbar = () => {
 					className={`nav__links ${isNavShowing ? "show__nav" : "hide__nav"}`}
 				>
 					{links.map(({ name, path, privateLink }, index) => {
-                        if(name==="Login" && isLoggedIn){
-                            name = "Logout";
-                            return (
-                                <li key={index}>
-                                    <p
-                                        className={({ isActive }) =>
-                                            isActive ? "active-nav" : "nav-link-p"
-                                        }
-                                        onClick={() => { console.log("called"); setIsNavShowing((prev) => !prev); dispatch(userLoggedOut());} }
-                                    >
-                                        {name}
-                                    </p>
-                                </li>
-                            );
-                        }
-						else if (privateLink) {
+						if (name === "Login" && isLoggedIn) {
+							name = "Logout";
+							return (
+								<li key={index}>
+									<NavLink
+										to={"/"}
+										className={({ isActive }) =>
+											isActive ? "active-nav" : "nav-link-p"
+										}
+										onClick={() => {
+											console.log("called");
+											setIsNavShowing((prev) => !prev);
+											dispatch(userLoggedOut());
+											logout();
+										}}
+									>
+										{name}
+									</NavLink>
+								</li>
+							);
+						} else if (privateLink) {
 							if (isLoggedIn) {
-                                return (
-                                    <li key={index}>
-                                        <NavLink
-                                            to={path}
-                                            className={({ isActive }) => (isActive ? "active-nav" : "")}
-                                            onClick={() => setIsNavShowing((prev) => !prev)}
-                                        >
-                                            {name}
-                                        </NavLink>
-                                    </li>
-                                );
+								return (
+									<li key={index}>
+										<NavLink
+											to={path}
+											className={({ isActive }) =>
+												isActive ? "active-nav" : ""
+											}
+											onClick={() => setIsNavShowing((prev) => !prev)}
+										>
+											{name}
+										</NavLink>
+									</li>
+								);
 							}
 						} else
 							return (

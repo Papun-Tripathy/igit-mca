@@ -8,7 +8,7 @@ const Course = ({ homePage }) => {
     <section className="courses">
       <div className="container courses__container">{
         course.map(({ icon, title, desc, path, showInHomepage }, index) => {
-          console.log(showInHomepage, title);
+          
           if (homePage ) {
             if (showInHomepage) {
 

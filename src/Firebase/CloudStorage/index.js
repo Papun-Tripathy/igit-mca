@@ -27,8 +27,7 @@ export class FirebaseBucketStorage{
             return await getDownloadURL(uploadTask.ref);
 
         } catch (err) {
-            console.log(err)
-            return Error("Something Wrong While Uploading the data");
+            throw Error("Something Wrong While Uploading the data");
         }
 
     }

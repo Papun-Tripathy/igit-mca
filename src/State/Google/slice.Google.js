@@ -23,7 +23,7 @@ const googleSlice = createSlice({
         }
     }
 })
-const authReducer = googleSlice.reducer;
+const googleReducer = googleSlice.reducer;
 
-export default authReducer;
-export const { userLoggedIn, userLoggedOut } = googleSlice.actions 
+export default googleReducer;
+export const { setAtLogin, resetAtLogout } = googleSlice.actions;
