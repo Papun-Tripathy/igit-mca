@@ -29,6 +29,7 @@ const RoadMap = () => {
                     </h3>
                     <p> High School Diploma</p>
                 </VerticalTimelineElement>
+                
                 <VerticalTimelineElement
                     className="vertical-timeline-element--education"
                     date="2014 - 2018"
