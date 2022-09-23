@@ -4,15 +4,22 @@ import { VerticalTimeline, VerticalTimelineElement }
 import "react-vertical-timeline-component/style.min.css";
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
+import "./roadmap.css";
 
 const RoadMap = () => {
 
     return (
+
+        <>
+
+        <div className='course-duration'><h1>Course Duration</h1></div>
         <div className="experience">
+           
             <VerticalTimeline lineColor="#3e497a">
                 <VerticalTimelineElement
                     className="vertical-timeline-element--education"
                     date="2010 - 2014"
+
                     iconStyle={{ background: "#3e497a", color: "#fff" }}
                     icon={<SchoolIcon />}
                 >
@@ -72,6 +79,7 @@ const RoadMap = () => {
                 </VerticalTimelineElement>
             </VerticalTimeline>
         </div>
+        </>
     );
 
 }
