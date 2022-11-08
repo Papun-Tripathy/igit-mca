@@ -37,8 +37,8 @@ export class FireStoreCollection {
         }
     }
 
-    getSubscription = async () => {
-        return onSnapshot(this.collectionRef)
+    getSubscription = ({workFunction}) => {
+        return onSnapshot(this.collectionRef, workFunction)
     }
 
     getSingleDoc = async (id, customCollectionName) => {

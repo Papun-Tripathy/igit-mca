@@ -1,14 +1,27 @@
 import React, { useEffect } from "react";
+import { useState } from "react";
+import { FireStoreCollection } from "../../Firebase/FireStore/collection";
 import "./notice.css";
 const ViewNotice = () => {
 
+	const [notices, setNotices] = useState([]);
+
 	useEffect(() => {
-	  
+		const unSub = subscribeToNotice();
+
+		
+
+		return () =>{
+			unSub();
+		}
 	
 	}, [])
 
 	const subscribeToNotice = () => {
-		
+		const noticeCollection = new FireStoreCollection("Notice");
+		return noticeCollection.getSubscription({workFunction: (doc) => {
+			doc.forEach(d => console.log(d.data()))
+		}});
 	}
 	
 
@@ -28,16 +41,15 @@ const ViewNotice = () => {
 						<table className="table">
 							<thead className="thead-dark">
 								<tr>
-									<th>ID</th>
-									<th>Name</th>
+									<th>Heading</th>
 									<th>Link</th>
-									<th>Date</th>
-									<th>Status</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr></tr>
+								{
+									ViewNoticeTableBody({heading: "Chodia pua", link: "linked"})
+								}
                             </tbody>
 						</table>
 					</form>
@@ -46,5 +58,19 @@ const ViewNotice = () => {
 		</div>
 	);
 };
+
+function ViewNoticeTableBody({heading, link}) {
+  return (
+	<tr>
+		<td>heading</td>
+		<td>link</td>
+		<td>
+			<button>Edit</button>
+			<button>Delete</button>
+		</td>
+	</tr>
+  )
+}
+
 
 export default ViewNotice;
