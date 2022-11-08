@@ -14,26 +14,47 @@ const initialState = {
 
 const userSlice = createSlice({
     name: "User",
-    initialState,
+    initialState: () => {
+        const localUser = localStorage.getItem("UserAuth");
+        if (localUser === null) {
+            return initialState;
+        }
+        const userData = JSON.parse(localUser);
+        const {
+            name, email, phoneNumber, profilePic, branch, linkedIn, insta, company
+        } = userData;
+        return {
+            name,
+            email,
+            branch,
+            phoneNumber,
+            registered: true,
+            insta: insta ?? "",
+            company: company ?? "",
+            linkedIn: linkedIn ?? "",
+            profilePic: profilePic ?? "",
+        }
+    },
     reducers: {
         setUserValue: (state, action) => {
             const {
                 name, email, phoneNumber, profilePic, branch, linkedIn, insta, company
             } = action.payload;
-            state = { ...state, 
-                name, 
-                email, 
-                branch, 
-                phoneNumber, 
-                registered: true,
-                insta: insta ?? "", 
-                company: company ?? "",
-                linkedIn: linkedIn ?? "", 
-                profilePic: profilePic ?? "",
-            }
+            localStorage.setItem("UserAuth", JSON.stringify({ name, email, phoneNumber, profilePic, branch, linkedIn, insta, company }));
+            state.name = name;
+            state.email = email;
+            state.branch = branch;
+            state.phoneNumber = phoneNumber;
+            state.registered = true;
+            state.insta = insta ?? "";
+            state.company = company ?? "";
+            state.linkedIn = linkedIn ?? "";
+            state.profilePic = profilePic ?? "";
+
         },
         emptyValue: (state) => {
             state = initialState;
+            localStorage.removeItem("UserAuth");
         }
     },
 })

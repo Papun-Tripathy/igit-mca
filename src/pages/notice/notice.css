@@ -151,6 +151,11 @@ table{
     margin: auto;
 }
 
+.add_notice_page{
+    top: 3rem;
+    margin-top: 5rem;
+}
+
 #update_user .form-group,
 #add_user .form-group{
     margin: .4em 0;

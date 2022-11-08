@@ -7,19 +7,41 @@ const initialState = {
     isAnonymous: false,
     photoURL: "",
     email: "",
-    uid: "", 
+    uid: "",
 }
 
 const googleSlice = createSlice({
     name: "Auth",
-    initialState,
+    initialState: () => {
+        const localAuth = localStorage.getItem("googleAuth");
+        if (localAuth === null) {
+            return initialState;
+        }
+        const load = JSON.parse(localAuth);
+        const { accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid } = load;
+        return {
+            accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid
+        };
+    },
+
     reducers: {
-        setAtLogin:(state, action)=>{
-            const {accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid} = action.payload;
-            state = {...state, accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid};
+        setAtLogin: (state, action) => {
+            const { accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid } = action.payload;
+            localStorage.setItem("googleAuth", JSON.stringify({ accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid }));
+            // never update the state object by a object
+            // update indivisually
+            state.accessToken = accessToken;
+            state.displayName = displayName;
+            state.emailVerified = emailVerified;
+            state.email = email;
+            state.isAnonymous = isAnonymous;
+            state.photoURL = photoURL;
+            state.uid = uid;
+
         },
-        resetAtLogout: (state) =>{
-            state= initialState;
+        resetAtLogout: (state) => {
+            state = initialState;
+            localStorage.removeItem("googleAuth");
         }
     }
 })

@@ -7,8 +7,14 @@ import {
 	FireStoreCollection,
 } from "../../Firebase/FireStore/collection";
 import { FirebaseBucketStorage } from "../../Firebase/CloudStorage";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
+	const userGoogleDetails = useSelector((state) => state.google);
+	const navigate = useNavigate();
+
+	// usestate's
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -58,7 +64,7 @@ const Registration = () => {
 		return false;
 	};
 
-	const structureUserDataForFirebase = () => {
+	const structureUserDataForFirebase = (profilePic) => {
 		return {
 			name,
 			email,
@@ -67,11 +73,11 @@ const Registration = () => {
 			linkedIn,
 			insta,
 			company: companyName,
-			profilePic: uploadedImageLink,
+			profilePic,
 		};
 	};
 
-	const resetFormData = () =>{
+	const resetFormData = () => {
 		setName("");
 		setEmail("");
 		setPhoneNumber("");
@@ -91,20 +97,20 @@ const Registration = () => {
 			fileName: "",
 		});
 		setBatch(0);
-	}
-
+	};
 	const uploadTheData = async () => {
 		try {
 			if (validateAllData()) return;
-			await storeData();
+			const imageUploadData = await storeData();
 			const userRegister = new FireStoreCollection("User");
-			const userDataToUpload = structureUserDataForFirebase();
+			const userDataToUpload = structureUserDataForFirebase(imageUploadData);
 			await userRegister.addDocumentWithId({
 				data: userDataToUpload,
-				specificId: rollNumber,
+				specificId: userGoogleDetails.email,
 			});
-			const user = await userRegister.getSingleDoc(rollNumber); 
-			console.log(user);
+			const user = await userRegister.getSingleDoc(rollNumber);
+			resetFormData();
+			navigate("/");
 		} catch (err) {
 			console.log(err);
 		}
@@ -118,8 +124,8 @@ const Registration = () => {
 				image,
 				imageMeta
 			);
-			console.log(imageServerUrl)
-			setUploadedImageLink(imageServerUrl);
+			console.log(imageServerUrl);
+			return imageServerUrl;
 		} catch (err) {
 			throw Error("Error in Image Upload");
 		}
@@ -133,7 +139,7 @@ const Registration = () => {
 			date.getUTCHours(),
 			date.getUTCMinutes(),
 			date.getUTCSeconds(),
-			date.getUTCMilliseconds(),
+			date.getUTCMilliseconds()
 		);
 		return now_utc;
 	};

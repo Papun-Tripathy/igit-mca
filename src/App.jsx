@@ -14,13 +14,16 @@ import BatchDisplay from './pages/BatchDetails/BatchDisplay';
 import ProtectedRoute from './pages/ProtectedRoute';
 import LoginSignUp from './pages/LoginSignUp/LoginSignUp';
 import { useEffect } from 'react';
-import { checkAuthState, firebaseAuth } from './Firebase';
+import { firebaseAuth } from './Firebase';
 import RoadMap from './pages/course/courseDetails/RoadMap';
 import Registration from './pages/Registration/Registration';
 import { onAuthStateChanged } from 'firebase/auth';
 import { resetAtLogout, setAtLogin } from './State/Google/slice.Google';
-import { useDispatch } from 'react-redux';
-import { userLoggedIn } from './State/Auth/slice.Auth';
+import { useDispatch, useStore } from 'react-redux';
+import { userLoggedIn, userLoggedOut } from './State/Auth/slice.Auth';
+import AddNotice from './pages/notice/AddNotice';
+import ViewNotice from './pages/notice/ViewNotice';
+import UpdateNotice from './pages/notice/UpdateNotice';
 
 
 
@@ -38,18 +41,19 @@ const App = () => {
       unSub();
     }
   }, [])
+
+  const store = useStore();
   
   const checkAuthState = () =>{
     const unSubscribe = onAuthStateChanged(firebaseAuth, (user) =>{
-      console.log("changes in user....")
-      console.log(user)
       // if user is loggin in then there will be something in the object otherwise null
       if(user){
         const {accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid} = user;
   			dispatch(setAtLogin({accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid}));
-        
+        dispatch(userLoggedIn());
       } else {
         dispatch(resetAtLogout());
+        dispatch(userLoggedOut());
       }
     })
     return unSubscribe;
@@ -63,6 +67,9 @@ const App = () => {
         <Route element={<ProtectedRoute />} >
           <Route path='/batch'element={<Batch/>}/>
           <Route path='/batch/:id'element={<BatchDisplay/>}/>
+          <Route path='/notice/add'element={<AddNotice/>}/>
+          <Route path='/notice/view'element={<ViewNotice/>}/>
+          <Route path='/notice/update'element={<UpdateNotice/>}/>
           <Route path='/course'element={<Course/>}/>
           <Route path='/course/:id'element={<RoadMap/>}/>
           <Route path='/notes'element={<Notes/>}/>
