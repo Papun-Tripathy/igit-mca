@@ -1,0 +1,35 @@
+
+.verifystudent{
+    width: 100%;
+    background: rgb(20, 23, 68);
+    border-radius: 15px;
+    margin-top: 5rem;
+    padding: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+.verifytable{
+    border-spacing: 0px;
+    padding: 2rem;
+    padding-top: 0;
+}
+.verifyhead{
+    background: rgb(0, 255, 110);
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.verifybody{
+    color: white;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 19px;
+}
+.verifybody tr{
+    border: 2px solid;
+}
+td{
+    padding: 15px;
+    text-align: center;
+}
+

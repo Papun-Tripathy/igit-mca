@@ -1,5 +1,9 @@
 import React from "react";
 import "./profiledetails.css";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import MailIcon from '@mui/icons-material/Mail';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import { Link } from "react-router-dom";
 const ProfileDetails = ({
 	fname,
 	company,
@@ -29,15 +33,9 @@ const ProfileDetails = ({
             {
                 !isLoading &&
                 <div className="team__member-socials">
-                    <a href={gmail} rel="noreferrer" target="_blank">
-                        Gmail
-                    </a>
-                    <a href={linkedin} rel="noreferrer" target="_blank">
-                        Linkedin
-                    </a>
-                    <a href={insta} rel="noreferrer" target="_blank">
-                        Insta
-                    </a>
+                      <Link to={gmail}><MailIcon /></Link>   
+             <Link to={linkedin}><LinkedInIcon/></Link>   
+             <Link to={insta}><InstagramIcon/></Link>   
                 </div>
             }
 		</article>

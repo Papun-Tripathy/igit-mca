@@ -4,6 +4,8 @@ import ProfileDetails from "../../components/ProfileDetails";
 import { FireStoreCollection } from "../../Firebase/FireStore/collection";
 import { BatchDetails } from "./BatchDetails";
 
+
+
 const BatchDisplay = () => {
 	const { id } = useParams();
 
@@ -46,7 +48,7 @@ const BatchDisplay = () => {
 		<div>
 			<div className="section team">
 				<h2>Meet Your Senior / Junior / BatchMates</h2>
-				<div className="container team__container">
+				<div className="batchcontainer team__container">
           {/* 
             // Improvise this for Skeleton Loader
             isLoading && 

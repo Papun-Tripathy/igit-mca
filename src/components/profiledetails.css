@@ -1,7 +1,7 @@
 .team {
     background: var(--color-bg1);
     box-shadow: inset 0 0 3rem rgba(0, 0, 0, 0.5);
-   padding: 8rem;
+    padding: 8rem;
 }
 .team h2{
     text-align: center;
@@ -9,6 +9,8 @@
 }
 
 .team__container {
+    width: 90%;
+    height: 50%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
@@ -21,6 +23,7 @@
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    border-radius: 1rem;
 }
 
 .team__member:hover {
@@ -31,7 +34,6 @@
 
 
 .team__member-img img {
-    width: 100%;
     filter: saturate(0);
 }
 

@@ -24,6 +24,9 @@ import { userLoggedIn, userLoggedOut } from './State/Auth/slice.Auth';
 import AddNotice from './pages/notice/AddNotice';
 import ViewNotice from './pages/notice/ViewNotice';
 import UpdateNotice from './pages/notice/UpdateNotice';
+import Semester from './pages/notes/Semester';
+import SemesterPaper from './pages/notes/Semester/SemesterPaper';
+import VerifyStudent from './pages/admin/verifyStudents/VerifyStudent';
 
 
 
@@ -65,16 +68,19 @@ const App = () => {
       <Navbar/>
       <Routes>
         <Route element={<ProtectedRoute />} >
-          <Route path='/batch'element={<Batch/>}/>
-          <Route path='/batch/:id'element={<BatchDisplay/>}/>
-          <Route path='/notice/add'element={<AddNotice/>}/>
-          <Route path='/notice/view'element={<ViewNotice/>}/>
-          <Route path='/notice/update'element={<UpdateNotice/>}/>
-          <Route path='/course'element={<Course/>}/>
-          <Route path='/course/:id'element={<RoadMap/>}/>
-          <Route path='/notes'element={<Notes/>}/>
-          <Route path='/gallary'element={<Gallary/>}/>
-          <Route path='/fill-details'element={<Registration/>}/>
+          <Route path='/batch' element={<Batch/>}/>
+          <Route path='/batch/:id' element={<BatchDisplay/>}/>
+          <Route path='/notice/add' element={<AddNotice/>}/>
+          <Route path='/notice/view' element={<ViewNotice/>}/>
+          <Route path='/notice/update' element={<UpdateNotice/>}/>
+          <Route path='/course' element={<Course/>}/>
+          <Route path='/course/:id' element={<RoadMap/>}/>
+          <Route path='/notes' element={<Notes/>}/>
+          <Route path='/notes/:semister' element={<Semester />}/>
+          <Route path='/notes/:semister/:paper' element={<SemesterPaper />}/>
+          <Route path='/gallary' element={<Gallary/>}/>
+          <Route path='/fill-details' element={<Registration/>}/>
+          <Route path='/verify-student' element={<VerifyStudent/>} />
         </Route>
         <Route index element={<Home/>}/>
         <Route path='/about'element={<About/>}/>
