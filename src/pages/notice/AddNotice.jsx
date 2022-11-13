@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FireStoreCollection } from "../../Firebase/FireStore/collection";
 import "./notice.css";
+import { Link } from "react-router-dom";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const AddNotice = () => {
 	const navigate = useNavigate();
@@ -33,6 +35,13 @@ const AddNotice = () => {
 		<div className="add_notice_page">
 			<form id="add_user" onSubmit={formSubmit}>
 				<div className="new_user">
+				<div className="filter">
+							<Link to={'/notice/view'}
+							className='back_to_notice'>
+								<ArrowBackIosIcon sx={{margin:'auto'}}/>
+								All Notices
+							</Link>
+						</div>
 					<div className="form-group">
 						<label htmlFor="name" className="text-light">
 							Name
@@ -42,7 +51,7 @@ const AddNotice = () => {
 							name="name"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							placeholder="Mark Stoenis"
+							placeholder="Heading of Notice"
 						/>
 					</div>
 					<div className="form-group">
@@ -54,7 +63,7 @@ const AddNotice = () => {
 							name="email"
 							value={link}
 							onChange={(e) => setLink(e.target.value)}
-							placeholder="paste the link"
+							placeholder="Paste the link"
 						/>
 					</div>
 					<div className="form-group">
