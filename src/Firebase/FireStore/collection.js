@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, setDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { firestoreDB } from "..";
 
 export class FireStoreCollection {
@@ -8,23 +8,23 @@ export class FireStoreCollection {
         this.collectionRef = collection(firestoreDB, collectionName);
     }
 
-    getDetails = async () =>{
+    getDetails = async () => {
         try {
             const detailsRef = collection(firestoreDB, `${this.collectionName}/all${this.collectionName}/details`)
             const snap = await getDocs(detailsRef);
             // if(snap.empty()) return Error("Empty") ;
-            return snap.docs.map( doc => ({ id: doc.id,...doc.data() }))
-            
+            return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+
         } catch (err) {
             console.warn(err)
             throw Error("Error in getDetails for the collection");
         }
     }
 
-    customCollectionRef = (newRef) =>{
+    customCollectionRef = (newRef) => {
         return collection(firestoreDB, `${this.collectionName}/${newRef}`)
     }
-    customCollectionName = (newRef) =>{
+    customCollectionName = (newRef) => {
         return `/${newRef}`;
     }
 
@@ -37,7 +37,7 @@ export class FireStoreCollection {
         }
     }
 
-    getSubscription = ({workFunction}) => {
+    getSubscription = ({ workFunction }) => {
         return onSnapshot(this.collectionRef, workFunction)
     }
 
@@ -46,15 +46,34 @@ export class FireStoreCollection {
             const docRef = doc(firestoreDB, customCollectionName ?? this.collectionName, id);
             const docData = await getDoc(docRef);
             return docData.exists() ?
-            docData.data() : Error("Invalid Id in the Collection");
-            
+                docData.data() : Error("Invalid Id in the Collection");
+
         } catch (err) {
             console.log(err)
             // throw Error("Error in data fetching")
         }
     }
 
-    addDocumentWithoutId = async ({customCollectionRef, data}) =>{
+    updateDocument = async (id, data, customCollectionName) => {
+        try {
+            const docRef = doc(firestoreDB, customCollectionName ?? this.collectionName, id);
+            return await updateDoc(docRef, data);
+            
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    deleteDocument = async (id, customCollectionRef) =>{
+        try{
+            const docRef = doc(firestoreDB, customCollectionRef ?? this.collectionName, id);
+            return await deleteDoc(docRef);
+        } catch(err){
+
+        }
+    }
+
+    addDocumentWithoutId = async ({ customCollectionRef, data }) => {
         try {
             const docData = await addDoc(customCollectionRef ?? this.collectionRef, data);
             console.log(data);
@@ -64,11 +83,11 @@ export class FireStoreCollection {
         }
     }
 
-    addDocumentWithId = async ({ customCollectionPath, specificId, data}) =>{
+    addDocumentWithId = async ({ customCollectionPath, specificId, data }) => {
         try {
-            const docRef = doc(firestoreDB, customCollectionPath ?? this.collectionName, specificId );
+            const docRef = doc(firestoreDB, customCollectionPath ?? this.collectionName, specificId);
             await setDoc(docRef, data);
-            
+
             // const docData = await this.getSingleDoc(specificId, customCollectionPath);
             console.log("Data with Id addition")
             // console.log(docData);
@@ -78,10 +97,11 @@ export class FireStoreCollection {
             throw Error("Error in Document Upload!!");
         }
     }
-    
+
+
 }
 
 export const cloudFirestoreCollections = {
     USER_DETAILS: "User",
     BATCH: "Batch",
-  }
+}

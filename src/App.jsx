@@ -90,7 +90,7 @@ const App = () => {
           <Route path='/batch/:id' element={<BatchDisplay/>}/>
           <Route path='/notice/add' element={<AddNotice/>}/>
           <Route path='/notice/view' element={<ViewNotice/>}/>
-          <Route path='/notice/update' element={<UpdateNotice/>}/>
+          <Route path='/notice/update/:id' element={<UpdateNotice/>}/>
           <Route path='/course' element={<Course/>}/>
           <Route path='/course/:id' element={<RoadMap/>}/>
           <Route path='/notes' element={<Notes/>}/>

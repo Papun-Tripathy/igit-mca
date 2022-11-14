@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FireStoreCollection } from "../../Firebase/FireStore/collection";
 import "./notice.css";
 import { Link } from "react-router-dom";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { serverTimestamp } from "firebase/firestore";
 
 const AddNotice = () => {
 	const navigate = useNavigate();
@@ -20,12 +21,12 @@ const AddNotice = () => {
 		try {
 			const noticeCollection = new FireStoreCollection("Notice");
 			await noticeCollection.addDocumentWithoutId({
-				data: { heading: name, link: link },
+				data: { heading: name, link: link,  time: serverTimestamp() },
 			});
 			alert("done adding document");
 			setName("");
 			setLink("");
-			navigate("notice/view");
+			return navigate("/notice/view");
 		} catch (error) {
 			return;
 		}
@@ -35,13 +36,12 @@ const AddNotice = () => {
 		<div className="add_notice_page">
 			<form id="add_user" onSubmit={formSubmit}>
 				<div className="new_user">
-				<div className="filter">
-							<Link to={'/notice/view'}
-							className='back_to_notice'>
-								<ArrowBackIosIcon sx={{margin:'auto'}}/>
-								All Notices
-							</Link>
-						</div>
+					<div className="filter">
+						<Link to={"/notice/view"} className="back_to_notice">
+							<ArrowBackIosIcon sx={{ margin: "auto" }} />
+							All Notices
+						</Link>
+					</div>
 					<div className="form-group">
 						<label htmlFor="name" className="text-light">
 							Name

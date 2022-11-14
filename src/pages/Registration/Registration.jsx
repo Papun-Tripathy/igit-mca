@@ -81,6 +81,7 @@ const Registration = () => {
 			insta,
 			company: companyName,
 			profilePic,
+			verifyed: false,
 		};
 	};
 
