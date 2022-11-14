@@ -37,7 +37,6 @@ const userSlice = createSlice({
     },
     reducers: {
         setUserValue: (state, action) => {
-            console.log("Calling user set value");
             const {
                 name, email, phoneNumber, profilePic, branch, linkedIn, insta, company
             } = action.payload;

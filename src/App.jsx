@@ -43,7 +43,6 @@ const App = () => {
     }
   }, [])
   
-  const store = useStore();
 
   // getting Data from the firestore user collection  
   const fetchDataOfTheUser = async (googleEmail) =>{

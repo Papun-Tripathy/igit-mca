@@ -1,4 +1,3 @@
-import C from '../../images/logo.png'
 
 export const semester = [
     {
