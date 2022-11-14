@@ -17,7 +17,6 @@ const About = () => {
             )
           })
         }
-          <DisplayAbout/>
         </div>
       </section>
     </>
