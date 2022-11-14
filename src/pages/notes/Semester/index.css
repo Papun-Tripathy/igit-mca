@@ -29,6 +29,21 @@
     place-items: center;
   }
   
+.skeleton__semester__paper{
+  opacity: .7;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0%{
+    background-color: hsl(199, 34%, 84%);
+
+  }
+  100%{
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
   /* MENU ITEM STYLING */
   
   .projectItem {
