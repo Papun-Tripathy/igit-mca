@@ -27,3 +27,9 @@
     margin: 1.2rem 0 2rem;
     font-size: 0.9rem;
 }
+
+@media screen and (max-width:400px){
+    .courses .courses__container{
+        grid-template-columns: repeat(1,1fr);
+    }
+}

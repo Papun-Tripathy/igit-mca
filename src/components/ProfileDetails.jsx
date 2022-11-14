@@ -5,23 +5,23 @@ import MailIcon from '@mui/icons-material/Mail';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { Link } from "react-router-dom";
 const ProfileDetails = ({
-	fname,
-	company,
-	insta,
-	linkedin,
-	gmail,
-	image,
+    fname,
+    company,
+    insta,
+    linkedin,
+    gmail,
+    image,
     isLoading,
 }) => {
-	return (
-		<article className={`${isLoading && 'skeleton'} team__member`}>
-			<div className="team__member-img">
+    return (
+        <article className={`${isLoading && 'skeleton'} team__member`}>
+            <div className="team__member-img">
                 {
                     !isLoading &&
-				<img src={image} alt="" />
+                    <img src={image} alt="" />
                 }
-			</div>
-			<div className="team__member-info">
+            </div>
+            <div className="team__member-info">
                 {
                     !isLoading &&
                     <>
@@ -29,17 +29,17 @@ const ProfileDetails = ({
                         <p>{company}</p>
                     </>
                 }
-			</div>
+            </div>
             {
                 !isLoading &&
                 <div className="team__member-socials">
-                      <Link to={gmail}><MailIcon /></Link>   
-             <Link to={linkedin}><LinkedInIcon/></Link>   
-             <Link to={insta}><InstagramIcon/></Link>   
+                   <a href={gmail} target="_blank" rel="noreferrer"><MailIcon /></a>
+                    <a href={linkedin} target="_blank" rel="noreferrer"><LinkedInIcon /></a>
+                    <a href={insta} target="_blank" rel="noreferrer"><InstagramIcon /></a>
                 </div>
             }
-		</article>
-	);
+        </article>
+    );
 };
 
 export default ProfileDetails;

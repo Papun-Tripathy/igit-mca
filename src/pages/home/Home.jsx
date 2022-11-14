@@ -8,12 +8,12 @@ import Course from '../course/Course'
 
 const Home = () => {
   return (
-    <>
+    <div className='homepage'>
     <MainHeader/>
     <Notice/>
     <Notes/>
     <Course homePage/>
-    </>
+    </div>
   )
 }
 

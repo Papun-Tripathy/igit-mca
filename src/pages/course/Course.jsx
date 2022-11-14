@@ -4,6 +4,7 @@ import './course.css'
 
 const Course = ({ homePage }) => {
 
+  
   return (
     <section className="courses">
       <div className="container courses__container">{

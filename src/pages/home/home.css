@@ -67,3 +67,31 @@
     }
     
 }
+
+@media screen and (max-width:400px) {
+    .main__header{
+        margin-bottom: 0;
+    }
+    .main__header-right{
+        display: none;
+    }
+   .homepage .main__header .main__header-container{
+        grid-template-rows: 100% 100%;
+        grid-template-columns: 100%;
+        margin-top: 2rem;
+    }
+
+    .homepage .notices{
+        margin-top: -11rem;
+    }
+    .homepage .notes .categories__container{
+        display: flex;
+        flex-direction: column;
+    }
+    .homepage .notes .categories__right{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .homepage .courses .courses__container{
+        grid-template-columns: repeat(1,1fr);
+    }
+}

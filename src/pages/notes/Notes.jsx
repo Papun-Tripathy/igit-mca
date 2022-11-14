@@ -11,7 +11,6 @@ const Notes = () => {
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus fuga, odio maiores vitae hic
                         beatae maxime harum est sapiente atque, tenetur eos suscipit fugiat facere obcaecati debitis
                         eveniet. Molestias, quisquam.</p>
-                    <a href="notes.html" className="btn">See All</a>
                 </div>
                 <div className="categories__right">{
                     semester.map(({ icon, title, desc, path },index) => {

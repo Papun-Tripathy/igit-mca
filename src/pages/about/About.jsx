@@ -4,6 +4,7 @@ import DisplayAbout from '../../components/DisplayAbout';
 import './abouteam.css';
 import { teamMember } from './teamMember'
 
+
 const About = () => {
   return (
     <>

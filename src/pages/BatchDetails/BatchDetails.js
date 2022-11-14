@@ -6,24 +6,24 @@ export const BatchDetails=[
         id:40,
         fname:"Mrutyunjaya Patra",
         company:"IGIT",
-        insta:'www.instagram.com',
-        linkedin:'www.linkedin.com',
+        insta:'https://www.instagram.com',
+        linkedin:'https://www.linkedin.com',
         image:Profile
     },
     {
         id:39,
         fname:"Kriti Kumar Behera",
         company:"IGIT",
-        insta:'www.instagram.com',
-        linkedin:'www.linkedin.com',
+        insta:'https://www.instagram.com',
+        linkedin:'https://www.linkedin.com',
         image:Profile
     },
     {
         id:38,
         fname:"Soumya Ranjan Das",
         company:"IGIT",
-        insta:'www.instagram.com',
-        linkedin:'www.linkedin.com',
+        insta:'https://www.instagram.com',
+        linkedin:'https://www.linkedin.com',
         image:Profile
     },
     {

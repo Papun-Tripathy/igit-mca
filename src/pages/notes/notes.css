@@ -1,15 +1,15 @@
 
 .notes {
     background: var(--color-bg1);
-    padding: 2rem;
-    top: 0;
-    margin-top: 80px;
-    margin-bottom: 10rem;
+    padding: 1rem;
+    margin-top: 3rem;
+    
 }
 
 .categories__container {
     display: grid;
     grid-template-columns: 40% 60%;
+    margin-top: 3rem;
 }
 
 .categories h1 {
@@ -53,4 +53,18 @@
 
 .category p {
     font-size: 0.85rem;
+}
+
+@media only screen and (max-width: 400px) {
+    .notes .categories__container{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .categories__left p{
+        text-align: start;
+    }
+
+    .categories__right{
+        display: flex;
+        flex-direction: column;
+    }
 }

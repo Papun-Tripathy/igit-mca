@@ -7,7 +7,7 @@ function ProtectedRoute() {
         return state.auth.isLoggedIn
     })
   return (
-    isLoggedIn ? <Outlet /> : <Navigate to="/login" />
+    isLoggedIn ? <Outlet /> : <Navigate to="/register" />
   )
 }
 

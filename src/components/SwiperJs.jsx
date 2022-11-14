@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "./swiperjs.css";
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper";
+import { Autoplay, Pagination, Navigation, Thumbs } from "swiper";
 export default function SwiperJs() {
     return (
         <>
@@ -23,7 +23,7 @@ export default function SwiperJs() {
                 }}
             
                 navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
+                modules={[Autoplay, Pagination, Navigation, Thumbs]}
                 className="mySwiper"
             >
                 <SwiperSlide className='swiper-slide'>

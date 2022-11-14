@@ -49,7 +49,7 @@ function Index() {
 	return (
 		<div className="semesterpaper">
 			<div className="subject">
-				<h1> My Personal Projects</h1>
+				<h1>Semester Papers</h1>
 				<div className="subjectList">
           {
             isDataLoading ? 
