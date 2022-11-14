@@ -1,60 +1,89 @@
+import React from 'react'
 import './contact.css'
+import { useForm, ValidationError } from '@formspree/react';
 
-const Contact = () => {
+
+
+function Contact() {
+  const [state, handleSubmit] = useForm("xaykvwee");
+  if (state.succeeded) {
+    return <p>Thanks for joining!</p>;
+  }
   return (
     <div>
 
       <section className="contact">
-        <div class="container contact_container">
-          <aside class="contact__aside">
-            <div class="aside__imgage">
+        <div className="container contact_container">
+          <aside className="contact__aside">
+            <div className="aside__imgage">
               <img src='../../images/contact.svg' alt="" />
             </div>
             <h2>Contact Us</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, voluptatem sit earum fuga dolore at.</p>
-            <ul class="contact__details">
+            <ul className="contact__details">
               <li>
-                <i class="uil uil-phone-times"></i>
+                <i className="uil uil-phone-times"></i>
                 <h5>+919090323291</h5>
               </li>
               <li>
-                <i class="uil uil-envelope"></i>
+                <i className="uil uil-envelope"></i>
                 <h5>mrmjpatra@gmail.com</h5>
               </li>
               <li>
-                <i class="uil uil-location-point"></i>
+                <i className="uil uil-location-point"></i>
                 <h5>Sarang, Dhenkanal</h5>
               </li>
             </ul>
-            <ul class="contact__socials">
-              <li><a href="https://facebook.com"><i class="uil uil-facebook-f"></i></a></li>
-              <li><a href="https://instagram.com"><i class="uil uil-instagram"></i></a></li>
-              <li><a href="https://twitter.com"><i class="uil uil-twitter"></i></a></li>
-              <li><a href="https://linkedin.com"><i class="uil uil-linkedin-alt"></i></a></li>
+            <ul className="contact__socials">
+              <li><a href="https://facebook.com"><i className="uil uil-facebook-f"></i></a></li>
+              <li><a href="https://instagram.com"><i className="uil uil-instagram"></i></a></li>
+              <li><a href="https://twitter.com"><i className="uil uil-twitter"></i></a></li>
+              <li><a href="https://linkedin.com"><i className="uil uil-linkedin-alt"></i></a></li>
             </ul>
           </aside>
-          {/* 
 
-          <form>
-            <div className='form__name'>
-              <input type="text" name="First Name" placeholder="First Name" data-required />
-              <input type="text" name='last name' placeholder='last name' required />
-            </div>
-            <input type='email' name='Email address' placeholder='Your Email address' required/>
-            <textarea name='Message' rows={7} placeholder='Message' required/>
-            <button type='submit' className='btn btn-primary' >Send Message</button>
-          </form> */}
+          <form onSubmit={handleSubmit} className='contactform'>
 
-
-
-          <form action="https://formspree.io/f/mrgdbrzg" method="POST" className="contact__form">
-            <div className="form__name">
-              <input type="text" name="First Name" placeholder="First Name" data-required />
-              <input type="text" name='last name' placeholder='last name' required />
-            </div>
-            <input type='email' name='Email address' placeholder='Your Email address' required />
-            <textarea name="Message" rows="7" placeholder="Message" required ></textarea>
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            
+              <label htmlFor="text">
+                 Name
+              </label>
+              <input
+                id='name'
+                type='text'
+                name="Enter Full Name" required autoComplete='autoComplete'/>
+            
+            <label htmlFor="email">
+              Email Address
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              required
+            />
+            <ValidationError
+              prefix="Email"
+              field="email"
+              errors={state.errors}
+            />
+            <label htmlFor='textarea'>
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows={"5"}
+            />
+            <ValidationError
+              prefix="Message"
+              field="message"
+              errors={state.errors}
+            />
+            <button type="submit" disabled={state.submitting} className='btn'>
+              Submit
+            </button>
           </form>
         </div>
       </section>

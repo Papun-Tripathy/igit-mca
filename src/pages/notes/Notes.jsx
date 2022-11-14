@@ -17,7 +17,7 @@ const Notes = () => {
                     semester.map(({ icon, title, desc, path },index) => {
                         return (
                             <div key={index}>
-                            <Semester icon={icon} title={title} desc={desc} path={path}/>
+                            <Semester icon={icon} title={title} desc={desc} path={path} />
                             </div>
                         )
                     })

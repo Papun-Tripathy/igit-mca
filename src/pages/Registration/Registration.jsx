@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
 	const userGoogleDetails = useSelector((state) => state.google);
+	const userUploadedDetails = useSelector(state => state.user);
 	const navigate = useNavigate();
 
 	// usestate's
@@ -35,6 +36,12 @@ const Registration = () => {
 	const [linkedIn, setLinkedIn] = useState("");
 	const [insta, setInsta] = useState("");
 	const [companyName, setCompanyName] = useState("IGIT");
+
+	useEffect(() => {
+		if(userUploadedDetails){
+			
+		}
+	}, [userUploadedDetails]);
 
 	useEffect(() => {
 		const getAllBatchList = async () => {
@@ -108,7 +115,8 @@ const Registration = () => {
 				data: userDataToUpload,
 				specificId: userGoogleDetails.email,
 			});
-			const user = await userRegister.getSingleDoc(rollNumber);
+			const user = await userRegister.getSingleDoc(userGoogleDetails.email);
+			console.log(user);
 			resetFormData();
 			navigate("/");
 		} catch (err) {

@@ -1,4 +1,8 @@
-.projects {
+.semesterpaper{
+  margin-top: 2rem; 
+  padding-top: 2.5rem;
+}
+.subject {
     width: 100%;
     height: auto;
     display: flex;
@@ -6,15 +10,19 @@
     align-items: center;
     flex-direction: column;
   }
-  .projects .projectTitle {
+  .subject .projectTitle {
     text-align: center;
     color: #3e497a;
     font-size: 60px;
     font-weight: bolder;
   }
   
-  .projectList {
-    width: 70vw;
+  .subjectList {
+    margin: 2rem;
+    box-shadow: inset 0px 0px 88px #0202025c;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-top: 0.4rem;
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -25,11 +33,15 @@
   
   .projectItem {
     border-radius: 15px;
+    position: relative;
     width: 300px;
     height: 300px;
     margin: 40px;
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 12px #ffffff54;
     text-align: center;
+    display: flex;
+    align-items: end;
+    justify-content: center;
   }
   .projectItem:hover {
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
@@ -38,33 +50,45 @@
   }
   
   .projectItem .bgImage {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-radius: 15px;
     width: 100%;
-    height: 200px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+  }
+  .projectItem .bgImageOverlay{
+    background: linear-gradient(transparent,transparent,black);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    z-index: 0;
   }
   
   .projectItem h1 {
     font-size: 25px;
+    position: absolute;
+    bottom: 2rem;
+    color: white;
   }
   
   @media only screen and (max-width: 1300px) {
-    .projectList {
+    .subjectList {
       grid-template-columns: 1fr 1fr;
     }
   }
   
   @media only screen and (max-width: 800px) {
-    .projectList {
+    .subjectList {
       grid-template-columns: 1fr;
     }
   }
   
   @media only screen and (max-width: 800px) {
-    .projectList {
+    .subjectList {
       width: 100%;
     }
     .projectItem {

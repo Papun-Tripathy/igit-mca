@@ -51,6 +51,7 @@
     background: var(--color-primary);
 }
 
+
 .achievement__card p {
     margin-top: 1rem;
 }
@@ -58,50 +59,66 @@
 
 
 /* =====================TEAMS====================== */
-
-.team {
-    background: var(--color-bg1);
-    box-shadow: inset 0 0 3rem rgba(0, 0, 0, 0.5);
+section {
+    margin: 1rem;
+    background-color: #3D4067;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
 }
 
-.team__container {
+.developerteam {
+    background: var(--color-bg1);
+    box-shadow: inset 0 0 3rem rgb(0 0 0 / 50%);
+    padding: 2rem;
+}
+
+.developerteam h2 {
+    text-align: center;
+    padding: 0 1rem 2rem 1rem;
+}
+
+.developerteam__container{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
 
-.team__member{
+.developerteam__member{
     background: var(--color-bg2);
     padding: 2rem;
     border: 1px solid transparent;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    border-radius: 1rem;
 }
-.team__member:hover{
+
+.developerteam__member:hover {
     background: transparent;
     border-color: var(--color-primary);
 }
 
 
 
-.team__member-img img{
-    width: 100%;
+.developerteam__member-img img {
     filter: saturate(0);
 }
-.team__member:hover img{
+
+.developerteam__member:hover img {
     filter: saturate(1);
 }
-.team__member-info *{
+
+.developerteam__member-info * {
     text-align: center;
     margin-top: 1.4rem;
 }
 
-.team__member-info p{
+.developerteam__member-info p {
     color: var(--color-light);
 }
 
-.team__member-socials{
+.developerteam__member-socials {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -110,13 +127,15 @@
     flex-direction: column;
     background: var(--color-primary);
     border-radius: 1rem 0 0 1rem;
-    box-shadow: -2rem 0 2rem  rgba(0, 0, 0, 0.3);
+    box-shadow: -2rem 0 2rem rgba(0, 0, 0, 0.3);
     transition: var(--transition);
 }
-.team__member:hover .team__member-socials{
+
+.developerteam__member:hover .developerteam__member-socials {
     right: 0;
 }
-.team__member-socials a{
+
+.developerteam__member-socials a {
     padding: 1rem;
 }
 
@@ -124,43 +143,32 @@
 /* MEdia Queries */
 
 @media screen and (max-width:1024px) {
-    .about__achievements{
-        margin-top: 2rem;
-    }
-    .about__achievements-container{
-        grid-template-columns: 1fr;
-        gap: 4rem;
-    }
-    .about_achievements-left{
-        width: 60%;
-        margin: 0 auto;
-    }
-    .team__container{
-        grid-template-columns: repeat(3,1fr);
+
+    .developerteam__container {
+        grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
     }
 
-    .team__member{
+    .developerteam__member {
         padding: 1rem;
     }
 }
 
 /* Media Queries for Mobile */
 @media screen and (max-width:600px) {
-    .achievements__cards{
+
+    .developerteam__container {
         grid-template-columns: 1fr 1fr;
         gap: 0.7rem;
     }
-    .team__container{
-        grid-template-columns: 1fr 1fr;
-        gap: 0.7rem;
-    }
-    .team__member{
+
+    .developerteam__member {
         padding: 0;
 
     }
-    .team__member p{
+
+    .developerteam__member p {
         margin-bottom: 1.5rem;
     }
-    
+
 }

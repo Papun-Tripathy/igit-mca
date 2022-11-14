@@ -1,22 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./notice.css";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { margin } from "@mui/system";
+
 const UpdateNotice = () => {
 	return (
 		<div>
-			<main id="site-main">
+			<main id="site-main" >
 				<div className="container">
 					<div className="box-nav d-flex justify-between">
 						<div className="filter">
-							<a href="/">
-								<i className="fas fa-angle-double-left"></i> All Notices
-							</a>
+							<Link to={'/notice/view'}
+							className='back_to_notice'>
+								<ArrowBackIosIcon sx={{margin:'auto'}}/>
+								All Notices
+							</Link>
 						</div>
 					</div>
 					<div className="form-title text-center">
 						<h2 className="text-dark">Update Notice</h2>
-						<span className="text-light">
+						<div className="text-light">
 							Use the below form to Update the Notice
-						</span>
+						</div>
 					</div>
 
 					<form id="update_user">
@@ -29,7 +35,7 @@ const UpdateNotice = () => {
 								<input
 									type="text"
 									name="name"
-									value="<%= user.name %>"
+									value="Title"
 									placeholder="Mark Stoenis"
 								/>
 							</div>
@@ -40,7 +46,7 @@ const UpdateNotice = () => {
 								<input
 									type="text"
 									name="email"
-									value="<%= user.email%>"
+									value="Link"
 									placeholder="Paste the link"
 								/>
 							</div>

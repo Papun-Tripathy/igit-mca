@@ -2,7 +2,7 @@ import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 	signinUserWithEmail,
 	signInwithGooglePopup,
@@ -18,9 +18,10 @@ const LoginSignUp = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [isLoading, setIsLoading] = useState(false);
-
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+	
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [signUp, setSignUp] = useState(false);
 
@@ -42,13 +43,11 @@ const LoginSignUp = () => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	if (isLoggedIn) return <Navigate to="/" />;
-
 	const signInSubmit = async (e) => {
 		e.preventDefault();
-		
+
 		setIsLoading(true);
-		
+
 		setSignInData((s) => ({
 			email: s.email.trim(),
 			password: s.password.trim(),
@@ -59,7 +58,7 @@ const LoginSignUp = () => {
 		if (!validMail(signInData.email)) {
 			return;
 		}
-		
+
 		try {
 			const user = await signinUserWithEmail(
 				signInData.email,
@@ -73,7 +72,7 @@ const LoginSignUp = () => {
 			setIsLoading(false);
 		}
 	};
-	
+
 	const signupSubmit = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
@@ -103,20 +102,40 @@ const LoginSignUp = () => {
 			setIsLoading(true);
 		}
 	};
-	
+
 	const loginWithGoogle = async (firstTime) => {
 		setIsLoading(true);
 		try {
 			const user = await signInwithGooglePopup();
 			dispatch(userLoggedIn());
-			const {accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid} = user;
-			dispatch(setAtLogin({accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid}));
+			const {
+				accessToken,
+				displayName,
+				emailVerified,
+				isAnonymous,
+				photoURL,
+				email,
+				uid,
+			} = user;
+			dispatch(
+				setAtLogin({
+					accessToken,
+					displayName,
+					emailVerified,
+					isAnonymous,
+					photoURL,
+					email,
+					uid,
+				})
+			);
 			setIsLoading(false);
-			return navigate(firstTime ?"/" : "/fill-details");
+			return navigate(firstTime ? "/" : "/fill-details");
 		} catch (err) {
 			setIsLoading(false);
 		}
 	};
+
+	if (isLoggedIn) return navigate("/");
 
 	return (
 		<div className="login-page-container">
@@ -126,7 +145,10 @@ const LoginSignUp = () => {
 						{/* <div className='loginPage'>
                         </div> */}
 						<p>Try</p>
-						<button className="login-with-google-btn" onClick={e => loginWithGoogle(true)}>
+						<button
+							className="login-with-google-btn"
+							onClick={(e) => loginWithGoogle(true)}
+						>
 							Log in with <img src={GoogleC} className="google-image" alt="" />
 						</button>
 						<h2>Already Have an Account ?</h2>
@@ -135,7 +157,10 @@ const LoginSignUp = () => {
 						</button>
 					</div>
 					<div className="box signup">
-						<button className="login-with-google-btn" onClick={e => loginWithGoogle(false)}>
+						<button
+							className="login-with-google-btn"
+							onClick={(e) => loginWithGoogle(false)}
+						>
 							Log in with <img src={GoogleC} className="google-image" alt="" />
 						</button>
 						<h2>Don't Have an Account ?</h2>
@@ -164,10 +189,11 @@ const LoginSignUp = () => {
 									setSignInData((s) => ({ ...s, password: e.target.value }))
 								}
 							/>
-							{
-								isLoading ? <CircularProgress size={30} /> :
-									<input type="submit" value="Login" />
-							}
+							{isLoading ? (
+								<CircularProgress size={30} />
+							) : (
+								<input type="submit" value="Login" />
+							)}
 							<p className="forget">Forget Password ?</p>
 						</form>
 					</div>
@@ -204,10 +230,11 @@ const LoginSignUp = () => {
 									}))
 								}
 							/>
-							{
-								isLoading ? <CircularProgress size={30} /> :
-									<input type="submit" value="Register" />
-							}
+							{isLoading ? (
+								<CircularProgress size={30} />
+							) : (
+								<input type="submit" value="Register" />
+							)}
 							<p className="forget">Forget Password ?</p>
 						</form>
 					</div>

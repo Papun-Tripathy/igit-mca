@@ -40,7 +40,6 @@ const Navbar = () => {
 											isActive ? "active-nav" : "nav-link-p"
 										}
 										onClick={() => {
-											console.log("called");
 											setIsNavShowing((prev) => !prev);
 											dispatch(userLoggedOut());
 											logout();

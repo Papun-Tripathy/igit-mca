@@ -37,6 +37,7 @@ const userSlice = createSlice({
     },
     reducers: {
         setUserValue: (state, action) => {
+            console.log("Calling user set value");
             const {
                 name, email, phoneNumber, profilePic, branch, linkedIn, insta, company
             } = action.payload;
@@ -57,9 +58,9 @@ const userSlice = createSlice({
             localStorage.removeItem("UserAuth");
         }
     },
-})
+});
 
-const { reducer: userReducer, actions: authActions } = userSlice;
+const userReducer = userSlice.reducer;
 
-export default userReducer;
-export { authActions };
+export default userReducer ;
+export const {setUserValue, emptyValue} = userSlice.actions;

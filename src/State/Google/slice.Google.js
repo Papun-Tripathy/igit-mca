@@ -37,7 +37,6 @@ const googleSlice = createSlice({
             state.isAnonymous = isAnonymous;
             state.photoURL = photoURL;
             state.uid = uid;
-
         },
         resetAtLogout: (state) => {
             state = initialState;

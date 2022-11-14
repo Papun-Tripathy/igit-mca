@@ -45,27 +45,6 @@ main {
 }
 
 
-footer {
-    width: 100%;
-    background-color: #1f2641;
-    padding: 16px;
-    align-self: center;
-    text-align: center;
-    margin-top: 32px;
-
-}
-
-footer a {
-    color: #fff;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-
-}
-
 
 
 form {
