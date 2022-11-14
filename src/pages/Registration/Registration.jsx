@@ -35,7 +35,7 @@ const Registration = () => {
 	const [batch, setBatch] = useState(0);
 	const [linkedIn, setLinkedIn] = useState("");
 	const [insta, setInsta] = useState("");
-	const [companyName, setCompanyName] = useState("IGIT");
+	const [companyName, setCompanyName] = useState("");
 
 	useEffect(() => {
 		if(userUploadedDetails){
@@ -246,7 +246,7 @@ const Registration = () => {
 															: showingImage
 													}
 													alt=""
-												/>
+												/><p className="uploadimgtext">Upload Image</p>
 											</div>
 										</div>
 										<input

@@ -92,6 +92,14 @@ small {
     width: 100%;
     height: 190px;
 }
+
+.uploadimgtext{
+    text-align: center;
+    color: black;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
 .form-item input[type="text"],
 input[type="number"],
 input[type="email"] {
