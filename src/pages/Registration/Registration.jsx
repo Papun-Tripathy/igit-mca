@@ -113,6 +113,7 @@ const Registration = () => {
 			name,
 			email,
 			contact: phoneNumber,
+			rollNumber,
 			batch,
 			linkedIn,
 			insta,

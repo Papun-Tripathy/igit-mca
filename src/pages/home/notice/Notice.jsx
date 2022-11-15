@@ -4,10 +4,27 @@ import "swiper/css/effect-cards";
 import "./notice.css";
 import { EffectCards, Autoplay, Pagination } from "swiper";
 import { values } from './noticedata';
+import { useEffect, useState } from "react";
+import { FireStoreCollection } from "../../../Firebase/FireStore/collection";
+import { CircularProgress } from "@mui/material";
 
 
 
 const Notice = () => {
+    const [notices, setNotices] = useState([]);
+    useEffect(() => {
+      
+    
+       const fetchNotices = async () => {
+            const noticeCollection = new FireStoreCollection("Notice");
+            const allNotice = await noticeCollection.getCollectionData();
+            const datas = allNotice.map(notice => notice.data());
+            setNotices(datas);
+      }
+
+      fetchNotices();
+    }, [])
+    
     return (
 
         <>
@@ -28,12 +45,14 @@ const Notice = () => {
                 >
 
                     {
-                        
-                        values.map(({icon, title, link },index) => {
+                        Object.is(notices, []) ?
+                        <SwiperSlide className="slide view" >
+                            <CircularProgress />
+                        </SwiperSlide> :
+                        notices.map(({heading, link },index) => {
                             return (
                                 <SwiperSlide className="slide view" key={index}>
-                                    {icon}
-                                    <h4>{title}</h4>
+                                    <h4>{heading}</h4>
                                     <span>
                                         <button className="btn"><a href={link}>Link</a></button>
                                     </span>

@@ -3,9 +3,10 @@ import { createSlice } from "@reduxjs/toolkit"
 export const userInitialState = {
     name: "",
     email: "",
-    phoneNumber: "",
+    contact: "",
     profilePic: "",
-    branch: "",
+    rollNumber: "",
+    batch: "",
     linkedIn: "",
     insta: "",
     company: "",
@@ -21,13 +22,14 @@ const userSlice = createSlice({
         }
         const userData = JSON.parse(localUser);
         const {
-            name, email, phoneNumber, profilePic, branch, linkedIn, insta, company
+            name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company
         } = userData;
         return {
             name,
             email,
-            branch,
-            phoneNumber,
+            batch,
+            contact,
+            rollNumber,
             registered: true,
             insta: insta ?? "",
             company: company ?? "",
@@ -38,16 +40,17 @@ const userSlice = createSlice({
     reducers: {
         setUserValue: (state, action) => {
             const {
-                name, email, phoneNumber, profilePic, branch, linkedIn, insta, company
+                name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company
             } = action.payload;
-            localStorage.setItem("UserAuth", JSON.stringify({ name, email, phoneNumber, profilePic, branch, linkedIn, insta, company }));
+            localStorage.setItem("UserAuth", JSON.stringify({ name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company }));
             state.name = name;
             state.email = email;
-            state.branch = branch;
-            state.phoneNumber = phoneNumber;
+            state.batch = batch;
+            state.contact = contact;
             state.registered = true;
             state.insta = insta ?? "";
             state.company = company ?? "";
+            state.rollNumber = rollNumber;
             state.linkedIn = linkedIn ?? "";
             state.profilePic = profilePic ?? "";
 

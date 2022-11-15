@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { firestoreDB } from "..";
 
 export class FireStoreCollection {
@@ -37,6 +37,18 @@ export class FireStoreCollection {
         }
     }
 
+    getCollectionDataWithQuery = async (customCollectionRef, ...querry) =>{
+        try {
+            const q = query(customCollectionRef?? this.collectionRef,...querry);
+            const dataFetched = await getDocs(q);
+            
+            return dataFetched.docs;
+            // return querrySnap.docs;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     getSubscription = ({ workFunction }) => {
         return onSnapshot(this.collectionRef, workFunction)
     }
@@ -71,7 +83,7 @@ export class FireStoreCollection {
             const docRef = doc(firestoreDB, customCollectionRef ?? this.collectionName, id);
             return await deleteDoc(docRef);
         } catch(err){
-
+            console.log(err)
         }
     }
 
