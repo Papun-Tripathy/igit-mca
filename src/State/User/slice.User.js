@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+export const userInitialState = {
     name: "",
     email: "",
     phoneNumber: "",
@@ -17,7 +17,7 @@ const userSlice = createSlice({
     initialState: () => {
         const localUser = localStorage.getItem("UserAuth");
         if (localUser === null) {
-            return initialState;
+            return userInitialState;
         }
         const userData = JSON.parse(localUser);
         const {
@@ -53,7 +53,7 @@ const userSlice = createSlice({
 
         },
         emptyValue: (state) => {
-            state = initialState;
+            state = userInitialState;
             localStorage.removeItem("UserAuth");
         }
     },

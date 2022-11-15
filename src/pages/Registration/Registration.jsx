@@ -9,15 +9,18 @@ import {
 import { FirebaseBucketStorage } from "../../Firebase/CloudStorage";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { userInitialState } from "../../State/User/slice.User";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 const Registration = () => {
 	const userGoogleDetails = useSelector((state) => state.google);
-	const userUploadedDetails = useSelector(state => state.user);
+	const userStateDetails = useSelector((state) => state.user);
 	const navigate = useNavigate();
-	console.log("register page");
+
 	// usestate's
 	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
+	const [email, setEmail] = useState( userGoogleDetails.email);
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [rollNumber, setRollNumber] = useState("");
 	const [image, setImage] = useState(File.prototype);
@@ -36,12 +39,7 @@ const Registration = () => {
 	const [linkedIn, setLinkedIn] = useState("");
 	const [insta, setInsta] = useState("");
 	const [companyName, setCompanyName] = useState("");
-
-	useEffect(() => {
-		if(userUploadedDetails){
-			
-		}
-	}, [userUploadedDetails]);
+	const [isDataUploading, setIsDataUploading] = useState(false);
 
 	useEffect(() => {
 		const getAllBatchList = async () => {
@@ -49,11 +47,16 @@ const Registration = () => {
 			const allBatchName = batchRef.customCollectionName("allBatch");
 
 			const data = await batchRef.getSingleDoc(allBatchName);
-
 			setBatchList(data.batchList);
 		};
+		const checkRegisteredOrNot = () => {
+			if (!Object.is(userStateDetails, userInitialState)) {
+				navigate("/");
+			}
+		};
+		checkRegisteredOrNot();
 		getAllBatchList();
-	}, []);
+	}, [userStateDetails]);
 
 	const validateAllData = () => {
 		if (
@@ -63,10 +66,44 @@ const Registration = () => {
 			phoneNumber.trim() === "" ||
 			batch === 0
 		) {
+			toast.warn("Data field is missing", {
+				position: "top-right",
+				autoClose: 4000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			});
 			return true;
 		}
-		if (image === File.prototype) return true;
-		if (showingImage === null) return true;
+		if (image === File.prototype) {
+			toast.warn("Upload a image", {
+				position: "top-right",
+				autoClose: 4000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			});
+			return true;
+		}
+		if (showingImage === null) {
+			toast.warn("error!!! refresh and try again ", {
+				position: "top-right",
+				autoClose: 4000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			});
+			return true;
+		}
 
 		return false;
 	};
@@ -109,7 +146,8 @@ const Registration = () => {
 	const uploadTheData = async () => {
 		try {
 			if (validateAllData()) return;
-			const imageUploadData = await storeData();
+			setIsDataUploading(true);
+			const imageUploadData = await toast.promise(storeData(), {}, {});
 			const userRegister = new FireStoreCollection("User");
 			const userDataToUpload = structureUserDataForFirebase(imageUploadData);
 			await userRegister.addDocumentWithId({
@@ -122,6 +160,8 @@ const Registration = () => {
 			navigate("/");
 		} catch (err) {
 			console.log(err);
+		} finally{
+			setIsDataUploading(false);
 		}
 	};
 
@@ -247,7 +287,8 @@ const Registration = () => {
 															: showingImage
 													}
 													alt=""
-												/><p className="uploadimgtext">Upload Image</p>
+												/>
+												<p className="uploadimgtext">Upload Image</p>
 											</div>
 										</div>
 										<input
@@ -318,8 +359,12 @@ const Registration = () => {
 							</div>
 
 							<div className="form-item">
-								<span id="submit" onClick={uploadTheData} className="submit">
-									Submit
+								<span id="submit" onClick={ isDataUploading ? null : uploadTheData} className="submit">
+									{
+										isDataUploading ? 
+											<CircularProgress /> : 
+											"Submit"
+									}
 								</span>
 							</div>
 						</form>

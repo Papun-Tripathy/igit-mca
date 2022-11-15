@@ -47,7 +47,7 @@ export class FireStoreCollection {
             const docData = await getDoc(docRef);
 
             if (docData.exists()) 
-                docData.data() 
+                return docData.data() 
             else throw Error("Invalid Id in the Collection");
 
         } catch (err) {
