@@ -45,11 +45,13 @@ export class FireStoreCollection {
         try {
             const docRef = doc(firestoreDB, customCollectionName ?? this.collectionName, id);
             const docData = await getDoc(docRef);
-            return docData.exists() ?
-                docData.data() : Error("Invalid Id in the Collection");
+
+            if (docData.exists()) 
+                docData.data() 
+            else throw Error("Invalid Id in the Collection");
 
         } catch (err) {
-            console.log(err)
+            throw err;
             // throw Error("Error in data fetching")
         }
     }

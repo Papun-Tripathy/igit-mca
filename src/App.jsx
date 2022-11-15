@@ -28,7 +28,7 @@ import { FireStoreCollection } from './Firebase/FireStore/collection'
 import { onAuthStateChanged } from 'firebase/auth';
 import { resetAtLogout, setAtLogin } from './State/Google/slice.Google';
 import { useDispatch, useStore } from 'react-redux';
-import { userLoggedIn, userLoggedOut } from './State/Auth/slice.Auth';
+import { userLoggedIn, userLoggedOut, userVerifyed } from './State/Auth/slice.Auth';
 import { emptyValue, setUserValue } from './State/User/slice.User';
 
 
@@ -48,12 +48,13 @@ const App = () => {
   const fetchDataOfTheUser = async (googleEmail) =>{
     const userCollection = new FireStoreCollection("User");
     try {
+      console.log("userData fetcheing.......");
       const userData = await userCollection.getSingleDoc(googleEmail);
+      dispatch(userVerifyed());
       const {batch, company, contact, email, insta, linkedIn, name, profilePic }  = userData;
       dispatch(setUserValue({batch, company, contact, email, insta, linkedIn, name, profilePic }));
     } catch (error) {
-      dispatch(emptyValue());
-      throw error;
+      console.log("User not registerd yet")
     }
 
   }
@@ -63,10 +64,13 @@ const App = () => {
       // if user is loggin in then there will be something in the object otherwise null
       try {
         if(user){
+          const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+          console.log(isLoggedIn)
+          // if()
           const {accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid} = user;
           dispatch(setAtLogin({accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid}));
-          await fetchDataOfTheUser(email);
           dispatch(userLoggedIn());
+          await fetchDataOfTheUser(email);
         } else {
           throw Error("Uesr not login");
           // dispatch(resetAtLogout());

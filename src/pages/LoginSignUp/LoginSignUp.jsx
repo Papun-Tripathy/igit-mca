@@ -20,7 +20,6 @@ const LoginSignUp = () => {
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-	
 	const [isLoading, setIsLoading] = useState(false);
 
 	const [signUp, setSignUp] = useState(false);
@@ -97,17 +96,16 @@ const LoginSignUp = () => {
 			dispatch(userLoggedIn());
 			dispatch(setAtLogin(user));
 			setIsLoading(false);
-			return navigate("/");
+			return navigate("/fill-details");
 		} catch (err) {
-			setIsLoading(true);
+			setIsLoading(false);
 		}
 	};
 
-	const loginWithGoogle = async (firstTime) => {
+	const loginWithGoogle = async () => {
 		setIsLoading(true);
 		try {
 			const user = await signInwithGooglePopup();
-			dispatch(userLoggedIn());
 			const {
 				accessToken,
 				displayName,
@@ -127,9 +125,11 @@ const LoginSignUp = () => {
 					email,
 					uid,
 				})
-			);
-			setIsLoading(false);
-			return navigate(firstTime ? "/" : "/fill-details");
+				);
+				setIsLoading(false);
+				console.log("redirecting to the fill details page")
+				navigate("/fill-details");
+				// dispatch(userLoggedIn());
 		} catch (err) {
 			setIsLoading(false);
 		}
@@ -147,7 +147,7 @@ const LoginSignUp = () => {
 						<p>Try</p>
 						<button
 							className="login-with-google-btn"
-							onClick={(e) => loginWithGoogle(true)}
+							onClick={(e) => loginWithGoogle()}
 						>
 							Log in with <img src={GoogleC} className="google-image" alt="" />
 						</button>
@@ -159,7 +159,7 @@ const LoginSignUp = () => {
 					<div className="box signup">
 						<button
 							className="login-with-google-btn"
-							onClick={(e) => loginWithGoogle(false)}
+							onClick={(e) => loginWithGoogle()}
 						>
 							Log in with <img src={GoogleC} className="google-image" alt="" />
 						</button>

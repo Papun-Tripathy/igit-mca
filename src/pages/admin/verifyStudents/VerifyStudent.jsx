@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import './verifystudent.css';
+import { useSelector } from 'react-redux';
 
 function VerifyStudent() {
+
+    const userData = useSelector(state => state)
+
+    useEffect(() => {
+        // fetch all the users of that batch whose data is not verifyed
+
+    }, []);
+
   return (
     <div className='verifystudent'>
 

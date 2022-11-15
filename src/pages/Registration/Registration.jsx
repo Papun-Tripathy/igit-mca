@@ -14,7 +14,7 @@ const Registration = () => {
 	const userGoogleDetails = useSelector((state) => state.google);
 	const userUploadedDetails = useSelector(state => state.user);
 	const navigate = useNavigate();
-
+	console.log("register page");
 	// usestate's
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");

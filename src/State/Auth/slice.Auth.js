@@ -2,18 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isLoggedIn: false,
+    isVerifyed: false,
 }
 
 const authSlice = createSlice({
     name: "Auth",
     initialState: () => {
-        const localData = localStorage.getItem("isLoggedIn");
-        if (localData === null) {
+        const localLoginData = localStorage.getItem("isLoggedIn");
+        const localVerificationData = localStorage.getItem("isVerifyed");
+        if (localLoginData === null) {
             localStorage.setItem("isLoggedIn", "false");
-            return { isLoggedIn: initialState };
+            return initialState;
         }
         return {
-            isLoggedIn: localData === "true",
+            isLoggedIn: localLoginData === "true",
+            isVerifyed: localVerificationData === "true",
         }
 
     },
@@ -26,10 +29,15 @@ const authSlice = createSlice({
             state.isLoggedIn = false;
             localStorage.clear();
             localStorage.setItem("isLoggedIn", "false");
+            localStorage.setItem("isVerifyed", "false");
+        },
+        userVerifyed: (state) =>{
+            state.isVerifyed = true;
+            localStorage.setItem("isVerifyed", "true");
         }
     }
 })
 const authReducer = authSlice.reducer;
 
 export default authReducer;
-export const { userLoggedIn, userLoggedOut } = authSlice.actions;
+export const { userLoggedIn, userLoggedOut, userVerifyed } = authSlice.actions;
