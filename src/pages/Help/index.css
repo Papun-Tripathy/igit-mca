@@ -1,0 +1,31 @@
+.helpcontent__container {
+    padding: 4rem 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.helpcontent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.helpcontent__serial {
+    flex: 1;
+    text-align: center;
+}
+
+.helpcontent__title {
+    flex: 2;
+}
+
+.helpcontent__desc {
+    flex: 8;
+}
+
+.helpcontent__btn {
+    flex: 2;
+    display: flex;
+   justify-content: center;
+}
