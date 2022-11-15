@@ -33,3 +33,9 @@ td{
     text-align: center;
 }
 
+.modalimagepreview{
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: contain;
+}
+
