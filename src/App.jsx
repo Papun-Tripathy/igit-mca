@@ -22,6 +22,8 @@ import SemesterPaper from './pages/notes/Semester/SemesterPaper';
 import VerifyStudent from './pages/admin/verifyStudents/VerifyStudent';
 import RoadMap from './pages/course/courseDetails/RoadMap';
 import Registration from './pages/Registration/Registration';
+import HelpPage from './pages/Help';
+
 
 import { firebaseAuth } from './Firebase';
 import { FireStoreCollection } from './Firebase/FireStore/collection'
@@ -103,6 +105,7 @@ const App = () => {
           <Route path='/gallary' element={<Gallary/>}/>
           <Route path='/fill-details' element={<Registration/>}/>
           <Route path='/verify-student' element={<VerifyStudent/>} />
+          <Route path='/student-support' element={<HelpPage/>}/>
         </Route>
         <Route index element={<Home/>}/>
         <Route path='/about'element={<About/>}/>
