@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-   
+    margin-bottom: 1rem;
 }
 .paper::before{
     width: 100%;
@@ -47,9 +47,11 @@
 }
 .titlelink{
     padding: 1rem;
-   
 }
-
+.titlelink h6{
+    color: white;
+    font-size: 2rem;
+}
 .paper h1 {
     margin-top: 50px;
     color: white;
@@ -57,7 +59,8 @@
 }
 
 .paper img {
-    width: 500px;
+    width: 200px;
+    height: 200px;
     border-radius: 10px;
 }
 
@@ -69,4 +72,34 @@
 .paper svg {
     font-size: 60px;
     color: white;
+}
+.paperlinkdetails{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 68%;
+}
+.paperteacher{
+    margin-left: 2rem;
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: white;
+}
+
+.paperlinkquestion{
+    display: flex;
+    align-items: center;
+    align-content: space-evenly;
+    width: 64%;
+}
+
+.paperlinkquestiontitle{
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.paperlinkquestionimg{
+    align-self: flex-end;
+    margin-left: 1rem;
 }

@@ -4,6 +4,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { ProjectList } from "./ProjectList";
 import "./semesterpaper.css";
 import { useState } from "react";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function SemesterPaper() {
 	const params = useParams();
@@ -26,19 +27,30 @@ function SemesterPaper() {
 			) : (
 				<>
 					<h1> {project.name}</h1>
-					<img src={project.image} alt="" />
+					<div className="paperlinkdetails">
+						<img src={project.image} alt="" className="paperlinkimg" />
+						
+						<div className="paperteacher"><b>Teacher Name : </b>{project.teacher}</div>
+					</div>
 					<div className="paperlinkParent">
 						<b>Links:</b>
 						<div className="paperlink">
 							{project?.links?.map((p, i) => {
 								return (
+
 									<div key={i} className="titlelink">
+
 										<h6>{p.title}</h6>
-										<p>{p.link}</p>
+
+										<a href={p.link} alt=''><VisibilityIcon /></a>
 									</div>
 								);
 							})}
 						</div>
+					</div>
+					<div className="paperlinkquestion">
+						<h3 className="paperlinkquestiontitle">Questions : </h3>
+						<a href={project.questionLink} alt='' className="paperlinkquestionimg"><VisibilityIcon /></a>
 					</div>
 					<GitHubIcon />
 				</>

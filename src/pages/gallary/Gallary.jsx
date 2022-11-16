@@ -1,8 +1,15 @@
 import './gallary.css'
+import SwiperJs from './Swipper'
+import './swiperjs.css'
 
 const Gallary = () => {
   return (
-    <div>Lr</div>
+    <div className='gallary'>
+      <h1>Picnic Tour</h1>
+      <div className="gallary__picnic">
+        <SwiperJs/>
+      </div>
+    </div>
   )
 }
 

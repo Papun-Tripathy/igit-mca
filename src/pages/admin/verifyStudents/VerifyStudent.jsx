@@ -100,7 +100,7 @@ function VerifyStudent() {
                                         <VisibilityIcon onClick={() => setShow(true)}>
                                         </VisibilityIcon>
                                         < Modal show={show} onClose={() => setShow(false)}>
-                                            <img src={student.profilePic} alt='' className="modalimagepreview"/>
+                                            <img src={student?.profilePic} alt='' className="modalimagepreview"/>
                                         </Modal>
 
                                     </td>
