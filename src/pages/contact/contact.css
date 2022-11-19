@@ -90,6 +90,7 @@
 
 }
 
+
 input,
 textarea {
     width: 100%;
@@ -106,7 +107,15 @@ textarea {
     margin-top: 1rem;
     cursor: pointer;
 }
-
+.contactus__submit{
+    background: #222a47;
+    margin: 4rem;
+    text-align: center;
+    font-size: 4rem;
+    color: #2dfff0;
+    font-weight: 900;
+    border-radius: 2rem;
+}
 
 /* ===========MEDIA QUERIES============ */
 

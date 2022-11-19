@@ -5,9 +5,11 @@ import { useForm, ValidationError } from '@formspree/react';
 
 
 function Contact() {
-  const [state, handleSubmit] = useForm("xaykvwee");
+  const [state, handleSubmit] = useForm("mvoyyzkp");
   if (state.succeeded) {
-    return <p>Thanks for joining!</p>;
+    return <div className='contactus__submit'>
+      <p>Thank You For Contacing Us</p>
+    </div>;
   }
   return (
     <div>
@@ -23,11 +25,11 @@ function Contact() {
             <ul className="contact__details">
               <li>
                 <i className="uil uil-phone-times"></i>
-                <h5>+919090323291</h5>
+                <h5>+91 9090323291</h5>
               </li>
               <li>
                 <i className="uil uil-envelope"></i>
-                <h5>mrmjpatra@gmail.com</h5>
+                <h5>mca40th@gmail.com</h5>
               </li>
               <li>
                 <i className="uil uil-location-point"></i>
