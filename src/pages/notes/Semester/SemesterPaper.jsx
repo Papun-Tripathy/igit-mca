@@ -42,7 +42,7 @@ function SemesterPaper() {
 
 										<h6>{p.title}</h6>
 
-										<a href={p.link} alt=''><VisibilityIcon /></a>
+										<a href={p.link} alt='' target='_blank' ><VisibilityIcon /></a>
 									</div>
 								);
 							})}
@@ -50,9 +50,9 @@ function SemesterPaper() {
 					</div>
 					<div className="paperlinkquestion">
 						<h3 className="paperlinkquestiontitle">Questions : </h3>
-						<a href={project.questionLink} alt='' className="paperlinkquestionimg"><VisibilityIcon /></a>
+						<a href={project.questionLink} alt='' className="paperlinkquestionimg" target='_blank'><VisibilityIcon className="paperlinkvisibility" /></a>
 					</div>
-					<GitHubIcon />
+					
 				</>
 			)}
 		</div>

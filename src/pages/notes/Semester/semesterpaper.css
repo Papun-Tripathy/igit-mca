@@ -1,5 +1,5 @@
 .paper {
-   position: relative;
+    position: relative;
     background: transparent;
     z-index: 2;
     width: 100%;
@@ -10,7 +10,8 @@
     flex-direction: column;
     margin-bottom: 1rem;
 }
-.paper::before{
+
+.paper::before {
     width: 100%;
     height: 100%;
     content: '';
@@ -19,8 +20,9 @@
     background: #181d56eb;
     filter: blur(142px);
 }
-.paperlinkParent{
-    margin: 2rem;
+
+.paperlinkParent {
+
     align-self: flex-start;
     display: flex;
     flex-direction: column;
@@ -29,9 +31,10 @@
     justify-content: center;
     align-items: center;
 }
-.paperlinkParent b{
+
+.paperlinkParent b {
     font-size: 2rem;
-    color:white;
+    color: white;
     position: relative;
     left: 15%;
     align-self: flex-start;
@@ -39,19 +42,22 @@
 
 }
 
-.paperlink{
+.paperlink {
     width: 70%;
     font-size: 2rem;
     background: linear-gradient(45deg, black, transparent);
     border-radius: 10px;
 }
-.titlelink{
-    padding: 1rem;
+
+.titlelink {
+    padding: .6rem;
 }
-.titlelink h6{
+
+.titlelink h6 {
     color: white;
     font-size: 2rem;
 }
+
 .paper h1 {
     margin-top: 50px;
     color: white;
@@ -59,47 +65,89 @@
 }
 
 .paper img {
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
+    width: 150px;
+    height: 150px;
+    
 }
 
 .paper p {
     font-size: 40px;
-   color:white
+    color: white
 }
 
 .paper svg {
     font-size: 60px;
     color: white;
 }
-.paperlinkdetails{
+
+.paperlinkdetails {
     margin-top: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 68%;
 }
-.paperteacher{
+
+.paperteacher {
     margin-left: 2rem;
     font-size: 1.9rem;
     font-weight: 900;
     color: white;
 }
 
-.paperlinkquestion{
+.paperlinkquestion {
     display: flex;
     align-items: center;
     align-content: space-evenly;
     width: 64%;
 }
 
-.paperlinkquestiontitle{
+.paperlinkquestiontitle {
     font-weight: bold;
     font-size: 2rem;
 }
 
-.paperlinkquestionimg{
+.paperlinkquestionimg {
     align-self: flex-end;
     margin-left: 1rem;
+}
+
+@media only screen and (max-width: 400px) {
+    .paper svg{
+        font-size: 40px;
+    }
+
+    .titlelink h6{
+        font-size: 1.4rem;
+    }
+    .paperlinkParent{
+        display: inline-flex;
+        margin: 1rem;
+    }
+    .paperlinkParent b{
+        position: static;
+        font-size: 1.4rem;
+    }
+    .paperlinkdetails {
+        flex-direction: column;
+        text-align: start;
+    }
+
+    .paperteacher {
+        font-size: 1rem;
+        margin-left: 0rem;
+        font-weight: 0rem;
+        text-align: center;
+    }
+    .paper img{
+        width: 100px;
+        height: 100px;
+    }
+    .paperlink{
+        width: 105%;
+    }
+
+    .paperlinkquestion{
+        width: 93%;
+    }
 }

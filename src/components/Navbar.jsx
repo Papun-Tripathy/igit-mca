@@ -21,7 +21,7 @@ const Navbar = () => {
 				<Link to="/" className="logo">
 					<img
 						src={Logo}
-						alt="Nav Logo"
+						alt="IGITMCA"
 						onClick={() => setIsNavShowing(false)}
 					/>
 				</Link>

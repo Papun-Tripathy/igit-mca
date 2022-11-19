@@ -28,3 +28,25 @@
    font-size: 3rem;
    text-align: center;
 }
+
+/* Smartphones (portrait) */
+@media only screen and (max-width: 400px) {
+
+    .mySwiper{
+        width: 50%;
+        height: 50%;
+    }
+    .gallary__picnic{
+        padding: 0;
+        
+        
+    }
+    /* .swiper-slide img {
+        display: block;
+        width: 70%;
+        height: 70%;
+        border-radius: 10px;
+        object-fit: fill;
+    }
+     */
+}

@@ -244,3 +244,10 @@
         top: 150px;
     }
 }
+
+@media only screen and (max-width: 400px) {
+   .login-container .formBx{
+    
+   }
+
+}

@@ -54,7 +54,7 @@ const Notice = () => {
                                 <SwiperSlide className="slide view" key={index}>
                                     <h4>{heading}</h4>
                                     <span>
-                                        <button className="btn"><a href={link}>Link</a></button>
+                                        <button className="btn"><a href={link} target='_blank'>Link</a></button>
                                     </span>
                                 </SwiperSlide>
                             )
