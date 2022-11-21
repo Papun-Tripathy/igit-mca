@@ -67,6 +67,7 @@ const App = () => {
 				profilePic,
 				verifyed,
 			} = userData;
+			console.log("verifyed: ", verifyed)
 			// if the user is verifyed then set it
 			if (verifyed) dispatch(userVerifyed());
 			dispatch(
@@ -100,6 +101,8 @@ const App = () => {
 						email,
 						uid,
 					} = user;
+					
+					// save things to state.Google
 					dispatch(
 						setAtLogin({
 							accessToken,
@@ -111,8 +114,9 @@ const App = () => {
 							uid,
 						})
 					);
-					dispatch(userLoggedIn());
+					// 
 					await fetchDataOfTheUser(email);
+					dispatch(userLoggedIn());
 				} else {
 					throw Error("Uesr not login");
 					// dispatch(resetAtLogout());

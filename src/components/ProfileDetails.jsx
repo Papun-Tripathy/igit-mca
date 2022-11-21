@@ -14,7 +14,7 @@ const ProfileDetails = ({
     isLoading,
 }) => {
     return (
-        <article className={`${isLoading && 'skeleton'} team__member`}>
+        <article className={`${isLoading ? 'skeleton' : ""} team__member`}>
             <div className="team__member-img">
                 {
                     !isLoading &&

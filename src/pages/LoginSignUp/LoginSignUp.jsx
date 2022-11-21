@@ -19,6 +19,8 @@ const LoginSignUp = () => {
 	const navigate = useNavigate();
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	const isVerifyed = useSelector((state) => state.auth.isVerifyed);
+	const isRegistered = useSelector((state) => state.user.registered);
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -125,17 +127,23 @@ const LoginSignUp = () => {
 					email,
 					uid,
 				})
-				);
-				setIsLoading(false);
-				console.log("redirecting to the fill details page")
-				navigate("/fill-details");
-				// dispatch(userLoggedIn());
+			);
+			setIsLoading(false);
+			console.log("redirecting to the fill details page");
+			navigate("/fill-details");
+			// dispatch(userLoggedIn());
 		} catch (err) {
 			setIsLoading(false);
 		}
 	};
 
-	if (isLoggedIn) return navigate("/");
+	if (isLoggedIn) {
+		if (isVerifyed && isRegistered) {
+			navigate("/");
+		} else {
+			navigate("/fill-details");
+		}
+	}
 
 	return (
 		<div className="login-page-container">

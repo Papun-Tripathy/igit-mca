@@ -13,10 +13,10 @@ const Batch = () => {
 
     const batchData = async () =>{
       // create collection ref
-      const batchCollectionRef = new FireStoreCollection("Batch");
+      const batchCollectionRef = new FireStoreCollection("Batcheees");
 
       // fetch the details collection 
-      const data = await batchCollectionRef.getDetails();
+      const data = await batchCollectionRef.getSingleDoc("allBatchList");
       console.log(data)
 
       // save to the state and redux

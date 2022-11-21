@@ -42,7 +42,6 @@ const BatchDisplay = () => {
 		fetchBatchDetails();
 	}, []);
 
-	const batch = BatchDetails.filter((detail) => detail.id === parseInt(id))[0];
 
 	return (
 		<div>
@@ -61,16 +60,18 @@ const BatchDisplay = () => {
              */}
           {
             !Object.is(batchStudents, []) && batchStudents.map(student => {
+				console.log(student)
               return <ProfileDetails
-                key={student.id}
-                fname={student.Name}
-                company={student.Company}
-                insta={student.Insta}
-                gmail={student.Email}
-                linkedin={batch.linkedin}
-                image={batch.image}
+                key={student?.id}
+                fname={student?.Name}
+                company={student?.Company}
+                insta={student?.Insta ?? ""}
+                gmail={student?.Email ?? ""}
+                linkedin={student?.linkedin ?? ""}
+                image={student?.PhotoRef ?? ""}
+				isLoading={false}
               />
-            })   
+            })
           }
           
 				</div>

@@ -8,6 +8,7 @@ export class FireStoreCollection {
         this.collectionRef = collection(firestoreDB, collectionName);
     }
 
+    // this is only used in the 
     getDetails = async () => {
         try {
             const detailsRef = collection(firestoreDB, `${this.collectionName}/all${this.collectionName}/details`)
@@ -98,12 +99,13 @@ export class FireStoreCollection {
     }
 
     addDocumentWithId = async ({ customCollectionPath, specificId, data }) => {
+        console.log(data)
         try {
             const docRef = doc(firestoreDB, customCollectionPath ?? this.collectionName, specificId);
             await setDoc(docRef, data);
 
             // const docData = await this.getSingleDoc(specificId, customCollectionPath);
-            console.log("Data with Id addition")
+            
             // console.log(docData);
             // return docData;
         } catch (err) {

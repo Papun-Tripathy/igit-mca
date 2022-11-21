@@ -7,20 +7,25 @@ import {
 	FireStoreCollection,
 } from "../../Firebase/FireStore/collection";
 import { FirebaseBucketStorage } from "../../Firebase/CloudStorage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userInitialState } from "../../State/User/slice.User";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
 
+import { setUserValue } from "../../State/User/slice.User";
+
 const Registration = () => {
+	console.log("at fil details page");
 	const userGoogleDetails = useSelector((state) => state.google);
 	const userStateDetails = useSelector((state) => state.user);
+	const userStateAuth = useSelector((state) => state.auth);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	// usestate's
 	const [name, setName] = useState("");
-	const [email, setEmail] = useState( userGoogleDetails.email);
+	const [email, setEmail] = useState(userGoogleDetails.email);
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [rollNumber, setRollNumber] = useState("");
 	const [image, setImage] = useState(File.prototype);
@@ -43,20 +48,25 @@ const Registration = () => {
 
 	useEffect(() => {
 		const getAllBatchList = async () => {
-			const batchRef = new FireStoreCollection(cloudFirestoreCollections.BATCH);
-			const allBatchName = batchRef.customCollectionName("allBatch");
+			// store it locally and fetch if not available locally #NotDoneYet !soon
+			const batchCollectionRef = new FireStoreCollection("Batches");
 
-			const data = await batchRef.getSingleDoc(allBatchName);
-			setBatchList(data.batchList);
+			const batchListData = await batchCollectionRef.getSingleDoc(
+				"allBatchList"
+			);
+
+			const detailedData = batchListData["batchNumber"].map((d) => d?.batch);
+
+			setBatchList(detailedData);
 		};
 		const checkRegisteredOrNot = () => {
-			if (!Object.is(userStateDetails, userInitialState)) {
+			if (userStateAuth.isVerifyed || userStateDetails.registered) {
 				navigate("/");
 			}
 		};
 		checkRegisteredOrNot();
 		getAllBatchList();
-	}, [userStateDetails]);
+	}, [userStateAuth, userStateDetails]);
 
 	const validateAllData = () => {
 		if (
@@ -144,24 +154,46 @@ const Registration = () => {
 		});
 		setBatch(0);
 	};
+
+	const fetchDataOfTheUser = (uploadImageData) => {
+		try {
+			dispatch(
+				setUserValue({
+					batch,
+					company: companyName,
+					contact: phoneNumber,
+					email,
+					insta,
+					linkedIn,
+					name,
+					profilePic: uploadImageData,
+				})
+			);
+		} catch (error) {
+			// console.log("User not registerd yet");
+		}
+	};
+
 	const uploadTheData = async () => {
 		try {
 			if (validateAllData()) return;
 			setIsDataUploading(true);
-			const imageUploadData = await toast.promise(storeData(), {}, {});
+			const imageUploadData = await storeData();
 			const userRegister = new FireStoreCollection("User");
 			const userDataToUpload = structureUserDataForFirebase(imageUploadData);
 			await userRegister.addDocumentWithId({
 				data: userDataToUpload,
 				specificId: userGoogleDetails.email,
 			});
-			const user = await userRegister.getSingleDoc(userGoogleDetails.email);
-			console.log(user);
+
+			// after sucessful addition this adds it to the state manager
+			fetchDataOfTheUser(imageUploadData);
 			resetFormData();
+
 			navigate("/");
 		} catch (err) {
 			console.log(err);
-		} finally{
+		} finally {
 			setIsDataUploading(false);
 		}
 	};
@@ -360,12 +392,12 @@ const Registration = () => {
 							</div>
 
 							<div className="form-item">
-								<span id="submit" onClick={ isDataUploading ? null : uploadTheData} className="submit">
-									{
-										isDataUploading ? 
-											<CircularProgress /> : 
-											"Submit"
-									}
+								<span
+									id="submit"
+									onClick={isDataUploading ? null : uploadTheData}
+									className="submit"
+								>
+									{isDataUploading ? <CircularProgress /> : "Submit"}
 								</span>
 							</div>
 						</form>
