@@ -67,7 +67,6 @@ const App = () => {
 				profilePic,
 				verifyed,
 			} = userData;
-			console.log("verifyed: ", verifyed)
 			// if the user is verifyed then set it
 			if (verifyed) dispatch(userVerifyed());
 			dispatch(

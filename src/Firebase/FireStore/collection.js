@@ -17,7 +17,7 @@ export class FireStoreCollection {
             return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 
         } catch (err) {
-            console.warn(err)
+            // console.warn(err)
             throw Error("Error in getDetails for the collection");
         }
     }
@@ -26,7 +26,7 @@ export class FireStoreCollection {
         return collection(firestoreDB, `${this.collectionName}/${newRef}`)
     }
     customCollectionName = (newRef) => {
-        return `/${newRef}`;
+        return `${this.collectionName}/${newRef}`;
     }
 
     getCollectionData = async (customCollection) => {
@@ -58,11 +58,10 @@ export class FireStoreCollection {
         try {
             const docRef = doc(firestoreDB, customCollectionName ?? this.collectionName, id);
             const docData = await getDoc(docRef);
-
             if (docData.exists()) 
                 return docData.data() 
+            // My custom Error Gandi Munda Andharr >.< 
             else throw Error("Invalid Id in the Collection");
-
         } catch (err) {
             throw err;
             // throw Error("Error in data fetching")

@@ -6,7 +6,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import { Link } from "react-router-dom";
 const ProfileDetails = ({
     fname,
-    company,
+    rollNumber,
     insta,
     linkedin,
     gmail,
@@ -26,7 +26,7 @@ const ProfileDetails = ({
                     !isLoading &&
                     <>
                         <h4>{fname}</h4>
-                        <p>{company}</p>
+                        <p>{rollNumber}</p>
                     </>
                 }
             </div>

@@ -15,24 +15,14 @@ const BatchDisplay = () => {
 	useEffect(() => {
 		const fetchBatchDetails = async () => {
 			// create collection ref
-			const batchCollectionRef = new FireStoreCollection("Batch");
-
-			// fetch the details collection
-
-			// batch doc details path: Batch -> allBatch/fullDetails/40
-			const batchDocDetailsRef = batchCollectionRef.customCollectionRef(
-				"allBatch/fullDetails"
-			);
-
-			// collection of students will be: Batch -> allBatch/fullDetails/40/Students
-			const batchStudentDetailsRef = batchCollectionRef.customCollectionRef(
-				"allBatch/fullDetails/40/Students"
-			);
+			const batchCollectionRef = new FireStoreCollection("Batches");
+			// reference to their students collection of their batch
+			const batchStudentCollectionRef = batchCollectionRef.customCollectionRef(`${id}/Students`)
 
 			const snapshotData = await batchCollectionRef.getCollectionData(
-				batchStudentDetailsRef
+				batchStudentCollectionRef
 			);
-
+			
 			const data = snapshotData.map((doc) => ({ id: doc.id, ...doc.data() }));
 
 			// save to the state and redux
@@ -60,15 +50,14 @@ const BatchDisplay = () => {
              */}
           {
             !Object.is(batchStudents, []) && batchStudents.map(student => {
-				console.log(student)
               return <ProfileDetails
                 key={student?.id}
-                fname={student?.Name}
-                company={student?.Company}
-                insta={student?.Insta ?? ""}
-                gmail={student?.Email ?? ""}
-                linkedin={student?.linkedin ?? ""}
-                image={student?.PhotoRef ?? ""}
+                fname={student?.name}
+                rollNumber={student?.rollNumber}
+                insta={student?.insta ?? ""}
+                gmail={student?.email ?? ""}
+                linkedin={student?.linkedIn ?? ""}
+                image={student?.profilePic ?? ""}
 				isLoading={false}
               />
             })

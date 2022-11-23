@@ -26,11 +26,33 @@
     font-size: 19px;
 }
 .verifybody tr{
-    border: 2px solid;
+    border: 2px dashed blue;
 }
-td{
+.verifystudent td{
     padding: 15px;
-    text-align: center;
+    display: table-cell !important;
+    width: auto !important;
+}
+.verifystudent td .student_emails {
+    text-align: left !important;
+}
+.verifystudent .student_emails_title {
+    margin-bottom: 2px;
+    color: bisque;
+}
+.verifystudent .student_emails_email {
+    font-family: Calibri;
+    font-weight: lighter;
+    
+}
+
+.verifystudent td .student_image{
+    max-height: 100px;
+    object-fit: contain;
+}
+
+.verifystudent .table_action_body:first-child{
+    margin-right: 20px;
 }
 
 .modalimagepreview{

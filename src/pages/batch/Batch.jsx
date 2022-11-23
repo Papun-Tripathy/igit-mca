@@ -12,19 +12,24 @@ const Batch = () => {
   useEffect(() => {
 
     const batchData = async () =>{
-      // create collection ref
-      const batchCollectionRef = new FireStoreCollection("Batcheees");
-
-      // fetch the details collection 
-      const data = await batchCollectionRef.getSingleDoc("allBatchList");
-      console.log(data)
-
-      // save to the state and redux
-      const saveDataToState = data.map( ({id, startingYear, endingYear, title}) => {
-        return new BatchOverallData(id, title, startingYear, endingYear);
-      } );
-      setAllBatchDetails( saveDataToState );
-      setIsLoading(false);
+      try {
+        // create collection ref
+        const batchCollectionRef = new FireStoreCollection("Batches");
+  
+        // fetch the details collection 
+        const data = await batchCollectionRef.getSingleDoc("allBatchList");
+        console.log(data)
+  
+        // save to the state and redux
+        const saveDataToState = data["batchNumber"].map( ({batch, startingYear, endingYear, title}) => {
+          return new BatchOverallData(batch, title, startingYear, endingYear);
+        } );
+        setAllBatchDetails( saveDataToState );
+        setIsLoading(false);
+        
+      } catch (error) {
+        console.log(error)
+      }
 
     }
 
@@ -42,9 +47,10 @@ const Batch = () => {
       }
       {
         allBatchDetails && 
-        allBatchDetails.map((batch) => {
+        allBatchDetails.map((batch, id) => {
+          console.log(batch)
           return (
-            <BatchColumn key={batch.id} id={batch.id} title={batch.title} session={batch.session} />
+            <BatchColumn key={id} id={batch.id} title={batch.title} session={batch.session} />
           )
         })
       }
