@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ProfileDetails from "../../components/ProfileDetails";
 import { FireStoreCollection } from "../../Firebase/FireStore/collection";
@@ -8,6 +9,8 @@ import { BatchDetails } from "./BatchDetails";
 
 const BatchDisplay = () => {
 	const { id } = useParams();
+	const userData = useSelector(state => state.user);
+	console.log(id)
 
   const [isLoading, setIsLoading] = useState(true);
 	const [batchStudents, setBatchStudents] = useState([]);

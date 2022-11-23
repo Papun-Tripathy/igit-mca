@@ -42,7 +42,7 @@ const Course = ({ homePage }) => {
             if (showInHomepage) {
 
               return (
-                <CourseArticle key={index} icon={icon} title={title} desc={desc} path={path} />
+                <CourseArticle key={index} icon={icon} title={title} desc={desc} path={`course/${path}`} />
               )
             }
           } else {

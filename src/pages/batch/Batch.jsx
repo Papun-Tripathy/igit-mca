@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import './batch.css';
 import BatchColumn from '../../components/BatchColumn';
-import { useEffect, useState } from 'react';
 import { FireStoreCollection } from '../../Firebase/FireStore/collection';
 import { BatchOverallData } from '../../Data/batch.data';
 
@@ -18,7 +18,6 @@ const Batch = () => {
   
         // fetch the details collection 
         const data = await batchCollectionRef.getSingleDoc("allBatchList");
-        console.log(data)
   
         // save to the state and redux
         const saveDataToState = data["batchNumber"].map( ({batch, startingYear, endingYear, title}) => {
@@ -42,7 +41,7 @@ const Batch = () => {
     <div className="batch__card">
       {
         isLoading && 
-        [1,2,3,4,5].map(num => <BatchColumn key={num} isLoading />)
+        [1,2,3].map(num => <BatchColumn key={num} isLoading />)
       }
       {
         allBatchDetails && 
