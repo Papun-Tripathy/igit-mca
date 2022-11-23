@@ -98,7 +98,7 @@ export class FireStoreCollection {
     }
 
     addDocumentWithId = async ({ customCollectionPath, specificId, data }) => {
-        console.log(data)
+        
         try {
             const docRef = doc(firestoreDB, customCollectionPath ?? this.collectionName, specificId);
             await setDoc(docRef, data);

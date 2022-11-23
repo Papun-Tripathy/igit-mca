@@ -1,88 +1,61 @@
-import React from 'react'
-import { VerticalTimeline, VerticalTimelineElement }
-    from 'react-vertical-timeline-component';
+import React, { useEffect } from "react";
+import {
+	VerticalTimeline,
+	VerticalTimelineElement,
+} from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import SchoolIcon from '@mui/icons-material/School';
-import WorkIcon from '@mui/icons-material/Work';
+import SchoolIcon from "@mui/icons-material/School";
+import WorkIcon from "@mui/icons-material/Work";
 import "./roadmap.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { CircularProgress } from "@mui/material";
 
 const RoadMap = () => {
+	const navigate = useNavigate();
+	const { id } = useParams();
+	const [course, setCourse] = useState({});
 
-    return (
+	useEffect(() => {
+		const allCourseData = localStorage.getItem("Courses");
+		if (!allCourseData) return navigate("/course");
 
-        <>
+		const coursesData = JSON.parse(allCourseData);
+		const courseData = coursesData.filter((d) => d.path === id);
+		setCourse(courseData[0]);
+	}, []);
 
-        <div className='course-duration'><h1>Course Duration</h1></div>
-        <div className="experience">
-           
-            <VerticalTimeline lineColor="#3e497a">
-                <VerticalTimelineElement
-                    className="vertical-timeline-element--education"
-                    date="2010 - 2014"
+	return (
+		<>
+			<div className="course-duration">
+				<h1>{course.title}</h1>
+			</div>
+			<div className="experience">
+				<VerticalTimeline lineColor="#3e497a">
+					{Object.is(course?.details, []) ? (
+                      <></>
+					) : (
+						course?.details?.map((detail, i) => {
+							const { desc, endTime, startTime, time, title } = detail;
+							return (
+								<VerticalTimelineElement
+									key={i}
+									className="vertical-timeline-element--education"
+									date={`${startTime} - ${endTime} ${time}`}
+									iconStyle={{ background: "#3e497a", color: "#fff" }}
+									icon={<SchoolIcon />}
+								>
+									<h3 className="vertical-timeline-element-title">{title}</h3>
+									<p> {desc} </p>
+								</VerticalTimelineElement>
+							);
+						})
+					)}
+					
+				</VerticalTimeline>
+			</div>
+		</>
+	);
+};
 
-                    iconStyle={{ background: "#3e497a", color: "#fff" }}
-                    icon={<SchoolIcon />}
-                >
-
-                    <h3 className="vertical-timeline-element-title">
-                        My Random High School, Random Place, Random State
-                    </h3>
-                    <p> High School Diploma</p>
-                </VerticalTimelineElement>
-                
-                <VerticalTimelineElement
-                    className="vertical-timeline-element--education"
-                    date="2014 - 2018"
-                    iconStyle={{ background: "#3e497a", color: "#fff" }}
-                    icon={<SchoolIcon />}
-                >
-                    <h3 className="vertical-timeline-element-title">
-                        My Cool University, Vancouver, British Columbia
-                    </h3>
-
-                    <h4 className="vertical-timeline-element-subtitle">
-                        Bachelor's Degree
-                    </h4>
-
-                    <p> Computer Science</p>
-                </VerticalTimelineElement>
-                <VerticalTimelineElement
-                    className="vertical-timeline-element--work"
-                    date="2018 - 2020"
-                    iconStyle={{ background: "#e9d35b", color: "#fff" }}
-                    icon={<WorkIcon />}
-                >
-                    <h3 className="vertical-timeline-element-title">
-                        Back End Engineer - Google
-                    </h3>
-                    <h4 className="vertical-timeline-element-subtitle">
-                        San Francisco, CA
-                    </h4>
-                    <p>Developed the backend infrastructure for 3 projects.</p>
-                </VerticalTimelineElement>
-
-                <VerticalTimelineElement
-                    className="vertical-timeline-element--work"
-                    date="2020 - present"
-                    iconStyle={{ background: "#e9d35b", color: "#fff" }}
-                    icon={<WorkIcon />}
-                >
-                    <h3 className="vertical-timeline-element-title">
-                        Full Stack Engineer - Twitch
-                    </h3>
-                    <h4 className="vertical-timeline-element-subtitle">
-                        San Francisco, CA
-                    </h4>
-                    <p>
-                        Helped the team launch 2 major features by working both in the front
-                        end and back end.
-                    </p>
-                </VerticalTimelineElement>
-            </VerticalTimeline>
-        </div>
-        </>
-    );
-
-}
-
-export default RoadMap
+export default RoadMap;

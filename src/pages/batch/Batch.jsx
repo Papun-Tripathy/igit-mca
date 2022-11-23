@@ -38,7 +38,6 @@ const Batch = () => {
   
   }, [])
   
-  console.log(Object.is(allBatchDetails, {}) )
   return (
     <div className="batch__card">
       {
@@ -48,7 +47,6 @@ const Batch = () => {
       {
         allBatchDetails && 
         allBatchDetails.map((batch, id) => {
-          console.log(batch)
           return (
             <BatchColumn key={id} id={batch.id} title={batch.title} session={batch.session} />
           )
