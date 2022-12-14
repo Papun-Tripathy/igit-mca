@@ -17,6 +17,7 @@
 }
 
 .team__member {
+    height: 95%;
     background: var(--color-bg2);
     padding: 2rem;
     border: 1px solid transparent;

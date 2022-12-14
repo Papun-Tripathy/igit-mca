@@ -1,0 +1,3 @@
+
+export const homeImage=["https://github.com/igitmca/photos/blob/main/batch/IMG_5937.jpeg?raw=true","https://github.com/igitmca/photos/blob/main/batch/IMG_5923.jpeg?raw=true","https://github.com/igitmca/photos/blob/main/batch/IMG_5921.jpeg?raw=true","https://github.com/igitmca/photos/blob/main/batch/IMG_20220831_154433.jpg?raw=true","https://github.com/igitmca/photos/blob/main/batch/PXL_20221024_123037186.NIGHT.jpg?raw=true","https://github.com/igitmca/photos/blob/main/batch/PXL_20221024_121010344.NIGHT.jpg?raw=true","https://github.com/igitmca/photos/blob/main/batch/IMG20220401215108.jpg?raw=true"
+]

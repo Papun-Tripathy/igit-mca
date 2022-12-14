@@ -13,18 +13,18 @@ import { CircularProgress } from "@mui/material";
 const Notice = () => {
     const [notices, setNotices] = useState([]);
     useEffect(() => {
-      
-    
-       const fetchNotices = async () => {
+
+
+        const fetchNotices = async () => {
             const noticeCollection = new FireStoreCollection("Notice");
             const allNotice = await noticeCollection.getCollectionData();
             const datas = allNotice.map(notice => notice.data());
             setNotices(datas);
-      }
+        }
 
-      fetchNotices();
+        fetchNotices();
     }, [])
-    
+
     return (
 
         <>
@@ -46,19 +46,21 @@ const Notice = () => {
 
                     {
                         Object.is(notices, []) ?
-                        <SwiperSlide className="slide view" >
-                            <CircularProgress />
-                        </SwiperSlide> :
-                        notices.map(({heading, link },index) => {
-                            return (
-                                <SwiperSlide className="slide view" key={index}>
-                                    <h4>{heading}</h4>
-                                    <span>
-                                        <button className="btn"><a href={link} target='_blank'>Link</a></button>
-                                    </span>
-                                </SwiperSlide>
-                            )
-                        })
+                            <SwiperSlide className="slide view" >
+                                <CircularProgress />
+                            </SwiperSlide> :
+                            notices.map(({ heading, link }, index) => {
+                                return (
+                                    <SwiperSlide className="slide view" key={index}>
+                                        <h4>{heading}</h4>
+                                        <span>
+                                            <a href={link} target='_blank' rel="notice">
+                                                <button className="btn">
+                                                    Link</button></a>
+                                        </span>
+                                    </SwiperSlide>
+                                )
+                            })
 
                     }
 
