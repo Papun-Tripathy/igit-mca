@@ -1,53 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow&family=PT+Sans&display=swap');
 
 
-.add_notice_page{
+.add_notice_page {
     margin-top: 4rem;
 }
-.add_notice_page #add_user .new_user{
+
+.add_notice_page #add_user .new_user {
     background: linear-gradient(181deg, #ffffff33, transparent);
     padding: 2rem;
     border-radius: 2rem;
 }
 
-.text-light{
+.text-light {
     text-align: center;
     border-bottom: 0.7px solid lightcyan;
     padding-bottom: 1rem;
 }
-#site-main .container{
+
+#site-main .container {
     background: linear-gradient(181deg, #ffffff33, transparent);
     padding: 2rem;
     border-radius: 2rem;
 }
 
 
-#site-main{
+#site-main {
     margin-top: 6em;
     font-family: 'Barlow', sans-serif;
 }
 
-#site-main .container .box-nav > a{
+#site-main .container .box-nav>a {
     font-size: 1em;
     padding: .5em 1em;
 }
 
-#site-main .container form{
+#site-main .container form {
     margin: 2em 0;
 }
 
-table{
+table {
     border-spacing: 0px;
     width: 100%;
-    border-radius: 2rem;
-}
-.thead-dark {
-    color: #000; 
-    background-color: lightcyan;
-    
+    border-collapse: separate;
 }
 
-.table_action_body{
+.thead-dark {
+    font-family: Lato-Bold;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.4;
+    background-color: #6c7ae0;
+}
+
+.notice__table__row {
+    background-color: #000000;
+    color: white;
+}
+
+.table_action_body {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
@@ -56,7 +66,7 @@ table{
 
 
 
-.table td > a.btn{
+.table td>a.btn {
     padding: .3em 1em;
     font-size: 1.1em;
     margin: 0 .2em;
@@ -64,20 +74,28 @@ table{
 
 
 
-@media only screen and (max-width: 1024px){
-    table, thead, tbody, th, td, tr{
+@media only screen and (max-width: 1024px) {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
         display: block;
     }
 
-    thead tr{
+    thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
 
-    tr { border: 1px solid var(--border);}
+    tr {
+        border: 1px solid var(--border);
+    }
 
-    td{
+    td {
         border: none;
         position: relative;
     }
@@ -86,7 +104,7 @@ table{
 
 /*  add user & update user template */
 
-.form-title > h2{
+.form-title>h2 {
     padding: .5em 0;
     padding-top: 0;
     text-align: center;
@@ -94,13 +112,14 @@ table{
 
 }
 
-.new_user{
+.new_user {
     width: 70%;
-    
+
     /* align-content: center; */
     /* margin: auto; */
 }
-#add_user{
+
+#add_user {
     height: 100%;
     width: 100%;
     display: flex;
@@ -108,36 +127,38 @@ table{
     flex-direction: column;
     align-items: center;
 }
+
 #update_user .form-group,
-#add_user .form-group{
+#add_user .form-group {
     margin: 1.2em 5rem;
     align-content: center;
 
 }
 
-.back_to_notice{
+.back_to_notice {
     border: 2px solid cyan;
     padding: 0.4rem;
     border-radius: 8%;
     font-size: 1.2rem;
     font-weight: 400;
     transition: all 0.4s ease-in;
-    
-    
-}
-.back_to_notice:hover{
-    background: cyan;
-    color:black;
-    border:none;
-  
+
+
 }
 
-#update_user{
+.back_to_notice:hover {
+    background: cyan;
+    color: black;
+    border: none;
+
+}
+
+#update_user {
     align-items: center;
 }
 
 #update_user .form-group input[type="text"],
-#add_user .form-group input[type="text"]{
+#add_user .form-group input[type="text"] {
     width: 100%;
     padding: .6em 1em;
     margin: .5em 0;
@@ -148,13 +169,13 @@ table{
 }
 
 #update_user .form-group .radio,
-#add_user .form-group .radio{
+#add_user .form-group .radio {
     margin: 1em 2em;
 }
 
 
 #update_user .form-group .btn,
-#add_user .form-group .btn{
+#add_user .form-group .btn {
     width: 100%;
     padding: .9em 1em;
     /* background-color:#16db93;  */
@@ -167,7 +188,7 @@ table{
 }
 
 #update_user .form-group .btn:hover,
-#add_user .form-group .btn:hover{
+#add_user .form-group .btn:hover {
     background-color: #16db93;
     color: black;
 }

@@ -45,7 +45,7 @@ const UpdateNotice = () => {
 		const noticeCollection = new FireStoreCollection("Notice");
 		try {
 			await noticeCollection.updateDocument(id, notice);
-			return navigate("/notice/view");
+			return navigate("/notice");
 		} catch (error) {
 		} finally {
 			setIsUpdating(false);
@@ -58,7 +58,7 @@ const UpdateNotice = () => {
 				<div className="container">
 					<div className="box-nav d-flex justify-between">
 						<div className="filter">
-							<Link to={"/notice/view"} className="back_to_notice">
+							<Link to={"/notice"} className="back_to_notice">
 								<ArrowBackIosIcon sx={{ margin: "auto" }} />
 								All Notices
 							</Link>

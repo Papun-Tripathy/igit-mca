@@ -55,7 +55,7 @@ const ViewNotice = () => {
 									<th>Action</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody className="notice__table__body">
 								{Object.is(notices, []) ? (
 									<tr>
 										<CircularProgress />
@@ -65,7 +65,7 @@ const ViewNotice = () => {
 										let t = new Date(notice?.time?.seconds * 1000);
 										let time = t.toDateString();
 										return (
-											<tr key={i}>
+											<tr key={i} className="notice__table__row">
 												<td align="center">{notice?.heading}</td>
 												<td align="center">{notice?.link}</td>
 												<td align="center">{time}</td>

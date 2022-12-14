@@ -9,7 +9,8 @@ const Footer = () => {
                 <div className="footer__1">
                     <Link to='/' className="footer__logo" />
                     <h4>MCA</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta maxime debitis nulla sequi molestiae quidem.</p>
+                    <p>Welcome IGTI MCA Batch Page.This page is designed by MCA 40th Batch in view of junior for interacting with senior
+                    </p>
                 </div>
                 <div className="footer__2">
                     <h4>Permalinks</h4>
