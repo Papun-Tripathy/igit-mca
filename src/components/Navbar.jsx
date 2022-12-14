@@ -14,8 +14,7 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-	const isAdmin = useSelector(state => state.user.admin);
-	console.log(isAdmin)
+	const isAdmin = useSelector(state => state?.user?.admin);
 
 	return (
 		<nav>
@@ -32,7 +31,7 @@ const Navbar = () => {
 					className={`nav__links ${isNavShowing ? "show__nav" : "hide__nav"}`}
 				>
 					{
-						isAdmin && 
+						isAdmin === true && 
 						<>
 						
 						<li>

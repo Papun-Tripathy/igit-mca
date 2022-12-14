@@ -3,6 +3,10 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding-bottom: 2rem;
+    margin-top: 2rem;
+}
+.courses{
+    margin-top: 3rem;
 }
 
 .course {

@@ -37,7 +37,7 @@ const AddNotice = () => {
 			<form id="add_user" onSubmit={formSubmit}>
 				<div className="new_user">
 					<div className="filter">
-						<Link to={"/notice/view"} className="back_to_notice">
+						<Link to={"/notice"} className="back_to_notice">
 							<ArrowBackIosIcon sx={{ margin: "auto" }} />
 							All Notices
 						</Link>

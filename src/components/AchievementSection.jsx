@@ -10,28 +10,28 @@ const AchievementSection = () => {
                 </div>
                 <div className="about_achievements-right">
                     <h1>About</h1>
-                    <p>This is the website for all the students who are studied at or studing or is going to study in the MCA branch in Indira Gandhi Institute of technology, Sarang</p>
+                    <p>This website designed and developed by MCA 40th batch.This website helps you to connect with your seniors.</p>
                     <div className="achievements__cards">
                         <article className="achievement__card">
                             <span className="achievement__icon">
-                               
+
                             </span>
                             <h3>40</h3>
-                            <p>Batch</p>
+                            <p>Senior Batch</p>
                         </article>
                         <article className="achievement__card">
                             <span className="achievement__icon">
-                               
+
                             </span>
                             <h3>41</h3>
-                            <p>Current Batch</p>
+                            <p>Junior Batch</p>
                         </article>
                         <article className="achievement__card">
                             <span className="achievement__icon">
-                               
+                                
                             </span>
-                            <h3>142</h3>
-                            <p>Strength</p>
+                            <h3>78</h3>
+                            <p>Batch Strength</p>
                         </article>
                     </div>
                 </div>

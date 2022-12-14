@@ -18,7 +18,7 @@ export const teamMember = [
     },
     {
         name: "Kriti Kumar Behera",
-        role:"Content Writter",
+        role:"moral supporter",
         gmail:"kritikumarb@gmail.com",
         insta:"https://www.instagram.com/kritikumarb/",
         linkedin:"https://www.linkedin.com/in/kriti-kumar-behera",

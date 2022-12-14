@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import "./verifystudent.css";
@@ -7,15 +6,25 @@ import { useSelector } from "react-redux";
 import { FireStoreCollection } from "../../../Firebase/FireStore/collection";
 import { where } from "firebase/firestore";
 import { CircularProgress } from "@mui/material";
-import Modal from "./Modal";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function VerifyStudent() {
 	const userData = useSelector((state) => state.user);
+	const navigate = useNavigate();
+	const isAuthorisedtoAccess = useSelector(state => {
+        return state?.user?.admin 
+    });
 	const [unVerifyedStudents, setUnVerifyedStudents] = useState([]);
 	const [isLoadingData, setIsLoadingData] = useState(false);
 	const [refreshPage, setRefreshPage] = useState(false);
 	const [show, setShow] = React.useState(false);
+	useEffect(() => {
+		if(!isAuthorisedtoAccess){
+			return navigate("/");
+		}
+	}, []);
+	
 	useEffect(() => {
 		// fetch all the users of that batch whose data is not verifyed
 		const getNonVerifyedUserData = async () => {

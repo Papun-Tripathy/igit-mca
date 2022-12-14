@@ -40,6 +40,7 @@ import {
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import AdminRouteProtector from "./pages/AdminRoute";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -103,7 +104,7 @@ const App = () => {
 						email,
 						uid,
 					} = user;
-					
+
 					// save things to state.Google
 					dispatch(
 						setAtLogin({
@@ -138,14 +139,18 @@ const App = () => {
 			<Routes>
 				<Route element={<ProtectedRoute />}>
 					{/* is admin routes */}
-					<Route path="/notice" element={<ViewNotice />} />
-					<Route path="/notice/add" element={<AddNotice />} />
-					<Route path="/notice/update/:id" element={<UpdateNotice />} />
-					<Route path="/verify-student" element={<VerifyStudent />} />
+					<Route element={<AdminRouteProtector />}>
+						<Route path="/verify-student" element={<VerifyStudent />} />
+						<Route path="/notice" element={<ViewNotice />} />
+						<Route path="/notice/add" element={<AddNotice />} />
+						<Route path="/notice/update/:id" element={<UpdateNotice />} />
+						<Route path="/verify-student" element={<VerifyStudent />} />
+					</Route>
 					{/* is admin routes */}
 
 					{/* only for the verifyed students */}
 					<Route element={<AuthorisedRoute />}>
+
 						<Route path="/batch" element={<Batch />} />
 						<Route path="/batch/:id" element={<BatchDisplay />} />
 
@@ -162,7 +167,7 @@ const App = () => {
 					<Route path="/gallary" element={<Gallary />} />
 				</Route>
 				<Route index element={<Home />} />
-        <Route path="/student-help" element={<HelpPage />} />
+				<Route path="/student-help" element={<HelpPage />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/register" element={<LoginSignUp />} />

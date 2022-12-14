@@ -150,9 +150,14 @@ const LoginSignUp = () => {
 		<div className="login-page-container">
 			<div className="login-container">
 				<div className="blueBg">
-					<div className="box signin">
-						{/* <div className='loginPage'>
-                        </div> */}
+				<button
+							className="login-with-google-btn"
+							onClick={(e) => loginWithGoogle()}
+						>
+							Log in with <img src={GoogleC} className="google-image" alt="" />
+						</button>
+					{/* <div className="box signin">
+						
 						<p>Try</p>
 						<button
 							className="login-with-google-btn"
@@ -170,15 +175,15 @@ const LoginSignUp = () => {
 							className="login-with-google-btn"
 							onClick={(e) => loginWithGoogle()}
 						>
-							Log in with <img src={GoogleC} className="google-image" alt="" />
+							Sign in with <img src={GoogleC} className="google-image" alt="" />
 						</button>
 						<h2>Don't Have an Account ?</h2>
 						<button className="signupBtn" onClick={(e) => setSignUp(true)}>
 							Sign Up
 						</button>
-					</div>
+					</div> */}
 				</div>
-				<div className={`formBx ${signUp ? "active" : ""}`}>
+				{/* <div className={`formBx ${signUp ? "active" : ""}`}>
 					<div className="form signinForm">
 						<form onSubmit={signInSubmit}>
 							<h3>Sign In</h3>
@@ -211,7 +216,6 @@ const LoginSignUp = () => {
 						<form onSubmit={signupSubmit}>
 							<h3>Sign Up</h3>
 
-							{/* <input type="text" placeholder="Username" /> */}
 							<input
 								type="text"
 								placeholder="Email Address"
@@ -247,7 +251,7 @@ const LoginSignUp = () => {
 							<p className="forget">Forget Password ?</p>
 						</form>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

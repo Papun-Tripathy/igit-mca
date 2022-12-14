@@ -21,7 +21,7 @@ function Contact() {
               <img src='../../images/contact.svg' alt="" />
             </div>
             <h2>Contact Us</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, voluptatem sit earum fuga dolore at.</p>
+            <p>Here you can post your query and bug related to this web page.For any query and issues we will help you.</p>
             <ul className="contact__details">
               <li>
                 <i className="uil uil-phone-times"></i>

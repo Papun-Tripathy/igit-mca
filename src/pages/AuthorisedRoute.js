@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 
 function AuthorisedRoute() {
-    const isAuthorised = useSelector(state => state.auth.isVerifyed);
+    const isAuthorised = useSelector(state => state?.auth?.isVerifyed);
 
     if (!isAuthorised) {
         toast.info('You are not verifyed yet!....', {

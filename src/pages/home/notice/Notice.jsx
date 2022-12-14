@@ -10,6 +10,7 @@ import { CircularProgress } from "@mui/material";
 
 
 
+
 const Notice = () => {
     const [notices, setNotices] = useState([]);
     useEffect(() => {

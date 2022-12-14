@@ -19,10 +19,13 @@ export default function SwiperJs() {
                 slidesPerView={1}
                 spaceBetween={30}
                 loop={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
                 pagination={{
                     clickable: true,
                 }}
-
                 navigation={true}
                 modules={[Autoplay, Pagination, Navigation, Thumbs]}
                 className="mySwiper"

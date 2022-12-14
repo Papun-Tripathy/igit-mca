@@ -73,10 +73,11 @@ const Registration = () => {
 			name.trim() === "" ||
 			email.trim() === "" ||
 			rollNumber.trim() === "" ||
-			phoneNumber.trim() === "" ||
-			batch === 0
+			phoneNumber.trim() === ""||
+			linkedIn.trim()===""
+			
 		) {
-			toast.warn("Data field is missing", {
+			toast.warn("Fill the mandatory field", {
 				position: "top-right",
 				autoClose: 4000,
 				hideProgressBar: false,
@@ -348,10 +349,11 @@ const Registration = () => {
 							<div className="form-item box-item">
 								<div className="form-item">
 									<select
+										id="batch"
 										className="batch"
 										value={batch}
 										onChange={(e) => setBatch(e.target.value)}
-										name="example"
+										name="batch"
 									>
 										<option name="" value={0}>
 											Select Batch
@@ -367,6 +369,7 @@ const Registration = () => {
 							</div>
 							<div className="form-item box-item">
 								<input
+									id="linkedIn"
 									type="text"
 									name="linkedine"
 									value={linkedIn}
