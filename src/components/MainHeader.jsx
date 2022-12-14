@@ -7,11 +7,8 @@ const MainHeader = () => {
     <header className='main__header'>
       <div className="container main__header-container">
         <div className="main__header-left">
-          <h2>Grow your skills to advance your carrer path </h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda fugit 
-            esse, neque cumque vitae
-            asperiores. Amet minus odio fugit id voluptas rem, adipisci eius dolor distinctio velit obcaecati
-            placeat dicta.</p>
+          <h2>Welcome IGIT MCA Student Website</h2>
+          <p>This page is developed </p>
           <Link to="/course" className='btn lg'>Get Started</Link>
         </div>
         <div className="main__header-right">
