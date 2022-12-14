@@ -66,7 +66,9 @@ const App = () => {
 				name,
 				profilePic,
 				verifyed,
+				admin,
 			} = userData;
+			console.log(userData);
 			// if the user is verifyed then set it
 			if (verifyed) dispatch(userVerifyed());
 			dispatch(
@@ -79,6 +81,7 @@ const App = () => {
 					linkedIn,
 					name,
 					profilePic,
+					admin,
 				})
 			);
 		} catch (error) {

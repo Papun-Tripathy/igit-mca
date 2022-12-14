@@ -36,13 +36,15 @@ const userSlice = createSlice({
             linkedIn: linkedIn ?? "",
             profilePic: profilePic ?? "",
         }
-    },
+    },          
     reducers: {
         setUserValue: (state, action) => {
             const {
-                name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company
+                name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company, admin
             } = action.payload;
-            localStorage.setItem("UserAuth", JSON.stringify({ name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company }));
+            localStorage.setItem("UserAuth", JSON.stringify({ name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company, admin: admin ?? false }));
+            console.log(admin)
+
             state.name = name;
             state.email = email;
             state.batch = batch;
@@ -53,7 +55,7 @@ const userSlice = createSlice({
             state.rollNumber = rollNumber;
             state.linkedIn = linkedIn ?? "";
             state.profilePic = profilePic ?? "";
-
+            if(admin) state.admin = admin;
         },
         emptyValue: (state) => {
             state = userInitialState;
@@ -64,5 +66,5 @@ const userSlice = createSlice({
 
 const userReducer = userSlice.reducer;
 
-export default userReducer ;
-export const {setUserValue, emptyValue} = userSlice.actions;
+export default userReducer;
+export const { setUserValue, emptyValue } = userSlice.actions;

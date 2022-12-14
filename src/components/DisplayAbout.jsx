@@ -33,7 +33,7 @@ const DisplayAbout = ({ name, role, gmail, insta, linkedin, image }) => {
              <Link to={linkedin}></Link>   
              <Link to={insta}><InstagramIcon/></Link>    */}
             
-             <a href={gmail}><MailIcon/></a>
+            <a href={`mailto:${gmail}`} target="_blank"><MailIcon /></a>
              <a href={linkedin}><LinkedInIcon/></a>
              <a href={insta}><InstagramIcon/></a>
             

@@ -26,7 +26,7 @@ const googleSlice = createSlice({
 
     reducers: {
         setAtLogin: (state, action) => {
-            const { accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid } = action.payload;
+            const { accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid} = action.payload;
             localStorage.setItem("googleAuth", JSON.stringify({ accessToken, displayName, emailVerified, isAnonymous, photoURL, email, uid }));
             // never update the state object by a object
             // update indivisually

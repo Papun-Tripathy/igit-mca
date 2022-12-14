@@ -14,6 +14,8 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	const isAdmin = useSelector(state => state.user.admin);
+	console.log(isAdmin)
 
 	return (
 		<nav>
@@ -29,6 +31,20 @@ const Navbar = () => {
 				<ul
 					className={`nav__links ${isNavShowing ? "show__nav" : "hide__nav"}`}
 				>
+					{
+						isAdmin &&
+						<li>
+							<NavLink
+								to={"/verify-student"}
+								className={({ isActive }) =>
+									isActive ? "active-nav" : "nav-link-p"
+								}
+							>
+								Verify
+							</NavLink>
+						</li>
+					}
+
 					{links.map(({ name, path, privateLink }, index) => {
 						if (name === "Login" && isLoggedIn) {
 							name = "Logout";

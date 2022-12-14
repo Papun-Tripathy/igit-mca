@@ -33,7 +33,7 @@ const ProfileDetails = ({
             {
                 !isLoading &&
                 <div className="team__member-socials">
-                   <a href={gmail} target="_blank" rel="noreferrer"><MailIcon /></a>
+                   <a href={`mailto:${gmail}`} target="_blank"><MailIcon /></a>
                     <a href={linkedin} target="_blank" rel="noreferrer"><LinkedInIcon /></a>
                     <a href={insta} target="_blank" rel="noreferrer"><InstagramIcon /></a>
                 </div>

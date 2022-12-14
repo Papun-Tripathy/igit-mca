@@ -108,6 +108,7 @@ const LoginSignUp = () => {
 		setIsLoading(true);
 		try {
 			const user = await signInwithGooglePopup();
+			
 			const {
 				accessToken,
 				displayName,
