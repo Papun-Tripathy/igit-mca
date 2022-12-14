@@ -32,7 +32,9 @@ const Navbar = () => {
 					className={`nav__links ${isNavShowing ? "show__nav" : "hide__nav"}`}
 				>
 					{
-						isAdmin &&
+						isAdmin && 
+						<>
+						
 						<li>
 							<NavLink
 								to={"/verify-student"}
@@ -43,6 +45,17 @@ const Navbar = () => {
 								Verify
 							</NavLink>
 						</li>
+						<li>
+							<NavLink
+								to={"/notice"}
+								className={({ isActive }) =>
+									isActive ? "active-nav" : "nav-link-p"
+								}
+							>
+								Notice
+							</NavLink>
+						</li>
+						</>
 					}
 
 					{links.map(({ name, path, privateLink }, index) => {

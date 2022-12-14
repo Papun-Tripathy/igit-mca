@@ -10,9 +10,7 @@ const AchievementSection = () => {
                 </div>
                 <div className="about_achievements-right">
                     <h1>About</h1>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam dolores, suscipit doloribus,
-                        vitae rem atque fugiat error voluptate et enim dignissimos cupiditate minus hic soluta placeat
-                        repellendus. Repellat, incidunt!</p>
+                    <p>This is the website for all the students who are studied at or studing or is going to study in the MCA branch in Indira Gandhi Institute of technology, Sarang</p>
                     <div className="achievements__cards">
                         <article className="achievement__card">
                             <span className="achievement__icon">
@@ -25,14 +23,14 @@ const AchievementSection = () => {
                             <span className="achievement__icon">
                                
                             </span>
-                            <h3>40</h3>
+                            <h3>41</h3>
                             <p>Current Batch</p>
                         </article>
                         <article className="achievement__card">
                             <span className="achievement__icon">
                                
                             </span>
-                            <h3>63</h3>
+                            <h3>142</h3>
                             <p>Strength</p>
                         </article>
                     </div>

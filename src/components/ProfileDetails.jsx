@@ -35,7 +35,7 @@ const ProfileDetails = ({
                 <div className="team__member-socials">
                    <a href={`mailto:${gmail}`} target="_blank"><MailIcon /></a>
                     <a href={linkedin} target="_blank" rel="noreferrer"><LinkedInIcon /></a>
-                    <a href={insta} target="_blank" rel="noreferrer"><InstagramIcon /></a>
+                    <a href={`http://www.instagram.com/${insta}`} target="_blank" rel="noreferrer"><InstagramIcon /></a>
                 </div>
             }
         </article>

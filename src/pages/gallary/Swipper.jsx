@@ -39,7 +39,7 @@ export default function SwiperJs() {
                     <img src="https://firebasestorage.googleapis.com/v0/b/image-be39d.appspot.com/o/PICNIC%2Fphoto_2022-11-17_00-28-32.jpg?alt=media&token=be549eac-ab4b-4424-94ab-84030a5f5dd2" alt="" />
                 </SwiperSlide>
                 <SwiperSlide className='swiper-slide'>
-                    <img src="https://firebasestorage.googleapis.com/v0/b/image-be39d.appspot.com/o/PICNIC%2Fphoto_2022-11-17_00-28-34.jpg?alt=media&token=ece9b367-0f4d-405e-849d-e2169f40c08c" alt="" />
+                    <img src="" alt="" />
                 </SwiperSlide>
                 <SwiperSlide className='swiper-slide'>
                     <img src="https://firebasestorage.googleapis.com/v0/b/image-be39d.appspot.com/o/PICNIC%2Fphoto_2022-11-17_00-28-36.jpg?alt=media&token=f0b9230c-04a9-43f6-ad31-2c6ad3ceac86" alt="" />

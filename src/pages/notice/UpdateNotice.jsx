@@ -20,7 +20,7 @@ const UpdateNotice = () => {
 	const id = params.id;
 
 	useEffect(() => {
-		if (!id) return navigate("/notice/view");
+		if (!id) return navigate("/notice");
 
 		const getNoticeData = async () => {
 			const noticeCollection = new FireStoreCollection("Notice");

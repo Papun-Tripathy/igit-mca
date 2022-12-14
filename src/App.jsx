@@ -138,8 +138,8 @@ const App = () => {
 			<Routes>
 				<Route element={<ProtectedRoute />}>
 					{/* is admin routes */}
+					<Route path="/notice" element={<ViewNotice />} />
 					<Route path="/notice/add" element={<AddNotice />} />
-					<Route path="/notice/view" element={<ViewNotice />} />
 					<Route path="/notice/update/:id" element={<UpdateNotice />} />
 					<Route path="/verify-student" element={<VerifyStudent />} />
 					{/* is admin routes */}

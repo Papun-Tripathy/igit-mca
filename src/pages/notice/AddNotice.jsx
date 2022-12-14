@@ -26,7 +26,7 @@ const AddNotice = () => {
 			alert("done adding document");
 			setName("");
 			setLink("");
-			return navigate("/notice/view");
+			return navigate("/notice");
 		} catch (error) {
 			return;
 		}

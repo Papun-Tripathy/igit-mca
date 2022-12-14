@@ -231,8 +231,18 @@ const Registration = () => {
 			let fileName = `${e.target.files[0].name}-${getUTCtime()}`;
 			let fileType = e.target.files[0].type;
 			console.log(fileSize);
-			if (fileSize / 1024 >= 1024 * 5) {
+			if (fileSize / 1024 >= 1024 * 4) {
 				// if file size exceeds 5MB
+				toast.warn('Upload Photo less then 4MB', {
+					position: "top-right",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "dark",
+				});
 				return;
 			}
 			setImage(e.target.files[0]);

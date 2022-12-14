@@ -10,7 +10,7 @@ export const teamMember = [
     },
     {
         name: "Pratyush Tripathy",
-        role:"Backend",
+        role:"Backend & Full-Stack",
         gmail:"pratyushtripathy@gmail.com",
         insta:"https://www.instagram.com/papun_tripathy/",
         linkedin:"https://www.linkedin.com/in/pratyush-tripathy-14b108151/",
@@ -18,7 +18,7 @@ export const teamMember = [
     },
     {
         name: "Kriti Kumar Behera",
-        role:"Backend",
+        role:"Content Writter",
         gmail:"kritikumarb@gmail.com",
         insta:"https://www.instagram.com/kritikumarb/",
         linkedin:"https://www.linkedin.com/in/kriti-kumar-behera",
