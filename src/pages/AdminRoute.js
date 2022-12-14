@@ -2,8 +2,8 @@ import { Outlet, Navigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 function AdminRouteProtector() {
-  console.log("hiee banda chuke magia cjodia pua randi gandi")
   const isAuthorised = useSelector(state => {
+    console.log("hiee banda chuke magia cjodia pua randi gandi")
     return state?.user?.admin
   });
 

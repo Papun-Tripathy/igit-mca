@@ -210,5 +210,11 @@ section {
     .achievement__icon {
         display: none;
     }
+    .developerteam__container{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .developerteam__member-img{
+        margin: 1.5rem;
+    }
 
 }
