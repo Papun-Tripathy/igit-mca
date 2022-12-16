@@ -1,0 +1,164 @@
+.profile__page__container {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+section {
+    margin: 0;
+    padding: 2.5rem;
+}
+
+.profile__top__details__section {
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile__card__box {
+    padding: 1.5rem 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: inset 0 0 20px 20px #00000021;
+    margin: 0 1rem;
+}
+
+.profile__image {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+
+.circular__image {
+    margin-bottom: 1rem;
+
+}
+
+.profile__image__name {
+    color: #6b63ff;
+
+}
+
+.profile__change__buttons {
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    background: rgb(62 64 103);
+    color: white;
+    border-radius: 1rem;
+}
+
+.profile__image__change button {
+    margin-top: 0.5rem;
+}
+
+.profile__details {
+    flex: 7;
+    padding: 0.6rem 1.5rem;
+
+}
+
+.single__profile__detail {
+    display: flex;
+    padding: 0.7rem;
+    margin-bottom: .1rem;
+
+}
+
+.single__profile__detail h3 {
+    flex: 2;
+    color: black;
+
+}
+
+.single__profile__detail p {
+    flex: 6;
+}
+
+.profile__details hr {
+    border: 1.1px solid #6b63ff;
+    background: #6b63ff;
+    margin-top: .3rem;
+    margin-bottom: .2rem;
+}
+
+.profile__details__change {
+    margin: 1rem 0.5rem;
+
+}
+
+
+/* second section */
+.profile__page__second__section {
+    padding-top: 0.2rem;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.profile__social__links {
+    flex: 4;
+
+}
+
+.profile__social__links hr {
+    border: 1px solid lightslategray;
+    margin-top: 0.4rem;
+}
+
+.profile__batch__details {
+    flex: 6;
+}
+
+.profile__social__detail {
+    padding: 0.6rem;
+}
+
+.profile__social__name {
+    display: flex;
+    align-items: center;
+}
+
+.profile__social__name p {
+    margin-left: 0.2rem;
+    color: #1e2641;
+    font-weight: 700;
+}
+
+.profile__social__id {
+    color: slategray;
+}
+
+.profile__batch__details {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.profile__batch__info {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.profile__info__data {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: black;
+}
+
+.profile__info__title {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #ff9e00;
+    color: darkmagenta;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+}

@@ -41,6 +41,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import AdminRouteProtector from "./pages/AdminRoute";
+import ProfilePage from "./pages/profile/ProfilePage";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -164,6 +165,8 @@ const App = () => {
 
 					<Route path="/fill-details" element={<Registration />} />
 					<Route path="/gallary" element={<Gallary />} />
+					<Route path="/profile" element={<ProfilePage />} />
+
 				</Route>
 				<Route index element={<Home />} />
 				<Route path="/student-help" element={<HelpPage />} />
