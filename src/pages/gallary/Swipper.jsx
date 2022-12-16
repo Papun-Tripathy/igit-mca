@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { picnic } from "./photos";
 
 // Import Swiper styles
 import "swiper/css";
@@ -12,7 +11,7 @@ import "./swiperjs.css";
 
 // import required modules
 import { Autoplay, Pagination, Navigation, Thumbs } from "swiper";
-export default function SwiperJs() {
+export default function SwiperJs({picnic}) {
     return (
         <>
             <Swiper
@@ -21,7 +20,7 @@ export default function SwiperJs() {
                 loop={true}
                 autoplay={{
                     delay: 2500,
-                    disableOnInteraction: false,
+                    disableOnInteraction: true,
                 }}
                 pagination={{
                     clickable: true,
@@ -34,7 +33,7 @@ export default function SwiperJs() {
                 {picnic.map((p, i) => {
                     return (
                         <SwiperSlide className='swiper-slide' key={i}>
-                            <img src={p} alt="" />
+                            <img loading="lazy" src={p} alt="" />
                         </SwiperSlide>
                     )
 

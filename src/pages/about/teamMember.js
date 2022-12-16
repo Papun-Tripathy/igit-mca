@@ -1,4 +1,4 @@
-import Logo from '../../images/logo.png'
+
 export const teamMember = [
     {
         name: "Mrutyunjaya Patra",
@@ -10,7 +10,7 @@ export const teamMember = [
     },
     {
         name: "Pratyush Tripathy",
-        role:"Backend & Full-Stack",
+        role:"Moral Supporter",
         gmail:"pratyushtripathy@gmail.com",
         insta:"https://www.instagram.com/papun_tripathy/",
         linkedin:"https://www.linkedin.com/in/pratyush-tripathy-14b108151/",

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import "./navbar.css";
 import Logo from "../images/logo.png";
 import { Link, NavLink } from "react-router-dom";
@@ -8,9 +8,14 @@ import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoggedOut } from "../State/Auth/slice.Auth";
 import { logout } from "../Firebase/Auth";
+import user from './user.png'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { AccountCircleOutlined, CallRounded, Info, InfoOutlined, LogoutOutlined, MailOutline, MessageOutlined } from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
 
 const Navbar = () => {
 	const [isNavShowing, setIsNavShowing] = useState(false);
+	const [openProfile, setOpenProfile] = useState(false);
 	const dispatch = useDispatch();
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -19,6 +24,13 @@ const Navbar = () => {
 	return (
 		<nav>
 			<div className="container nav__container">
+				<button
+					className="nav__toggle-btn"
+					onClick={() => { setIsNavShowing((prev) => !prev); setOpenProfile(false); }}
+				>
+					{isNavShowing ? <MdOutlineClose /> : <GoThreeBars />}
+				</button>
+
 				<Link to="/" className="logo">
 					<img
 						src={Logo}
@@ -31,53 +43,35 @@ const Navbar = () => {
 					className={`nav__links ${isNavShowing ? "show__nav" : "hide__nav"}`}
 				>
 					{
-						isAdmin === true && 
+						isAdmin === true &&
 						<>
-						
-						<li>
-							<NavLink
-								to={"/verify-student"}
-								className={({ isActive }) =>
-									isActive ? "active-nav" : "nav-link-p"
-								}
-							>
-								Verify
-							</NavLink>
-						</li>
-						<li>
-							<NavLink
-								to={"/notice"}
-								className={({ isActive }) =>
-									isActive ? "active-nav" : "nav-link-p"
-								}
-							>
-								Notice
-							</NavLink>
-						</li>
+
+							<li>
+								<NavLink
+									to={"/verify-student"}
+									className={({ isActive }) =>
+										isActive ? "active-nav" : "nav-link-p"
+									}
+								>
+									Verify
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to={"/notice"}
+									className={({ isActive }) =>
+										isActive ? "active-nav" : "nav-link-p"
+									}
+								>
+									Notice
+								</NavLink>
+							</li>
 						</>
 					}
 
-					{links.map(({ name, path, privateLink }, index) => {
-						if (name === "Login" && isLoggedIn) {
-							name = "Logout";
-							return (
-								<li key={index}>
-									<NavLink
-										to={"/"}
-										className={({ isActive }) =>
-											isActive ? "active-nav" : "nav-link-p"
-										}
-										onClick={() => {
-											setIsNavShowing((prev) => !prev);
-											dispatch(userLoggedOut());
-											logout();
-										}}
-									>
-										{name}
-									</NavLink>
-								</li>
-							);
-						} else if (privateLink) {
+					{links.map(({ name, path, privateLink, dontShow }, index) => {
+						// it manages the login and logout button
+						if (privateLink) {
 							if (isLoggedIn) {
 								return (
 									<li key={index}>
@@ -93,6 +87,9 @@ const Navbar = () => {
 									</li>
 								);
 							}
+							// it manages all the general links
+						} else if (isLoggedIn && dontShow) {
+
 						} else
 							return (
 								<li key={index}>
@@ -106,13 +103,82 @@ const Navbar = () => {
 								</li>
 							);
 					})}
+					{
+						!isLoggedIn &&
+						<li>
+							<NavLink to={"/register"}
+								className={({ isActive }) => (isActive ? "active-nav" : "")}
+								onClick={() => setIsNavShowing((prev) => !prev)} >
+								Login
+							</NavLink>
+						</li>
+					}
 				</ul>
-				<button
-					className="nav__toggle-btn"
-					onClick={() => setIsNavShowing((prev) => !prev)}
-				>
-					{isNavShowing ? <MdOutlineClose /> : <GoThreeBars />}
-				</button>
+				{
+					isLoggedIn &&
+					<span className="nav-profile-section" >
+						<span
+							onClick={() => {
+								setOpenProfile(!openProfile);
+								setIsNavShowing(false);
+								// setIsNavShowing((prev) => !prev);
+								// dispatch(userLoggedOut());
+								// logout();
+							}}
+						>
+
+							<img src={user} alt="" className="user-pic" />
+							<div className={`sub-menu-wrap ${openProfile ? "open-menu" : ""} `} id="">
+								<div className="sub-menu">
+									<div className="user-info">
+										<img src={user} alt="" className="user-pic" />
+										<h2>James Gosling</h2>
+									</div>
+									<hr />
+									<div className="sub-menu-links" >
+										<Link to='/contact' className="sub-menu-link">
+											<Tooltip title="Contact	" >
+												<MailOutline className="sub-menu-link-icon" sx={{ mr: '0.5rem' }} />
+											</Tooltip>
+											<p className="sub-menu-link-id" >Contact</p>
+										</Link>
+										<Link to='/about' className="sub-menu-link">
+											<Tooltip title="About" >
+												<InfoOutlined className="sub-menu-link-icon" sx={{ mr: '0.5rem' }} />
+											</Tooltip>
+											<p className="sub-menu-link-id" >About</p>
+										</Link>
+										<Link to='/profile' className="sub-menu-link">
+											<Tooltip title="Edit Profile" >
+
+												<AccountCircleOutlined className="sub-menu-link-icon" sx={{ mr: '0.5rem' }} />
+											</Tooltip>
+											<p className="sub-menu-link-id" >Edit Profile</p>
+										</Link>
+										<span onClick={
+											() => {
+												setOpenProfile(!openProfile);
+												setIsNavShowing(false);
+												setIsNavShowing((prev) => !prev);
+												dispatch(userLoggedOut());
+												logout();
+											}
+										} className="sub-menu-link">
+											<Tooltip title="Logout">
+
+												<LogoutOutlined className="sub-menu-link-icon" sx={{ mr: "0.5rem" }} />
+											</Tooltip>
+											<p className={`sub-menu-link-id`} >Log Out</p>
+										</span>
+									</div>
+								</div>
+							</div>
+
+						</span>
+					</span>
+
+				}
+
 			</div>
 		</nav>
 	);

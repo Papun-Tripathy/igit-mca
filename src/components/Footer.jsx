@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className="footer__1">
                     <Link to='/' className="footer__logo" />
                     <h4>MCA</h4>
-                    <p>Welcome IGTI MCA Batch Page.This page is designed by MCA 40th Batch in view of junior for interacting with senior
+                    <p>Welcome to IGIT MCA Batch Page.This page is designed by MCA 40th Batch in view of junior for interacting with senior
                     </p>
                 </div>
                 <div className="footer__2">
@@ -39,7 +39,7 @@ const Footer = () => {
                     <h4>Contact Us</h4>
                     <div>
                         <p> <Link to='tel:+919090323291'>+91 9090323291</Link> </p>
-                        <p><Link to='mailto:mrmjpatra@gmail.com'> mrmjpatra@gmail.com</Link></p>
+                        <p><Link to='mailto:mrmjpatra@gmail.com'> mca40th@gmail.com</Link></p>
                     </div>
                     <ul className="footer__socials">
                         <li><Link to='/'></Link> </li>
