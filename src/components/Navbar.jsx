@@ -20,7 +20,7 @@ const Navbar = () => {
 	const isAdmin = useSelector(state => state?.user?.admin);
 
 	const userData = useSelector(state => state?.user);
-	const {name, profilePic} = userData;
+	const { name, profilePic } = userData;
 
 	return (
 		<nav>
@@ -132,7 +132,9 @@ const Navbar = () => {
 							<div className={`sub-menu-wrap ${openProfile ? "open-menu" : ""} `} id="">
 								<div className="sub-menu">
 									<div className="user-info">
-										<img src={profilePic} alt="" className="user-pic" />
+										<NavLink to={'/profile'} >
+											<img src={profilePic} alt="" className="user-pic" />
+										</NavLink>
 										<h2>{name}</h2>
 									</div>
 									<hr />
@@ -161,8 +163,8 @@ const Navbar = () => {
 												setOpenProfile(!openProfile);
 												setIsNavShowing(false);
 												setIsNavShowing((prev) => !prev);
-													dispatch(userLoggedOut());
-													logout();
+												dispatch(userLoggedOut());
+												logout();
 											}
 										} className="sub-menu-link">
 											<Tooltip title="Logout">

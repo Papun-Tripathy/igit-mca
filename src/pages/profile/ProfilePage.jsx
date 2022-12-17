@@ -9,7 +9,7 @@ import { userLoggedOut } from '../../State/Auth/slice.Auth';
 import { logout } from '../../Firebase/Auth';
 const ProfilePage = () => {
     const imageSelectRef = useRef();
-	const dispatch = useDispatch();
+    const dispatch = useDispatch();
     //scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -85,6 +85,14 @@ const ProfilePage = () => {
             const dataRecent = await getData();
             setUserData(dataRecent);
 
+            const batchCollectionRef = new FireStoreCollection("Batches");
+            // reference to their students collection of their batch
+            const batchStudentCollectionRef = batchCollectionRef.customCollectionName(
+                `${dataTosent.batch}/Students`
+            );
+            await batchCollectionRef.updateDocument(dataTosent.rollNumber, dataTosent, batchStudentCollectionRef);
+
+
         } catch (error) {
             console.err(error)
         }
@@ -92,19 +100,19 @@ const ProfilePage = () => {
 
     // upload the image
     const storeImagetoBucket = async () => {
-		try {
-			const studentPhotoLink = new FirebaseBucketStorage("studentsPhoto");
-			const imageServerUrl = await studentPhotoLink.storeObjectAndGetUrl(
-				additionImageDetails.fileName,
-				image,
-				imageMeta
-			);
-			// console.log(imageServerUrl);
-			return imageServerUrl;
-		} catch (err) {
-			throw Error("Error in Image Upload");
-		}
-	};
+        try {
+            const studentPhotoLink = new FirebaseBucketStorage("studentsPhoto");
+            const imageServerUrl = await studentPhotoLink.storeObjectAndGetUrl(
+                additionImageDetails.fileName,
+                image,
+                imageMeta
+            );
+            // console.log(imageServerUrl);
+            return imageServerUrl;
+        } catch (err) {
+            throw Error("Error in Image Upload");
+        }
+    };
 
     // delete the image
     const deleteOldPhotoFromBucket = async (imageLink) => {
@@ -135,8 +143,8 @@ const ProfilePage = () => {
         }
     }
 
-    const updateDataAfterImageChange = async(photoLink) =>{
-        let dataTosent ={ ...userRecentData, profilePic: photoLink, verifyed: true};
+    const updateDataAfterImageChange = async (photoLink) => {
+        let dataTosent = { ...userRecentData, profilePic: photoLink, verifyed: true };
         console.log(dataTosent)
         try {
             const userCollection = new FireStoreCollection("User");
@@ -144,6 +152,15 @@ const ProfilePage = () => {
             cleanUpGetData();
             const dataRecent = await getData();
             setUserData(dataRecent);
+
+            const batchCollectionRef = new FireStoreCollection("Batches");
+            // reference to their students collection of their batch
+            const batchStudentCollectionRef = batchCollectionRef.customCollectionName(
+                `${dataTosent.batch}/Students`
+            );
+            await batchCollectionRef.updateDocument(dataTosent.rollNumber, dataTosent, batchStudentCollectionRef);
+
+
 
         } catch (error) {
             console.err(error)
@@ -157,7 +174,7 @@ const ProfilePage = () => {
             const newImageUploadedLink = await storeImagetoBucket();
 
             // delete the old Image
-			await deleteOldPhotoFromBucket(oldImageLink);
+            await deleteOldPhotoFromBucket(oldImageLink);
             // now update in the firestore database
             console.log(userData)
             await updateDataAfterImageChange(newImageUploadedLink);
@@ -167,7 +184,7 @@ const ProfilePage = () => {
 
         } catch (error) {
             console.log(error);
-        }finally{
+        } finally {
             setChangeImage(false);
         }
 
@@ -238,14 +255,17 @@ const ProfilePage = () => {
                     <h4 className='profile__image__name'>{userData.name}</h4>
                     <div className="profile__image__change ">
                         <input type="file" accept='image/*' style={{ display: 'none' }} ref={imageSelectRef} onChange={handleImageChange} />
-                        <button onClick={() => addImage()} className='profile__change__buttons'>Change</button>
                         {
-                            changeImage && 
+                            !changeImage &&
+                            <button onClick={() => addImage()} className='profile__change__buttons'>Change</button>
+                        }
+                        {
+                            changeImage &&
                             <>
                                 <button className='profile__change__buttons' onClick={() => changeUserImage()} >
                                     Upload
                                 </button>
-                                <button className='profile__change__buttons' onClick={ _ => setChangeImage(false) }>
+                                <button className='profile__change__buttons' onClick={_ => setChangeImage(false)}>
                                     Cancel
                                 </button>
                             </>
@@ -315,7 +335,7 @@ const ProfilePage = () => {
                                     await uploadUpdatedData()
                                     setChangeUserDetails(false);
                                 }} >
-                                    Submit
+                                    Update
                                 </button>
                                 <button className='profile__change__buttons cancel__button' onClick={() => {
                                     setChangeUserDetails(false);
@@ -325,7 +345,10 @@ const ProfilePage = () => {
                                 </button>
                             </>
                         }
-                        <button className='profile__change__buttons' onClick={() => setChangeUserDetails(true)} >Change</button>
+                        {
+                            !changeUserDetails &&
+                            <button className='profile__change__buttons' onClick={() => setChangeUserDetails(true)} >Change</button>
+                        }
                     </div>
                 </div>
             </section>
@@ -338,7 +361,7 @@ const ProfilePage = () => {
                             <p>LinkedIn</p>
                         </div>
                         <h3 className='profile__social__id'>
-                            www.linkedin.com/mrmjpatra
+                            {userData.linkedIn}
                         </h3>
                     </div>
                     <hr />
@@ -348,7 +371,7 @@ const ProfilePage = () => {
                             <p>Github</p>
                         </div>
                         <h3 className='profile__social__id'>
-                            www.github.com/mrmjpatra
+                            {userData.github}
                         </h3>
                     </div>
                     <hr />
@@ -358,7 +381,7 @@ const ProfilePage = () => {
                             <p>Instagram</p>
                         </div>
                         <h3 className='profile__social__id'>
-                            www.instagram.com/mrmjpatra
+                            www.instagram.com/{userData.insta}
                         </h3>
                     </div>
                 </div>
