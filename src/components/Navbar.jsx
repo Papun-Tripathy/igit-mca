@@ -8,9 +8,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoggedOut } from "../State/Auth/slice.Auth";
 import { logout } from "../Firebase/Auth";
-import user from './user.png'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { AccountCircleOutlined, CallRounded, Info, InfoOutlined, LogoutOutlined, MailOutline, MessageOutlined } from "@mui/icons-material";
+import { AccountCircleOutlined, InfoOutlined, LogoutOutlined, MailOutline } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 
 const Navbar = () => {
@@ -20,6 +18,9 @@ const Navbar = () => {
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 	const isAdmin = useSelector(state => state?.user?.admin);
+
+	const userData = useSelector(state => state?.user);
+	const {name, profilePic} = userData;
 
 	return (
 		<nav>
@@ -127,12 +128,12 @@ const Navbar = () => {
 							}}
 						>
 
-							<img src={user} alt="" className="user-pic" />
+							<img src={profilePic} alt="" className="user-pic" />
 							<div className={`sub-menu-wrap ${openProfile ? "open-menu" : ""} `} id="">
 								<div className="sub-menu">
 									<div className="user-info">
-										<img src={user} alt="" className="user-pic" />
-										<h2>James Gosling</h2>
+										<img src={profilePic} alt="" className="user-pic" />
+										<h2>{name}</h2>
 									</div>
 									<hr />
 									<div className="sub-menu-links" >

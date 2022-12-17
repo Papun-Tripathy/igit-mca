@@ -43,8 +43,6 @@ const userSlice = createSlice({
                 name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company, admin
             } = action.payload;
             localStorage.setItem("UserAuth", JSON.stringify({ name, email, contact, rollNumber, profilePic, batch, linkedIn, insta, company, admin: admin ?? false }));
-            console.log(admin)
-
             state.name = name;
             state.email = email;
             state.batch = batch;

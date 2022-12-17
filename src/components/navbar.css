@@ -70,7 +70,8 @@ nav{
 /* Drop down profile */
 .user-pic {
     width: 40px;
-    border-radius: 50%;
+    height: 40px;
+    border-radius: 300rem;
     cursor: pointer;
     margin-left: 1rem;
 }
@@ -100,6 +101,7 @@ nav{
 }
 .user-info img{
     width: 60px;
+    height: 60px;
     border-radius: 50%;
     margin-right: 15px;
 }

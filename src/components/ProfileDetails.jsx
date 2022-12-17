@@ -3,7 +3,6 @@ import "./profiledetails.css";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MailIcon from '@mui/icons-material/Mail';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import { Link } from "react-router-dom";
 const ProfileDetails = ({
     fname,
     rollNumber,

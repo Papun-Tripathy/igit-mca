@@ -67,6 +67,7 @@ const App = () => {
 				linkedIn,
 				name,
 				profilePic,
+				rollNumber,
 				verifyed,
 				admin,
 			} = userData;
@@ -83,6 +84,7 @@ const App = () => {
 					name,
 					profilePic,
 					admin,
+					rollNumber,
 				})
 			);
 		} catch (error) {
