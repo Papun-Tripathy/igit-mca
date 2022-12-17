@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './profilePage.css'
 import { GitHub, Instagram, LinkedIn } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FireStoreCollection } from '../../Firebase/FireStore/collection';
+import { FirebaseBucketStorage } from '../../Firebase/CloudStorage';
+import { toast } from 'react-toastify';
+import { userLoggedOut } from '../../State/Auth/slice.Auth';
+import { logout } from '../../Firebase/Auth';
 const ProfilePage = () => {
+    const imageSelectRef = useRef();
+	const dispatch = useDispatch();
     //scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -11,6 +17,7 @@ const ProfilePage = () => {
     //get latest data of the user
     const userIdRef = useSelector(state => state?.google?.email);
     const [userRecentData, setUserRecentData] = useState({});
+
     const getData = async () => {
         let userData = sessionStorage.getItem("tempUserData");
         if (!userData) {
@@ -23,10 +30,9 @@ const ProfilePage = () => {
     const cleanUpGetData = () => {
         sessionStorage.removeItem("tempUserData");
     }
+    // get the user data from the server
     useEffect(() => {
-
         getData();
-
         return cleanUpGetData;
     }, []);
     const userDataFromState = useSelector(state => state?.user);
@@ -35,21 +41,35 @@ const ProfilePage = () => {
 
     const getDataFromState = () => {
         const { name, email, contact, linkedIn, insta, github, profilePic } = userDataFromState;
+
         setUserData({ name, email, contact, linkedIn, insta, github, profilePic })
     }
     useEffect(getDataFromState, []);
+
+    // image uploading handle
+    const [changeImage, setChangeImage] = useState(false);
+    const [image, setImage] = useState(File.prototype);
+    const [imageMeta, setImageMeta] = useState({
+        contentType: "image/*",
+    });
+    const [showingImage, setShowingImage] = useState(null);
+    const [additionImageDetails, setAdditionImageDetails] = useState({
+        fileType: "",
+        fileSize: "",
+        fileName: "",
+    });
+
 
     const getFormattedData = () => {
         let data = userRecentData;
         data = {
             ...data,
-            ...userData, 
-            verifyed: false,
+            ...userData,
         }
         console.log("Formatted Data: ", data)
         const keys = Object.keys(data)
         keys.forEach(key => {
-            if(!data[key]){
+            if (!data[key]) {
                 data[key] = "";
             }
         });
@@ -57,30 +77,179 @@ const ProfilePage = () => {
     }
 
     const uploadUpdatedData = async () => {
-        let userData = getFormattedData();
+        let dataTosent = getFormattedData();
         try {
             const userCollection = new FireStoreCollection("User");
-            await userCollection.updateDocument(userIdRef, userData);
+            await userCollection.updateDocument(userIdRef, dataTosent);
             cleanUpGetData();
             const dataRecent = await getData();
             setUserData(dataRecent);
-            
+
         } catch (error) {
             console.err(error)
         }
     }
+
+    // upload the image
+    const storeImagetoBucket = async () => {
+		try {
+			const studentPhotoLink = new FirebaseBucketStorage("studentsPhoto");
+			const imageServerUrl = await studentPhotoLink.storeObjectAndGetUrl(
+				additionImageDetails.fileName,
+				image,
+				imageMeta
+			);
+			// console.log(imageServerUrl);
+			return imageServerUrl;
+		} catch (err) {
+			throw Error("Error in Image Upload");
+		}
+	};
+
+    // delete the image
+    const deleteOldPhotoFromBucket = async (imageLink) => {
+        const studentPhotoLink = new FirebaseBucketStorage("studentsPhoto");
+        const doneDeleting = await studentPhotoLink.deleteObjectFromBucketStorage(imageLink);
+        if (!doneDeleting) {
+            toast.warn('Upload sucessful, error in Deletion!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } else {
+            toast.success('Upload sucessful, Login to view changes', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+    }
+
+    const updateDataAfterImageChange = async(photoLink) =>{
+        let dataTosent ={ ...userRecentData, profilePic: photoLink, verifyed: true};
+        console.log(dataTosent)
+        try {
+            const userCollection = new FireStoreCollection("User");
+            await userCollection.updateDocument(userIdRef, dataTosent);
+            cleanUpGetData();
+            const dataRecent = await getData();
+            setUserData(dataRecent);
+
+        } catch (error) {
+            console.err(error)
+        }
+    }
+
+    const changeUserImage = async () => {
+        const oldImageLink = userData.profilePic;
+        try {
+            // upload the current image
+            const newImageUploadedLink = await storeImagetoBucket();
+
+            // delete the old Image
+			await deleteOldPhotoFromBucket(oldImageLink);
+            // now update in the firestore database
+            console.log(userData)
+            await updateDataAfterImageChange(newImageUploadedLink);
+
+            dispatch(userLoggedOut());
+            logout();
+
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setChangeImage(false);
+        }
+
+    }
+
+    const addImage = () => {
+        imageSelectRef.current.click();
+    }
+
+    const getUTCtime = () => {
+        let date = new Date();
+        let now_utc = Date.UTC(
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate(),
+            date.getUTCHours(),
+            date.getUTCMinutes(),
+            date.getUTCSeconds(),
+            date.getUTCMilliseconds()
+        );
+        return now_utc;
+    };
+    const handleImageChange = (e) => {
+        if (e.target.files[0]) {
+            let fileSize = e.target.files[0].size;
+            let fileName = `${e.target.files[0].name}-${getUTCtime()}`;
+            let fileType = e.target.files[0].type;
+            console.log(fileSize);
+            if (fileSize / 1024 >= 1024 * 2) {
+                // if file size exceeds 5MB
+                toast.warn('Upload Photo less then 2MB', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                return;
+            }
+            setImage(e.target.files[0]);
+            setAdditionImageDetails({
+                fileName,
+                fileSize,
+                fileType,
+            });
+            setImageMeta({
+                contentType: fileType,
+            });
+            setShowingImage(URL.createObjectURL(e.target.files[0]));
+        }
+        setChangeImage(true);
+    };
+
     return (
         <div className="profile__page__container">
 
             <section className='profile__top__details__section'>
                 <div className="profile__image profile__card__box">
                     <div className="circular__image">
-                        <img src={userData.profilePic} alt="" />
-                        {/* <img src={profilePic} alt="" /> */}
+                        <img src={userData.profilePic} className={`profile__image__original ${changeImage ? "active" : ""}`} alt="" />
+
+                        <img src={showingImage ?? userData.profilePic} className={`profile__image__new ${changeImage ? "active" : ""}`} alt="" />
+
                     </div>
                     <h4 className='profile__image__name'>{userData.name}</h4>
                     <div className="profile__image__change ">
-                        <button className='profile__change__buttons'>Change</button>
+                        <input type="file" accept='image/*' style={{ display: 'none' }} ref={imageSelectRef} onChange={handleImageChange} />
+                        <button onClick={() => addImage()} className='profile__change__buttons'>Change</button>
+                        {
+                            changeImage && 
+                            <>
+                                <button className='profile__change__buttons' onClick={() => changeUserImage()} >
+                                    Upload
+                                </button>
+                                <button className='profile__change__buttons' onClick={ _ => setChangeImage(false) }>
+                                    Cancel
+                                </button>
+                            </>
+                        }
                     </div>
                 </div>
                 <div className="profile__details profile__card__box">

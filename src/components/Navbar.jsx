@@ -161,8 +161,8 @@ const Navbar = () => {
 												setOpenProfile(!openProfile);
 												setIsNavShowing(false);
 												setIsNavShowing((prev) => !prev);
-												dispatch(userLoggedOut());
-												logout();
+													dispatch(userLoggedOut());
+													logout();
 											}
 										} className="sub-menu-link">
 											<Tooltip title="Logout">

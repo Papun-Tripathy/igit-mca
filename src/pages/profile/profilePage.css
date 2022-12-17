@@ -27,19 +27,46 @@ section {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
 }
-
-
 
 .circular__image {
     margin-bottom: 1rem;
-
+    position: relative;
 }
-
+.circular__image img{
+    transition: all 0.7s ease-in-out;
+    aspect-ratio: 3/4;
+}
+.profile__image__original.active{
+    z-index: 1;
+    transform: scale(0.7)translate(-30%, -15%);
+}
+.profile__image__original.active:hover{
+    z-index: 2;
+}
+.profile__image__new{
+    opacity: 0;
+    top: 0;
+    z-index: 2;
+    display: none;
+}
+.profile__image__new.active{
+    opacity: 1;
+    display: block;
+    position: absolute;
+    animation: popupImage 0.7s ease;
+    transform: scale(0.7)translate(30%, 15%);
+}
+@keyframes popupImage {
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(0.7)translate(30%, 15%);
+    }
+}
 .profile__image__name {
     color: #6b63ff;
-
 }
 
 .profile__change__buttons {
@@ -50,6 +77,12 @@ section {
     background: rgb(62 64 103);
     color: white;
     border-radius: 1rem;
+}
+
+.profile__image__change{
+    display: flex;
+    width: 80%;
+    justify-content: space-evenly;
 }
 
 .profile__image__change button {

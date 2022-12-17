@@ -36,7 +36,6 @@
 
 .team__member-img img {
     filter: saturate(0);
-    max-width: 180px;
     aspect-ratio: 3/ 4;
 }
 
