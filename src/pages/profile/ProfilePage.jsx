@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FireStoreCollection } from '../../Firebase/FireStore/collection';
 import { FirebaseBucketStorage } from '../../Firebase/CloudStorage';
 import { toast } from 'react-toastify';
-import { userLoggedOut } from '../../State/Auth/slice.Auth';
+import { unverifyUser, userLoggedOut } from '../../State/Auth/slice.Auth';
 import { logout } from '../../Firebase/Auth';
+import { updateUserData } from '../../State/User/slice.User';
 const ProfilePage = () => {
     const imageSelectRef = useRef();
     const dispatch = useDispatch();
@@ -69,7 +70,7 @@ const ProfilePage = () => {
         console.log("Formatted Data: ", data)
         const keys = Object.keys(data)
         keys.forEach(key => {
-            if (!data[key]) {
+            if (data[key]===undefined) {
                 data[key] = "";
             }
         });
@@ -84,6 +85,7 @@ const ProfilePage = () => {
             cleanUpGetData();
             const dataRecent = await getData();
             setUserData(dataRecent);
+            // dispatch(updateUserData);
 
             const batchCollectionRef = new FireStoreCollection("Batches");
             // reference to their students collection of their batch
@@ -91,7 +93,8 @@ const ProfilePage = () => {
                 `${dataTosent.batch}/Students`
             );
             await batchCollectionRef.updateDocument(dataTosent.rollNumber, dataTosent, batchStudentCollectionRef);
-
+            //change the state value
+            dispatch(unverifyUser);
 
         } catch (error) {
             console.err(error)
@@ -144,7 +147,8 @@ const ProfilePage = () => {
     }
 
     const updateDataAfterImageChange = async (photoLink) => {
-        let dataTosent = { ...userRecentData, profilePic: photoLink, verifyed: true };
+        let dataTosent = { ...userRecentData, profilePic: photoLink, verifyed: false };
+        //change the state value
         console.log(dataTosent)
         try {
             const userCollection = new FireStoreCollection("User");
@@ -153,14 +157,13 @@ const ProfilePage = () => {
             const dataRecent = await getData();
             setUserData(dataRecent);
 
+
             const batchCollectionRef = new FireStoreCollection("Batches");
             // reference to their students collection of their batch
             const batchStudentCollectionRef = batchCollectionRef.customCollectionName(
                 `${dataTosent.batch}/Students`
             );
             await batchCollectionRef.updateDocument(dataTosent.rollNumber, dataTosent, batchStudentCollectionRef);
-
-
 
         } catch (error) {
             console.err(error)
@@ -398,7 +401,7 @@ const ProfilePage = () => {
 
                     <div className="profile__batch__info">
                         <p className="profile__info__data">
-                            CR
+                            Student
                         </p>
                         <p className="profile__info__title">
                             Your Position

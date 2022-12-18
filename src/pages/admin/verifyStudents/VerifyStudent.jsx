@@ -8,23 +8,25 @@ import { where } from "firebase/firestore";
 import { CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { FirebaseBucketStorage } from "../../../Firebase/CloudStorage";
+import { Instagram, LinkedIn } from "@mui/icons-material";
 
 function VerifyStudent() {
 	const userData = useSelector((state) => state.user);
 	const navigate = useNavigate();
 	const isAuthorisedtoAccess = useSelector(state => {
-        return state?.user?.admin 
-    });
+		return state?.user?.admin
+	});
 	const [unVerifyedStudents, setUnVerifyedStudents] = useState([]);
 	const [isLoadingData, setIsLoadingData] = useState(false);
 	const [refreshPage, setRefreshPage] = useState(false);
 	const [show, setShow] = React.useState(false);
 	useEffect(() => {
-		if(!isAuthorisedtoAccess){
+		if (!isAuthorisedtoAccess) {
 			return navigate("/");
 		}
 	}, []);
-	
+
 	useEffect(() => {
 		// fetch all the users of that batch whose data is not verifyed
 		const getNonVerifyedUserData = async () => {
@@ -153,11 +155,20 @@ function VerifyStudent() {
 			console.log(error);
 		}
 	};
+	const deleteOldPhotoFromBucket = async (imageLink) => {
+		const studentPhotoLink = new FirebaseBucketStorage("studentsPhoto");
+		await studentPhotoLink.deleteObjectFromBucketStorage(imageLink);
+
+	}
+
 
 	const rejectStudent = async (id) => {
 		// delete his photo also
 		const userRef = new FireStoreCollection("User");
 		try {
+			const student = unVerifyedStudents.filter(p => p.id === id)[0];
+			const { profilePic } = student
+			await deleteOldPhotoFromBucket(profilePic)
 			await userRef.deleteDocument(id);
 			setRefreshPage(!refreshPage);
 		} catch (error) {
@@ -176,6 +187,7 @@ function VerifyStudent() {
 						<td align="center">Email</td>
 						<td align="center">Roll No.</td>
 						<td align="center">Image</td>
+						<td align="center">Socials</td>
 						<td align="center">Action</td>
 					</tr>
 				</thead>
@@ -212,6 +224,14 @@ function VerifyStudent() {
                                         < Modal show={show} onClose={() => setShow(false)}>
                                             <img src={student?.profilePic} alt='' className="modalimagepreview"/>
                                         </Modal> */}
+									</td>
+									<td align="center" className="table_action_body table_socials">
+										<a href={`https://www.instagram.com/${student.insta}`} target='_blank'>
+											<Instagram />
+										</a>
+										<a href={student.linkedIn} target='_blank'>
+											<LinkedIn />
+										</a>
 									</td>
 									<td align="center" className="table_action_body">
 										<CheckIcon

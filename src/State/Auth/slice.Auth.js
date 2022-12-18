@@ -34,10 +34,14 @@ const authSlice = createSlice({
         userVerifyed: (state) =>{
             state.isVerifyed = true;
             localStorage.setItem("isVerifyed", "true");
+        },
+        unverifyUser:(state)=>{
+            state.isVerifyed=false
+            localStorage.setItem("isVerifyed", "false");
         }
     }
 })
 const authReducer = authSlice.reducer;
 
 export default authReducer;
-export const { userLoggedIn, userLoggedOut, userVerifyed } = authSlice.actions;
+export const { userLoggedIn, userLoggedOut, userVerifyed ,unverifyUser} = authSlice.actions;

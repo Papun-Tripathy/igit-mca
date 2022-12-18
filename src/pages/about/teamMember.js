@@ -2,7 +2,7 @@
 export const teamMember = [
     {
         name: "Mrutyunjaya Patra",
-        role:"Karide re MG",
+        role:"Frontend",
         gmail:"mrmjpatra@gmail.com",
         insta:"https://www.instagram.com/mrmjpatra/",
         linkedin:"https://www.linkedin.com/in/mrmjpatra/",
@@ -10,7 +10,7 @@ export const teamMember = [
     },
     {
         name: "Pratyush Tripathy",
-        role:"Choda baki sabu Chaka",
+        role:"FullStack",
         gmail:"pratyushtripathy@gmail.com",
         insta:"https://www.instagram.com/papun_tripathy/",
         linkedin:"https://www.linkedin.com/in/pratyush-tripathy-14b108151/",
@@ -18,7 +18,7 @@ export const teamMember = [
     },
     {
         name: "Kriti Kumar Behera",
-        role:"Backend Data Managing tu kaine Chodi ta eithi",
+        role:"Database",
         gmail:"kritikumarb@gmail.com",
         insta:"https://www.instagram.com/kritikumarb/",
         linkedin:"https://www.linkedin.com/in/kriti-kumar-behera",

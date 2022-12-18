@@ -205,3 +205,34 @@ section {
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+@media only screen and (max-width: 600px) {
+    .profile__top__details__section{
+        flex-direction: column;
+        row-gap: 2rem;
+    }
+    .single__profile__detail{
+        flex-direction: column;
+    }
+    .single__profile__detail p{
+        font-size: 0.7rem;
+
+    }
+    .profile__page__second__section{
+        flex-direction: column;
+        row-gap: 2rem;
+    }
+    .profile__social__detail{
+        padding: 0.1rem;
+    }
+    .profile__social__id{
+        font-weight: 100;
+        font-size: 0.75rem;
+    }
+    .profile__batch__details{
+        flex-direction: column;
+    }
+    .profile__batch__info p{
+        text-align: center;
+    }
+}

@@ -73,6 +73,7 @@ const Registration = () => {
 			name.trim() === "" ||
 			email.trim() === "" ||
 			rollNumber.trim() === "" ||
+			batch===0 || 
 			phoneNumber.trim() === ""||
 			linkedIn.trim()===""
 			

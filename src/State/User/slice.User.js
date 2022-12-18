@@ -58,6 +58,14 @@ const userSlice = createSlice({
         emptyValue: (state) => {
             state = userInitialState;
             localStorage.removeItem("UserAuth");
+        },
+        updateUserData: (state, action) =>{
+            const keys = Object.keys(action.payload);
+            console.log(state);
+            keys.forEach(key => {
+                state[key] = action.payload[key];
+            });
+            console.log(state);
         }
     },
 });
@@ -65,4 +73,4 @@ const userSlice = createSlice({
 const userReducer = userSlice.reducer;
 
 export default userReducer;
-export const { setUserValue, emptyValue } = userSlice.actions;
+export const { setUserValue, emptyValue, updateUserData } = userSlice.actions;
