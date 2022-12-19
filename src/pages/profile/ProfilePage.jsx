@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { unverifyUser, userLoggedOut } from '../../State/Auth/slice.Auth';
 import { logout } from '../../Firebase/Auth';
 import { updateUserData } from '../../State/User/slice.User';
+
 const ProfilePage = () => {
     const imageSelectRef = useRef();
     const dispatch = useDispatch();
@@ -147,7 +148,7 @@ const ProfilePage = () => {
     }
 
     const updateDataAfterImageChange = async (photoLink) => {
-        let dataTosent = { ...userRecentData, profilePic: photoLink, verifyed: false };
+        let dataTosent = { ...userRecentData, profilePic: photoLink, verifyed: true };
         //change the state value
         console.log(dataTosent)
         try {
@@ -216,9 +217,9 @@ const ProfilePage = () => {
             let fileName = `${e.target.files[0].name}-${getUTCtime()}`;
             let fileType = e.target.files[0].type;
             console.log(fileSize);
-            if (fileSize / 1024 >= 1024 * 2) {
+            if (fileSize / 1024 >= 1024 * 1) {
                 // if file size exceeds 5MB
-                toast.warn('Upload Photo less then 2MB', {
+                toast.warn('Upload Photo less then 1MB', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
